@@ -1,0 +1,43 @@
+@import './globalVariables';
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+  margin: 0;
+
+  color: $primary-font-color;
+  font-family: 'Quicksand', sans-serif;
+}
+
+#root {
+  min-height: 100%;
+
+  overflow: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+td {
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border: none;
+
+  background-color: transparent;
+}

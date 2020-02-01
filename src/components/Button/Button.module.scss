@@ -1,0 +1,106 @@
+@import '../../globalVariables';
+
+.button {
+    border-radius: $default-button-border-radius;
+
+    box-shadow: $default-box-shadow;
+
+    transition: transform .25s ease-out;
+
+    cursor: pointer;
+
+    &.small {
+        width: 100px;
+        height: 30px;
+    }
+
+    &.medium {
+        width: 150px;
+        height: 30px;
+    }
+
+    &.large {
+        width: 200px;
+        height: 30px;
+    }
+
+    &.default-primary {
+        color: $secondary-font-color;
+        background-color: $primary-color;
+
+        border: none;
+
+        & > span::after {
+            background-color: $secondary-font-color;
+        }
+    }
+
+    &.default-secondary {
+        color: $primary-font-color;
+        background-color: $secondary-color;
+
+        border: none;
+
+        & > span::after {
+            background-color: $primary-font-color;
+        }
+    }
+
+    &.inverted-primary {
+        color: $primary-color;
+        background-color: transparent;
+
+        border: 1px solid $primary-color;
+
+        & > span::after {
+            background-color: $primary-color;
+        }
+    }
+
+    &.inverted-secondary {
+        color: $secondary-color;
+        background-color: transparent;
+
+        border: 1px solid $secondary-color;
+
+        & > span::after {
+            background-color: $secondary-color;
+        }
+    }
+
+    &:hover {
+        transform: scale(1.05);
+
+        & > span::after {
+            transform: translateX(0) scale(1.05);
+        }
+    }
+
+    & > span {
+        font-family: inherit;
+        font-weight: bolder;
+    
+        position: relative;
+
+        display: block;
+        width: fit-content;
+        margin: 0 auto;
+
+        overflow-x: hidden;
+
+        &::after {
+                content: "";
+        
+                width: 100%;
+                height: 1px;
+        
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                transform: translateX(-100%);
+
+                transition: transform .25s ease-out;
+        }
+    }
+}
+

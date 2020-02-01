@@ -1,0 +1,18 @@
+@import '../../globalVariables';
+
+#landingPage {
+    height: 100vh;
+
+    scroll-snap-type: y proximity;
+    
+    overflow-y: scroll;
+
+    & > #slideshowContainer {
+        overflow-x: hidden;
+    }
+
+    & > .scrollSnapItem {
+        scroll-snap-align: start;
+        height: 100%;
+      }
+}

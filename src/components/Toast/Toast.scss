@@ -1,0 +1,67 @@
+@import '../../globalVariables';
+
+.toast {
+  width: 200px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+
+  position: absolute;
+  top: 5px;
+  right: 0;
+  z-index: 2;
+  transform: translateX(100%);
+
+  border-radius: 0.5rem;
+
+  box-shadow: $default-box-shadow;
+
+  animation-name: showToast;
+  animation-duration: 5s;
+  animation-timing-function: ease-in-out;
+
+  &.success {
+    color: $secondary-font-color;
+    background-color: green;
+  }
+
+  &.info {
+    color: $secondary-font-color;
+    background-color: blue;
+  }
+
+  &.warn {
+    color: $primary-font-color;
+    background-color: yellow;
+  }
+
+  &.error {
+    color: $primary-font-color;
+    background-color: red;
+  }
+
+  & > * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@keyframes showToast {
+  0% {
+    transform: translateX(100%);
+  }
+  15% {
+    transform: translateX(-5%);
+    right: 5px;
+  }
+  17% {
+    transform: translateX(0);
+    right: 5px;
+  }
+  90% {
+    transform: translateX(0);
+    right: 5px;
+  }
+}

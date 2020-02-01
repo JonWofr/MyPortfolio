@@ -1,0 +1,17 @@
+#slideshow {
+    width: fit-content;
+    height: 100%;
+
+    display: flex;
+
+    position: relative;
+
+    animation-name: sliding;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+
+    & > .slideContainer {
+        width: 100vw;
+    }
+}

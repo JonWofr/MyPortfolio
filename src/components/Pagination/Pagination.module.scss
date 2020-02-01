@@ -1,0 +1,26 @@
+#pagination {
+    display: inline-flex;
+    align-items: center;
+
+    & > ul {
+        display: flex;
+        align-items: center;
+
+        & > li {
+            margin: 0 .25rem;
+
+            font-weight: 500;
+            font-size: 1rem;
+
+            &.selected {
+                font-weight: 700;
+                font-size: 1.125rem;
+            }
+
+            & > button {
+                font-size: inherit;
+                font-weight: inherit;
+            }
+        }
+    }
+}

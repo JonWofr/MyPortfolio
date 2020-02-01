@@ -1,0 +1,23 @@
+.paragraph {
+    display: flex;
+    align-items: center;
+
+    & > img {
+        width: 20%; 
+    
+        &.right {
+            order: 1;
+            margin-left: 20px;
+        }
+    
+        &.left {
+            order: -1;
+            margin-right: 20px;
+        }
+    }
+
+    & > p {
+        flex-grow: 1;
+        text-align: justify;
+    }
+}
