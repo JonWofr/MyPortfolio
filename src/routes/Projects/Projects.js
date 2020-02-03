@@ -1,74 +1,96 @@
 import React, { Component } from 'react';
-
-// Components
-import Project from '../../components/Project';
+import PropTypes from 'prop-types';
 
 // Utils
 import * as http from '../../utils/http';
-import { parseDocumentsToProjects } from '../../utils/parser';
+import * as parser from '../../utils/parser';
+
+// Styles
+import styles from './Projects.module.scss';
+
+// Components
+import Heading from '../../components/Heading';
+import Project from '../../components/Project';
+import Pagination from '../../components/Pagination';
 
 class Projects extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            page: 1,
-            lastPage: 1,
-            limit: 5,
-
+            page: undefined,
+            limit: undefined,
+            lastPage: undefined,
             projects: []
         }
     }
 
-    componentDidMount = () => this.fetchProjects;
+    componentDidMount = () => {
+        this.fetchProjects();
+    }
 
-    fetchProjects = () => {
-        const { page, limit } = this.state;
-        const data = {
+    fetchProjects = (page = 1, limit = 5) => {
+        const queryObject = {
             page,
             limit
         }
-        http.get(`${process.env.REACT_APP_BACKEND_URL}/projects`, data)
-            .then(res => {
-                const { documents, lastPage } = res;
-                const projects = parseDocumentsToProjects(documents);
+
+        http.get(`${process.env.REACT_APP_BACKEND_URL}/projects`, queryObject)
+            .then(({ response }) => {
+                const { data, appendix: { lastPage } } = response;
+
+                const projects = parser.parseDocumentsToProjects(data);
                 this.setState({
+                    page,
+                    limit,
                     lastPage,
                     projects
                 });
-            });
+            })
     }
-    render = () => {
-        const { projects } = this.state;
-        const keys = Object.keys(projects);
+
+    render() {
+        const { page, lastPage, projects } = this.state;
+
+        const projectIds = Object.keys(projects);
+
         return (
-            <div>
-                {keys && keys.length > 0 &&
-                    keys.map((key) => {
-                        const { _id, projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[key];
-                        const data = {
-                            projectName,
-                            categories,
-                            technologies,
-                            teamMembers,
-                            startDate,
-                            endDate,
-                            gitRepoLink,
-                            paragraphs
-                        }
-                        console.log(data);
+            <div id={styles.projects}>
+                <Heading type="primary">
+                    Projects
+                </Heading>
+                {
+                    projectIds.map((projectId, projectIdIndex) => {
+                        const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
                         return (
-                            <div key={_id}>
-                                <div>
-                                    <Project data={data} />
-                                </div>
-                            </div>
+                            <Project
+                                projectName={projectName}
+                                categories={categories}
+                                technologies={technologies}
+                                teamMembers={teamMembers}
+                                startDate={startDate}
+                                endDate={endDate}
+                                gitRepoLink={gitRepoLink}
+                                paragraphs={paragraphs}
+                            />
                         )
                     })
                 }
+                <Pagination
+                    page={page}
+                    lastPage={lastPage}
+                    onClickPage={this.onClickPaginationPage}
+                />
             </div>
-        )
+        );
     }
+
+
+    onClickPaginationPage = page => {
+        const { limit } = this.state;
+        this.fetchProjects(page, limit);
+    }
+
 }
 
 export default Projects;

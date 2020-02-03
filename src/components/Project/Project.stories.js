@@ -14,7 +14,22 @@ export const mockingData = {
     teamMembers: ["Nico", "Jonas"],
     startDate: "01.01.1919",
     endDate: "02.02.1091",
+    gitRepoLink: "https://google.com",
     paragraphs: paragraphs
 }
 
-storiesOf("Project", module).add("Default", () => <Project data={mockingData} />)
+storiesOf("Project", module).add("Default", () => {
+    const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = mockingData;
+    return (
+        <Project
+            projectName={projectName}
+            categories={categories}
+            technologies={technologies}
+            teamMembers={teamMembers}
+            startDate={startDate}
+            endDate={endDate}
+            gitRepoLink={gitRepoLink}
+            paragraphs={paragraphs}
+        />
+    )
+})

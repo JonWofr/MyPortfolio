@@ -1,0 +1,21 @@
+.badgeList {
+    display: flex;
+
+    &.horizontal {
+        margin: 0 -.25rem; 
+
+        & > * {
+            margin: 0 .25rem;
+        }
+    }
+
+    &.vertical {
+        flex-direction: column;
+
+        margin: -.25rem 0;
+
+        & > * {
+            margin: .25rem 0;
+        }
+    }
+}
