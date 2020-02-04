@@ -1,0 +1,21 @@
+.project {
+    & > .paragraphsContainer {
+        display: flex;
+        flex-direction: column;
+    
+        margin: -1.25rem 0;
+    
+        & > * {
+            margin: 1.25rem 0;
+        }
+    }
+
+    & > .moreBar {
+        display: flex;
+        justify-content: center;
+
+        & > span {
+            font-weight: 600;
+        }
+    }
+}

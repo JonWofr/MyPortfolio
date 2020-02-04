@@ -1,39 +1,84 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // Components
 import Heading from '../Heading';
-import List from '../List';
 import Paragraph from '../Paragraph';
 import Button from '../Button';
-import Badge from '../Badge';
+import BadgeList from '../BadgeList';
 
 // Styles
 import styles from './Project.module.scss';
 
-const Project = ({ projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs }) => (
-    <div>
-        <Heading type="secondary">
-            {projectName}
-        </Heading>
-        <List items={categories}></List>
-        <List items={technologies}></List>
-        <List items={teamMembers}></List>
-        <p>{`${startDate} - ${endDate}`}</p>
-        <div>
-            {paragraphs.length > 0 && paragraphs.map((paragraph, paragraphIndex) => {
-                return (
-                    <Paragraph key={paragraphIndex} image={paragraph.image}>{paragraph.description}</Paragraph>
-                )
-            })}
+// Icons
+import arrowDownIcon from '../../assets/icons/arrowDown.svg';
+import arrowUpIcon from '../../assets/icons/arrowUp.svg';
+
+const Project = ({ projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const visibleParagraphs = isExpanded ? paragraphs : (paragraphs.length > 0 ? [paragraphs[0]] : []);
+
+    return (
+        <div className={styles.project}>
+            <Heading type="secondary">
+                {projectName}
+            </Heading>
+            <Heading type="tertiary">
+                Kategorien
+            </Heading>
+            <BadgeList
+                items={categories}
+                direction="horizontal"
+            />
+            <Heading type="tertiary">
+                Verwendete Technologien:
+            </Heading>
+            <BadgeList
+                items={technologies}
+                direction="horizontal"
+            />
+            <Heading type="tertiary">
+                Teammitglieder
+            </Heading>
+            <BadgeList
+                items={teamMembers}
+                direction="horizontal"
+            />
+            <Heading type="tertiary">
+                Projectlaufzeit:
+            </Heading>
+            <p>{`${startDate} - ${endDate}`}</p>
+            <div className={styles.paragraphsContainer}>
+                {visibleParagraphs.map((visibleParagraph, visibleParagraphIndex) => {
+                    const { heading, description, image } = visibleParagraph;
+                    return (
+                        <div key={visibleParagraphIndex} className={styles.paragraphContainer}>
+                            <Paragraph
+                                heading={heading}
+                                description={description}
+                                image={image}
+                            />
+                        </div>
+                    )
+                })}
+            </div>
+            <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
+                <Button type="button" size="medium">
+                    Zum Git Repo!
+                </Button>
+            </a>
+            <div className={styles.moreBar}>
+                <span>
+                    {isExpanded ? "Weniger" : "Mehr"}
+                </span>
+                <button onClick={() => setIsExpanded(!isExpanded)}>
+                    <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
+                </button>
+            </div>
         </div>
-        <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
-            <Button type="button" size="medium">
-                Zum Git Repo!
-            </Button>
-        </a>
-    </div>
-)
+    )
+}
 
 Project.propTypes = {
     projectName: PropTypes.string.isRequired,

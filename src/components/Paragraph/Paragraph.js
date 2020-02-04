@@ -1,38 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//Styling
+// Styling
 import styles from './Paragraph.module.scss';
 
-const Paragraph = ({ children, image }) => {
-    if (image) {
-        return (
-            <div className={styles.paragraph}>
+// Components
+import Heading from '../Heading';
+
+const Paragraph = ({ description, heading, image }) => (
+    <div className={styles.paragraph}>
+        {heading &&
+            <Heading type="quatenary">
+                {heading}
+            </Heading>
+        }
+        <div className={styles.content}>
+            {image &&
                 <img
                     className={styles[image.position]}
                     src={image.url}
                     alt=""
                 />
-                <p>
-                    {children}
-                </p>
-            </div>
-        )
-    }
-    else {
-        return (
-            <div className={styles.paragraph}>
-                <p>
-                    {children}
-                </p>
-            </div>
-        )
-    }
-}
+            }
+            <p>
+                {description}
+            </p>
+        </div>
+    </div>
+)
 
 Paragraph.propTypes = {
-    children: PropTypes.node.isRequired,
-    
+    text: PropTypes.string.isRequired,
+    description: PropTypes.string,
     image: PropTypes.exact({
         position: PropTypes.string,
         url: PropTypes.string,

@@ -1,23 +1,57 @@
+@import '../../globalVariables';
+
 .paragraph {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
-    & > img {
-        width: 20%; 
-    
-        &.right {
-            order: 1;
-            margin-left: 20px;
+    & > .content {
+        display: flex;
+        flex-direction: column;
+
+        margin: -.5rem 0;
+
+        & > * {
+            margin: .5rem 0;
         }
     
-        &.left {
-            order: -1;
-            margin-right: 20px;
+        & > img {    
+            width: 100%;
+            min-height: 0;
+
+            object-fit: cover;
+        
+            &.right {
+                order: 1;
+            }
+        
+            &.left {
+                order: -1;
+            }
+        }
+    
+        & > p {
+            text-align: justify;
         }
     }
+}
 
-    & > p {
-        flex-grow: 1;
-        text-align: justify;
+@media only screen and (min-width: $md-breakpoint) {
+    .paragraph > .content {
+        flex-direction: row;
+
+        margin: 0 -.5rem;
+
+        & > * {
+            margin: 0 .5rem;
+        }
+
+        & > img {
+            width: initial;
+            max-width: calc(50% - 1rem);
+        }
+
+        & > p {
+            flex-grow: 1;
+        }
     }
 }
