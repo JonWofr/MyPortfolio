@@ -19,6 +19,17 @@ body {
   min-height: 100%;
 
   overflow: auto;
+
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  width: 95%;
+
+  margin: auto;
+
+  margin-top: $default-header-height;
 }
 
 a {
@@ -40,4 +51,25 @@ button {
   border: none;
 
   background-color: transparent;
+}
+
+@media only screen and (min-width: $sm-breakpoint) {
+  main {
+      width: 92.5%;
+  }
+}
+@media only screen and (min-width: $md-breakpoint) {
+  main {
+      width: 90%;
+  }
+}
+@media only screen and (min-width: $lg-breakpoint) {
+  main {
+      width: 85%;
+  }
+}
+@media only screen and (min-width: $xl-breakpoint) {
+  main {
+      width: 75%;
+  }
 }

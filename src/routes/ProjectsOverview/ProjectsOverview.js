@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { cloneDeep } from 'lodash';
 
 // Components
@@ -7,6 +7,7 @@ import Toast from '../../components/Toast';
 import Pagination from '../../components/Pagination';
 import TableRow from '../../components/TableRow';
 import ParagraphsWindow from '../../components/ParagraphsWindow';
+import Header from '../../components/Header';
 
 // Utils
 import * as http from '../../utils/http';
@@ -90,37 +91,42 @@ class ProjectsOverview extends Component {
     render = () => {
         const { toasts, page, lastPage, shouldShowParagraphs } = this.state;
         return (
-            <div id={styles.projectsOverview}>
-                {toasts.length > 0 &&
-                    toasts.map((toast, index) => {
-                        const { type, heading, description } = toast;
-                        return (
-                            <Toast
-                                key={index}
-                                type={type}
-                                heading={heading}
-                                description={description}
-                            />
-                        )
-                    })
-                }
-                <Heading type="primary">
-                    Projects-formular
+            <Fragment>
+                <Header />
+                <main>
+                    <div id={styles.projectsOverview}>
+                        {toasts.length > 0 &&
+                            toasts.map((toast, index) => {
+                                const { type, heading, description } = toast;
+                                return (
+                                    <Toast
+                                        key={index}
+                                        type={type}
+                                        heading={heading}
+                                        description={description}
+                                    />
+                                )
+                            })
+                        }
+                        <Heading type="primary">
+                            Projects-formular
                 </Heading>
-                <table>
-                    {this.renderTableHead()}
-                    {this.renderTableBody()}
-                    {this.renderTableFoot()}
-                </table>
-                <div id={styles.paginationContainer}>
-                    <Pagination
-                        page={page}
-                        lastPage={lastPage}
-                        onClickPage={this.onClickPaginationPage}
-                    />
-                </div>
-                {shouldShowParagraphs && this.renderParagraphs()}
-            </div>
+                        <table>
+                            {this.renderTableHead()}
+                            {this.renderTableBody()}
+                            {this.renderTableFoot()}
+                        </table>
+                        <div id={styles.paginationContainer}>
+                            <Pagination
+                                page={page}
+                                lastPage={lastPage}
+                                onClickPage={this.onClickPaginationPage}
+                            />
+                        </div>
+                        {shouldShowParagraphs && this.renderParagraphs()}
+                    </div>
+                </main>
+            </Fragment>
         )
     }
 

@@ -15,13 +15,7 @@ const App = () => {
                 key={index}
                 path={path}
                 exact={exact}
-                component={() => {
-                  return (
-                    <Layout {...layoutProps}>
-                      <Component />
-                    </Layout>
-                  )
-                }} />
+                component={Component} />
             )
           })}
         </Switch>

@@ -1,3 +1,30 @@
-#projects {
-    
+@import "../../globalVariables";
+
+main {
+  width: initial;
+  height: 100%;
+
+  margin-right: initial;
+  margin-left: initial;
+
+  & > #projects {
+    height: 100%;
+
+    #projectsContainer {
+      height: calc(100vh - #{$default-header-height});
+
+      overflow-y: scroll;
+
+      scroll-snap-type: y proximity;
+
+      & > .projectContainer {
+        min-height: 100%;
+
+        box-sizing: border-box;
+        padding: 2rem;
+
+        scroll-snap-align: start;
+      }
+    }
+  }
 }

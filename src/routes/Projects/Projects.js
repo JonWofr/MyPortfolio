@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 // Utils
@@ -12,6 +12,7 @@ import styles from './Projects.module.scss';
 import Heading from '../../components/Heading';
 import Project from '../../components/Project';
 import Pagination from '../../components/Pagination';
+import Header from '../../components/Header';
 
 class Projects extends Component {
     constructor(props) {
@@ -55,33 +56,42 @@ class Projects extends Component {
         const projectIds = Object.keys(projects);
 
         return (
-            <div id={styles.projects}>
-                <Heading type="primary">
-                    Projects
-                </Heading>
-                {
-                    projectIds.map((projectId, projectIdIndex) => {
-                        const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
-                        return (
-                            <Project
-                                projectName={projectName}
-                                categories={categories}
-                                technologies={technologies}
-                                teamMembers={teamMembers}
-                                startDate={startDate}
-                                endDate={endDate}
-                                gitRepoLink={gitRepoLink}
-                                paragraphs={paragraphs}
-                            />
-                        )
-                    })
-                }
-                <Pagination
-                    page={page}
-                    lastPage={lastPage}
-                    onClickPage={this.onClickPaginationPage}
-                />
-            </div>
+            <Fragment>
+                <Header />
+                <main>
+                    <div id={styles.projects}>
+{/*                         <Heading type="primary">
+                            Projects
+                        </Heading> */}
+                        <div id={styles.projectsContainer}>
+                            {
+                                projectIds.map((projectId, projectIdIndex) => {
+                                    const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
+                                    return (
+                                        <div className={styles.projectContainer}>
+                                            <Project
+                                                projectName={projectName}
+                                                categories={categories}
+                                                technologies={technologies}
+                                                teamMembers={teamMembers}
+                                                startDate={startDate}
+                                                endDate={endDate}
+                                                gitRepoLink={gitRepoLink}
+                                                paragraphs={paragraphs}
+                                            />
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+{/*                         <Pagination
+                            page={page}
+                            lastPage={lastPage}
+                            onClickPage={this.onClickPaginationPage}
+                        /> */}
+                    </div>
+                </main>
+            </Fragment>
         );
     }
 
