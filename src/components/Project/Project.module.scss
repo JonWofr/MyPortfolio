@@ -1,3 +1,5 @@
+@import '../../globalVariables';
+
 .project {
     & > .heading {
 
@@ -48,10 +50,15 @@
 
             cursor: pointer;
 
+            border: none;
+
+            background-color: transparent;
+
             & > span {
                 font-weight: 600;
                 font-size: 1rem;
-                font-family: inherit ;
+                font-family: inherit;
+                color: $lightest-font-color;
             }
         }
     }

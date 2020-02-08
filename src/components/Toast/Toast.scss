@@ -23,28 +23,25 @@
   animation-timing-function: ease-in-out;
 
   &.success {
-    color: $secondary-font-color;
-    background-color: green;
+    background-color: #116611;
   }
 
   &.info {
-    color: $secondary-font-color;
-    background-color: blue;
+    background-color: #261758;
   }
 
   &.warn {
-    color: $primary-font-color;
-    background-color: yellow;
+    background-color: #806D15;
   }
 
   &.error {
-    color: $primary-font-color;
-    background-color: red;
+    background-color: #801515;
   }
 
-  & > * {
+  & > p {
+    color: $lighter-font-color;
+
     margin: 0;
-    padding: 0;
   }
 }
 

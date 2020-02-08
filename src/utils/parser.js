@@ -56,3 +56,18 @@ export const parseFileToDataUrl = (file) => {
         fileReader.readAsDataURL(file);
     })
 }
+
+export const parseShallowPropsObjectToPropsString = (props) => {
+    let propsString = "";
+    for (const key in props) {
+        let value;
+        if (typeof props[key] === "object") value = "OBJECT";
+        else if (typeof props[key] === "function") value = "FUNCTION";
+        else value = props[key];
+
+        if (value.length > 30) value = `${value.substring(0, 31)}...`;
+
+        propsString += propsString === "" ?  `${key}: ${value}` : `, ${key}: ${value}`
+    }
+    return propsString;
+}

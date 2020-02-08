@@ -1,9 +1,22 @@
 // Colors
-$primary-color: #5C1EC0;
-$secondary-color: #E2FA41;
+$primary-accent-color: hsl(263, 73%, 44%);
+$primary-accent-color-hover: hsl(263, 73%, 34%);
+$secondary-accent-color: hsl(68, 95%, 62%);
+$secondary-accent-color-hover: hsl(68, 95%, 52%);
 
-$primary-font-color: #000000;
-$secondary-font-color: #ffffff;
+$lightest-background-color: hsl(250, 10, 90);
+$lighter-background-color: hsl(250, 10, 85);
+$light-background-color: hsl(250, 10, 80);
+$dark-background-color: hsl(250, 10, 20);
+$darker-background-color: hsl(250, 10, 15);
+$darkest-background-color: hsl(250, 10, 10);
+
+$lightest-font-color: hsl(250, 10, 90);
+$lighter-font-color: hsl(250, 10, 85);
+$light-font-color: hsl(250, 10, 80);
+$dark-font-color: hsl(250, 10, 20);
+$darker-font-color: hsl(250, 10, 15);
+$darkest-font-color: hsl(250, 10, 10);
 
 $default-header-height: 50px;
 

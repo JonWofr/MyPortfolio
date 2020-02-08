@@ -23,6 +23,7 @@
 
         font-size: 1rem;
         line-height: 2rem;
+        color: $lightest-font-color;
 
         background-color: transparent;
 
@@ -31,8 +32,6 @@
 
     select:focus + label > .labelContent, select:valid:not([value=""]) + label > .labelContent, select:disabled:not([value=""]) + label > .labelContent {
         transform: translateY(-2rem);
-
-        color: $primary-color;
     
         font-size: .875rem;
         line-height: .875rem;
@@ -43,7 +42,7 @@
     }
 
     select:disabled {
-        color: #999999;
+
     }
     
     & > label {
@@ -67,6 +66,7 @@
 
             font-size: 1rem;
             line-height: 2rem;
+            color: $lighter-font-color;
 
             transition: all .3s ease;
         }
@@ -84,7 +84,7 @@
         left: 0;
         bottom: -1px;
 
-        border-bottom: 3px solid $primary-color;
+        border-bottom: 3px solid $primary-accent-color;
 
         transform: translateX(-100%);
 
@@ -109,20 +109,28 @@
 
     & > ul {
         border-collapse: collapse;
+
+        padding: 0;
+        margin: 0;
+
+        background-color: $dark-background-color;
+
         & > li {
             padding: .125rem .25rem;
-            border: $default-border;
+            
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            color: $lighter-font-color;
     
             & > span {
                 &.enabled {
-                    color: initial;
+
                 }
     
                 &.disabled {
-                    color: #999999;
+
                 }
             }
     
@@ -130,6 +138,7 @@
                 padding: 0;
     
                 border: none;
+
                 background-color: transparent;
 
                 cursor: pointer;

@@ -4,10 +4,11 @@ import propTypes from 'prop-types';
 // Styles
 import styles from './ParagraphsWindow.module.scss';
 
-// Presentational Components
+// Components
 import Input from '../Input';
 import Select from '../Select';
 import TextArea from '../TextArea';
+import Heading from '../Heading';
 
 // Constants
 const imagePositionSelectValues = [{
@@ -30,9 +31,9 @@ const ParagraphsWindow = (props) => {
                 return (
                     <div key={index} className={styles.paragraphContainer}>
                         <div>
-                            <h2>
+                            <Heading type="secondary">
                                 {`${index + 1}. Paragraph`}
-                            </h2>
+                            </Heading>
                             <button className={styles.deleteButton} disabled={!isEditable} type="button" onClick={(e) => onClickRemoveParagraph(index)}>
                                 <i className="material-icons">delete</i>
                             </button>
@@ -112,7 +113,6 @@ ParagraphsWindow.propTypes = {
     onChangeValue: propTypes.func.isRequired,
     onClickAddNewParagraph: propTypes.func.isRequired,
     onClickRemoveParagraph: propTypes.func.isRequired,
-
     isEditable: propTypes.bool
 }
 

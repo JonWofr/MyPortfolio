@@ -4,32 +4,42 @@ import { storiesOf } from '@storybook/react';
 // Presentational Components
 import Select from './Select';
 
-// Mocking data
-const options = [{
-    value: "hund",
-    textNode: "Hund"
-}, {
-    value: "katze",
-    textNode: "Katze"
-}, {
-    value: "maus",
-    textNode: "Maus"
-}];
+// Utils
+import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
-storiesOf("Select", module)
-    .add("Multi", () => (
-        <Select
-            options={options}
-            selectedValue={["hund"]}
-            onChangeValue={(e) => { console.log(`Selected ${e.target.value}`) }}
-            mode="multi"
-        />
-    ))
-    .add("Single", () => (
-        <Select
-            options={options}
-            selectedValue={"fisch"}
-            onChangeValue={(e) => { console.log(`Selected ${e.target.value}`) }}
-            mode="single"
-        />
-    ))
+// MockingData
+export const mockingData = {
+    componentName: "Select",
+    Component: Select,
+    stories: [{
+        options: [{
+            value: "hund",
+            textNode: "Hund"
+        }, {
+            value: "katze",
+            textNode: "Katze"
+        }, {
+            value: "maus",
+            textNode: "Maus"
+        }],
+        selectedValue: ["hund"],
+        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        mode: "multi"
+    }, {
+        options: [{
+            value: "hund",
+            textNode: "Hund"
+        }, {
+            value: "katze",
+            textNode: "Katze"
+        }, {
+            value: "maus",
+            textNode: "Maus"
+        }],
+        selectedValue: "fisch",
+        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        mode: "single"
+    }]
+}
+
+mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => <mockingData.Component {...story} />))

@@ -1,29 +1,63 @@
-import { storiesOf } from '@storybook/react';
 import React from 'react';
+import { storiesOf } from '@storybook/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-//Components
+// Components
 import CustomLink from './CustomLink.js';
 
-storiesOf("CustomLink", module)
-    .add("small", () => (
-        <Router>
-            <CustomLink to="/projects" size="small">
-                Mehr
-            </CustomLink>
-        </Router>
-    ))
-    .add("medium", () => (
-        <Router>
-            <CustomLink to="/projects" size="medium">
-                Mehr
-            </CustomLink>
-        </Router>
-    ))
-    .add("large", () => (
-        <Router>
-            <CustomLink to="/projects" size="large">
-                Mehr
-            </CustomLink>
-        </Router>
-    ))
+// Utils
+import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
+
+// MockingData
+export const mockingData = {
+    componentName: "CustomLink",
+    Component: CustomLink,
+    stories: [{
+        size: "small",
+        to: "/projects",
+        children: "Hier"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier"
+    }, {
+        size: "large",
+        to: "/projects",
+        children: "Hier"
+    }, {
+        size: "fluid",
+        to: "/projects",
+        children: "Hier"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier",
+        colorScheme: "primaryAccent"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier",
+        colorScheme: "secondaryAccent"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier",
+        colorScheme: "invertedPrimaryAccent"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier",
+        colorScheme: "invertedSecondaryAccent"
+    }, {
+        size: "medium",
+        to: "/projects",
+        children: "Hier",
+        disabled: true
+    }]
+}
+
+mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => (
+    <Router>
+        <mockingData.Component {...story} />
+    </Router>
+)))

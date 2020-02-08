@@ -35,17 +35,18 @@
 
         box-sizing: border-box;
 
-        border:  3px solid $primary-color;
+        border:  3px solid $primary-accent-color;
 
         outline: none;
 
         font-size: 1rem;
         line-height: 2rem;
+        color: $lightest-font-color;
 
         background-color: transparent;
 
         &:disabled {
-            color: #999999;
+
         }
     }   
     
@@ -68,9 +69,9 @@
             top: 0;
             left: 0;
 
-            color: $primary-color;
             font-size: .875rem;
             line-height: .875rem;
+            color: $lighter-font-color;
         }
     }
 }

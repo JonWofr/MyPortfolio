@@ -4,9 +4,7 @@ import propTypes from 'prop-types';
 // Styles
 import styles from './TextArea.module.scss';
 
-const TextArea = (props) => {
-    const { form, disabled, size, onChange, value, required, id, placeholder } = props;
-    return (
+const TextArea = ({ form, disabled, size, onChange, value, required, id, placeholder }) => (
         <div className={`${styles.textArea} ${styles[size]}`}>
             <textarea
                 form={form}
@@ -23,7 +21,6 @@ const TextArea = (props) => {
             </label>
         </div>
     )
-}
 
 TextArea.propTypes = {
     value: propTypes.string.isRequired,

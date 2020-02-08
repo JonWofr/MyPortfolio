@@ -95,14 +95,16 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                         Zum Git Repo!
                     </Button>
                 </a> */}
-                <div className={styles.moreBar}>
-                    <button onClick={() => setIsExpanded(!isExpanded)}>
-                        <span>
-                            {isExpanded ? "Weniger" : "Mehr"}
-                        </span>
-                        <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
-                    </button>
-                </div>
+                {paragraphs.length > 1 &&
+                    <div className={styles.moreBar}>
+                        <button onClick={() => setIsExpanded(!isExpanded)}>
+                            <span>
+                                {isExpanded ? "Weniger" : "Mehr"}
+                            </span>
+                            <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
+                        </button>
+                    </div>
+                }
             </div>
         </article>
     )

@@ -1,27 +1,24 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 // Components
-import TextArea from './TextArea';
+import Header from './Header';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "TextArea",
-    Component: TextArea,
+    componentName: "Header",
+    Component: Header,
     stories: [{
-        value: "hallo",
-        placeholder: "With content"
-    }, {
-        value: "",
-        placeholder: "Without content"
+        default: true
     }]
 }
 
 mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => (
-    <div style={{ height: "200px" }}>
+    <Router>
         <mockingData.Component {...story} />
-    </div>
+    </Router>
 )))
