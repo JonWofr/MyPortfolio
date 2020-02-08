@@ -1,21 +1,58 @@
 .project {
-    & > .paragraphsContainer {
-        display: flex;
-        flex-direction: column;
-    
-        margin: -1.25rem 0;
-    
-        & > * {
-            margin: 1.25rem 0;
-        }
+    & > .heading {
+
     }
 
-    & > .moreBar {
+    & > .content {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
 
-        & > span {
-            font-weight: 600;
+        & > section, & > div {
+            margin: .675rem 0;
+
+            display: flex;
+            flex-direction: column;
+
+            &:first-child {
+                margin-top: initial;
+            }
+            &:last-child {
+                margin-bottom: initial;
+            }
+
+            & > * {
+                margin: .25rem 0;
+            
+                &:first-child {
+                    margin-top: initial;
+                }
+                &:last-child {
+                    margin-bottom: initial;
+                }
+
+                &.projectTimespan {
+                    font-size: 0.875rem;
+                    line-height: 1.125rem;
+
+                    padding: .5rem 0;
+                }
+            }
+        }
+
+
+        & > .moreBar > button {
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+
+            cursor: pointer;
+
+            & > span {
+                font-weight: 600;
+                font-size: 1rem;
+                font-family: inherit ;
+            }
         }
     }
 }

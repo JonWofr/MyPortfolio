@@ -20,63 +20,91 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
     const visibleParagraphs = isExpanded ? paragraphs : (paragraphs.length > 0 ? [paragraphs[0]] : []);
 
     return (
-        <div className={styles.project}>
-            <Heading type="secondary">
-                {projectName}
-            </Heading>
-            <Heading type="tertiary">
-                Kategorien
-            </Heading>
-            <BadgeList
-                items={categories}
-                direction="horizontal"
-            />
-            <Heading type="tertiary">
-                Verwendete Technologien:
-            </Heading>
-            <BadgeList
-                items={technologies}
-                direction="horizontal"
-            />
-            <Heading type="tertiary">
-                Teammitglieder
-            </Heading>
-            <BadgeList
-                items={teamMembers}
-                direction="horizontal"
-            />
-            <Heading type="tertiary">
-                Projectlaufzeit:
-            </Heading>
-            <p>{`${startDate} - ${endDate}`}</p>
-            <div className={styles.paragraphsContainer}>
-                {visibleParagraphs.map((visibleParagraph, visibleParagraphIndex) => {
-                    const { heading, description, image } = visibleParagraph;
-                    return (
-                        <div key={visibleParagraphIndex} className={styles.paragraphContainer}>
-                            <Paragraph
-                                heading={heading}
-                                description={description}
-                                image={image}
-                            />
-                        </div>
-                    )
-                })}
+        <article className={styles.project}>
+            <div className={styles.heading}>
+                <Heading type="secondary">
+                    {projectName}
+                </Heading>
             </div>
-            <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
-                <Button type="button" size="medium">
-                    Zum Git Repo!
-                </Button>
-            </a>
-            <div className={styles.moreBar}>
-                <span>
-                    {isExpanded ? "Weniger" : "Mehr"}
-                </span>
-                <button onClick={() => setIsExpanded(!isExpanded)}>
-                    <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
-                </button>
+            <div className={styles.content}>
+                <section>
+                    <div>
+                        <Heading type="tertiary">
+                            Kategorien
+                        </Heading>
+                    </div>
+                    <div>
+                        <BadgeList
+                            items={categories}
+                            direction="horizontal"
+                        />
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <Heading type="tertiary">
+                            Verwendete Technologien:
+                        </Heading>
+                    </div>
+                    <div>
+                        <BadgeList
+                            items={technologies}
+                            direction="horizontal"
+                        />
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <Heading type="tertiary">
+                            Teammitglieder
+                        </Heading>
+                    </div>
+                    <div>
+                        <BadgeList
+                            items={teamMembers}
+                            direction="horizontal"
+                        />
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <Heading type="tertiary">
+                            Projectlaufzeit:
+                        </Heading>
+                    </div>
+                    <p className={styles.projectTimespan}>
+                        {`${startDate} - ${endDate}`}
+                    </p>
+                </section>
+                <div>
+                    {visibleParagraphs.map((visibleParagraph, visibleParagraphIndex) => {
+                        const { heading, description, image } = visibleParagraph;
+                        return (
+                            <div className={styles.paragraphContainer} key={visibleParagraphIndex}>
+                                <Paragraph
+                                    heading={heading}
+                                    description={description}
+                                    image={image}
+                                />
+                            </div>
+                        )
+                    })}
+                </div>
+                {/*                 <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
+                    <Button type="button" size="medium">
+                        Zum Git Repo!
+                    </Button>
+                </a> */}
+                <div className={styles.moreBar}>
+                    <button onClick={() => setIsExpanded(!isExpanded)}>
+                        <span>
+                            {isExpanded ? "Weniger" : "Mehr"}
+                        </span>
+                        <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
+                    </button>
+                </div>
             </div>
-        </div>
+        </article>
     )
 }
 

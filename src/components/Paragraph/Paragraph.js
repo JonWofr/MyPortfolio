@@ -8,25 +8,27 @@ import styles from './Paragraph.module.scss';
 import Heading from '../Heading';
 
 const Paragraph = ({ description, heading, image }) => (
-    <div className={styles.paragraph}>
-        {heading &&
-            <Heading type="quatenary">
-                {heading}
-            </Heading>
+    <section className={styles.paragraph}>
+        {image &&
+            <img
+                className={styles[image.position]}
+                src={image.url}
+                alt=""
+            />
         }
-        <div className={styles.content}>
-            {image &&
-                <img
-                    className={styles[image.position]}
-                    src={image.url}
-                    alt=""
-                />
+        <div className={styles.textContainer}>
+            {heading &&
+                <div className={styles.headingContainer}>
+                    <Heading type="quatenary">
+                        {heading}
+                    </Heading>
+                </div>
             }
             <p>
                 {description}
             </p>
         </div>
-    </div>
+    </section >
 )
 
 Paragraph.propTypes = {

@@ -51,6 +51,8 @@ button {
   border: none;
 
   background-color: transparent;
+
+  font-family: inherit;
 }
 
 @media only screen and (min-width: $sm-breakpoint) {
