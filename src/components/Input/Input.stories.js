@@ -21,6 +21,18 @@ const mockingData = {
         size: "medium",
         value: "hallo",
         required: true
+    }, {
+        type: "text",
+        placeholder: "testing-placeholder",
+        size: "large",
+        required: true,
+        colorMode: "dark"
+    }, {
+        type: "text",
+        size: "medium",
+        value: "hallo",
+        required: true,
+        colorMode: "dark"
     }]
 }
 

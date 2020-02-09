@@ -1,0 +1,33 @@
+@import "../../globalVariables";
+
+.showMoreButton {
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+
+  &.light {
+    & > span {
+      color: $darkest-font-color;
+    }
+
+    & > svg > path:first-child {
+      fill: $darkest-font-color;
+    }
+  }
+
+  &.dark {
+    & > span {
+      color: $lightest-font-color;
+    }
+
+    & > svg > path:first-child {
+      fill: $lightest-font-color;
+    }
+  }
+  
+  & > span {
+    font-weight: 600;
+    font-size: 1rem;
+  }
+}

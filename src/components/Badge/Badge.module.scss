@@ -7,7 +7,17 @@
     border-radius: .9375rem;
 
     font-size: .875rem;
-    color: $darker-font-color;
+    font-weight: 600;
 
-    background-color: $lightest-background-color;
+    &.light {
+        color: $lighter-font-color;
+
+        background-color: $darkest-background-color;
+    }
+
+    &.dark {
+        color: $darker-font-color;
+
+        background-color: $lightest-background-color;
+    }
 }

@@ -1,0 +1,58 @@
+@import '../../globalVariables';
+
+.projectNavigation {
+    display: flex;
+    flex-direction: column;
+
+    &.light > button:nth-child(2) > svg > path:first-child {
+        fill: $lighter-background-color;
+    }
+
+    &.dark > button:nth-child(2) > svg > path:first-child {
+        fill: $darker-background-color;
+    }
+
+    & > * {
+        margin: .25rem 0;
+
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+    
+    & > button {
+        width: 50px;
+        height: 50px;
+
+        border-radius: 50%;
+
+        box-sizing: border-box;
+
+        &:first-child {
+            border: 1px solid $primary-accent-color;
+
+            &:hover {
+                border: 1px solid $primary-accent-color-hover;
+
+                & > svg > path:first-child {
+                    fill: $primary-accent-color-hover;
+                }
+            }
+
+            & > svg > path:first-child {
+                fill: $primary-accent-color;
+            }
+        }
+
+        &:nth-child(2) {
+            background-color: $primary-accent-color;
+
+            &:hover {
+                background-color: $primary-accent-color-hover
+            }
+        }
+    }
+}

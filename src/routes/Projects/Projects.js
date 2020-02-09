@@ -13,6 +13,7 @@ import Heading from '../../components/Heading';
 import Project from '../../components/Project';
 import Pagination from '../../components/Pagination';
 import Header from '../../components/Header';
+import ProjectNavigation from '../../components/ProjectNavigation';
 
 class Projects extends Component {
     constructor(props) {
@@ -59,16 +60,13 @@ class Projects extends Component {
             <Fragment>
                 <Header />
                 <main>
-                    <div id={styles.projects}>
-{/*                         <Heading type="primary">
-                            Projects
-                        </Heading> */}
-                        <div id={styles.projectsContainer}>
-                            {
-                                projectIds.map((projectId, projectIdIndex) => {
-                                    const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
-                                    return (
-                                        <div className={styles.projectContainer}>
+                    <div id={styles.projectsContainer}>
+                        {
+                            projectIds.map((projectId, projectIdIndex) => {
+                                const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
+                                return (
+                                    <div className={styles.projectOuterContainer}>
+                                        <div className={styles.projectInnerContainer}>
                                             <Project
                                                 projectName={projectName}
                                                 categories={categories}
@@ -78,17 +76,13 @@ class Projects extends Component {
                                                 endDate={endDate}
                                                 gitRepoLink={gitRepoLink}
                                                 paragraphs={paragraphs}
+                                                colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
                                             />
                                         </div>
-                                    )
-                                })
-                            }
-                        </div>
-{/*                         <Pagination
-                            page={page}
-                            lastPage={lastPage}
-                            onClickPage={this.onClickPaginationPage}
-                        /> */}
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </main>
             </Fragment>

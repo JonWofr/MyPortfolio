@@ -13,6 +13,9 @@ export const mockingData = {
     Component: List,
     stories: [{
         items: ["Kotlin", "Swift", "Java", "JavaScript", "PHP"],
+    }, {
+        items: ["Kotlin", "Swift", "Java", "JavaScript", "PHP"],
+        colorMode: "dark"
     }]
 }
 

@@ -1,148 +1,178 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
 .select {
-    position: relative;
+  position: relative;
 
-    overflow: hidden;
+  overflow: hidden;
 
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    select {
-        width: 100%;
-        height: 2.875rem;
+  &.small {
+    width: 100px;
+  }
 
-        padding: 0;
-        padding-top: .875rem;
+  &.medium {
+    width: 200px;
+  }
 
-        box-sizing: border-box;
+  &.large {
+    width: 300px;
+  }
 
-        border: none;
+  &.fluid {
+    width: 100%;
+  }
 
-        outline: none;
+  &.light {
+      & > select {
+          color: $darker-font-color;
+      }
 
-        font-size: 1rem;
-        line-height: 2rem;
-        color: $lightest-font-color;
+      & > label > .labelContent {
+          color: $darkest-font-color;
+      }
 
-        background-color: transparent;
+      & > ul {
+          background-color: $light-background-color;
 
-        cursor: pointer;
+          & > li {
+              & > span {
+                  color: $darker-font-color;
+              }
+              & > button > svg > path:first-child {
+                  fill: $darker-font-color;
+              }
+          }
+      }
+  }
+
+  &.dark {
+      & > select {
+          color: $lighter-font-color;
+      }
+
+      & > label > .labelContent {
+          color: $lightest-font-color;
+      }
+
+      & > ul {
+          background-color: $dark-background-color;
+
+          & > li {
+              & > span {
+                  color: $lighter-font-color;
+              }
+              & > button > svg > path:first-child {
+                  fill: $lighter-font-color;
+              }
+          }
+      }
+  }
+
+  & > select {
+    width: 100%;
+    height: 2.875rem;
+
+    padding: 0;
+    padding-top: 0.875rem;
+
+    box-sizing: border-box;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 1rem;
+    line-height: 2rem;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    &:focus + label > .labelContent,
+    &:valid:not([value=""]) + label > .labelContent,
+    &:disabled:not([value=""]) + label > .labelContent {
+      transform: translateY(-2rem);
+
+      font-size: 0.875rem;
+      line-height: 0.875rem;
     }
 
-    select:focus + label > .labelContent, select:valid:not([value=""]) + label > .labelContent, select:disabled:not([value=""]) + label > .labelContent {
-        transform: translateY(-2rem);
-    
-        font-size: .875rem;
-        line-height: .875rem;
+    &:focus + label::after,
+    &:valid:not([value=""]) + label::after,
+    &:disabled:not([value=""]) + label::after {
+      transform: translateX(0%);
     }
 
-    select:focus + label::after, select:valid:not([value=""]) + label::after, select:disabled:not([value=""]) + label::after {
-        transform: translateX(0%);
+    &:disabled {
     }
+  }
 
-    select:disabled {
+  & > label {
+    width: 100%;
+    height: 2.875rem;
 
-    }
-    
-    & > label {
-        width: 100%;
-        height: 2.875rem;
+    position: absolute;
+    left: 0;
+    top: 0;
 
-        position: absolute;
-        left: 0;
-        top: 0;
+    box-sizing: border-box;
 
-        box-sizing: border-box;
+    border-bottom: 1px solid black;
 
-        border-bottom: 1px solid black;
+    pointer-events: none;
 
-        pointer-events: none;
-
-        .labelContent {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-
-            font-size: 1rem;
-            line-height: 2rem;
-            color: $lighter-font-color;
-
-            transition: all .3s ease;
-        }
-    }
-
-    label::after {
+    &::after {
         width: 100%;
         height: 100%;
-
+    
         content: "";
-
+    
         box-sizing: border-box;
-
+    
         position: absolute;
         left: 0;
         bottom: -1px;
-
+    
         border-bottom: 3px solid $primary-accent-color;
-
+    
         transform: translateX(-100%);
-
-        transition: transform .3s ease;
-    }
-
-    &.small {
-        width: 100px;
-    }
-
-    &.medium {
-        width: 200px;
-    }
-
-    &.large {
-        width: 300px;
-    }
-
-    &.fluid {
-        width: 100%;
-    }
-
-    & > ul {
-        border-collapse: collapse;
-
-        padding: 0;
-        margin: 0;
-
-        background-color: $dark-background-color;
-
-        & > li {
-            padding: .125rem .25rem;
-            
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            color: $lighter-font-color;
     
-            & > span {
-                &.enabled {
+        transition: transform 0.3s ease;
+      }
 
-                }
-    
-                &.disabled {
+    & > .labelContent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
 
-                }
-            }
-    
-            & > button {
-                padding: 0;
-    
-                border: none;
+      font-size: 1rem;
+      line-height: 2rem;
 
-                background-color: transparent;
+      transition: all 0.3s ease;
+    }
+  }
 
-                cursor: pointer;
-            }
+  & > ul {
+    border-collapse: collapse;
+
+    & > li {
+      padding: 0.125rem 0.25rem;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: $lighter-font-color;
+
+      & > span {
+        &.enabled {
         }
+
+        &.disabled {
+        }
+      }
     }
+  }
 }

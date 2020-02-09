@@ -110,7 +110,7 @@ class ProjectsOverview extends Component {
                         }
                         <Heading type="primary">
                             Projects-formular
-                </Heading>
+                        </Heading>
                         <table>
                             {this.renderTableHead()}
                             {this.renderTableBody()}

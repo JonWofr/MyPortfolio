@@ -4,6 +4,8 @@
 
 html {
   height: 100%;
+
+  font-size: 14px;
 }
 
 body {
@@ -13,7 +15,7 @@ body {
 
   font-family: 'Quicksand', sans-serif;
 
-  background-color: $darker-background-color;
+  background-color: $lightest-background-color;
 }
 
 #root {
@@ -39,28 +41,55 @@ a {
 
 ul, ol {
   list-style: none;
+
+  padding: 0;
+  margin: 0;
 }
 
 button {
   font-family: inherit;
+
+  background-color: transparent;
+
+  border: none;
+
+  cursor: pointer;
+
+  padding: 0;
 }
 
 @media only screen and (min-width: $sm-breakpoint) {
+  html {
+    font-size: 14.5px;
+  }
+
   main {
       width: 92.5%;
   }
 }
 @media only screen and (min-width: $md-breakpoint) {
+  html {
+    font-size: 15px;
+  }
+
   main {
       width: 90%;
   }
 }
 @media only screen and (min-width: $lg-breakpoint) {
+  html {
+    font-size: 15.5px;
+  }
+
   main {
       width: 85%;
   }
 }
 @media only screen and (min-width: $xl-breakpoint) {
+  html {
+    font-size: 16px;
+  }
+
   main {
       width: 75%;
   }

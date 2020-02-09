@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 // Styles
 import styles from './Select.module.scss';
 
-const Select = ({ form, disabled, required, selectedValue, options, mode, size, onChangeValue, id, placeholder }) => {
+const Select = ({ form, disabled, required, selectedValue, options, mode, size, onChangeValue, id, placeholder, colorMode }) => {
     switch (mode) {
         case "single":
             return (
-                <div className={`${styles.select} ${styles[size]}`}>
+                <div className={`${styles.select} ${styles[size]} ${styles[colorMode]}`}>
                     <select
                         form={form}
                         disabled={disabled}
@@ -31,7 +31,7 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
             )
         case "multi":
             return (
-                <div className={`${styles.select} ${styles[size]}`}>
+                <div className={`${styles.select} ${styles[size]} ${styles[colorMode]}`}>
                     <select
                         form={form}
                         disabled={disabled}
@@ -62,17 +62,14 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                             })
                             return (
                                 <li key={index}>
-                                    <span className={`${disabled ? styles.disabled : styles.enabled}`}>
+                                    <span className={disabled ? styles.disabled : styles.enabled}>
                                         {textNode}
                                     </span>
-                                    <button
-                                        disabled={disabled}
-                                        type="button"
-                                        onClick={() => onClickDeleteListItem(selectedValue, index, onChangeValue)}
-                                    >
-                                        <i disabled={disabled} className="material-icons">
-                                            delete
-                                        </i>
+                                    <button disabled={disabled} type="button" onClick={() => onClickDeleteListItem(selectedValue, index, onChangeValue)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                                            <path d="M0 0h24v24H0z" fill="none" />
+                                        </svg>
                                     </button>
                                 </li>
                             )
@@ -110,7 +107,8 @@ Select.propTypes = {
     defaultValue: PropTypes.string,
     size: PropTypes.string,
     id: PropTypes.string,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    colorMode: PropTypes.oneOf(["light", "dark"])
 }
 
 Select.defaultProps = {
@@ -122,7 +120,8 @@ Select.defaultProps = {
     defaultValue: "",
     size: "medium",
     id: undefined,
-    placeholder: "placeholder"
+    placeholder: "placeholder",
+    colorMode: "light"
 }
 
 export default Select;

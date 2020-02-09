@@ -15,6 +15,10 @@ export const mockingData = {
         value: "hallo",
         placeholder: "With content"
     }, {
+        value: "hallo",
+        placeholder: "With content",
+        colorMode: "dark"
+    }, {
         value: "",
         placeholder: "Without content"
     }]

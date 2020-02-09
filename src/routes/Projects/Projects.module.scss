@@ -2,28 +2,23 @@
 
 main {
   width: initial;
-  height: 100%;
 
-  margin-right: initial;
-  margin-left: initial;
+  margin: 0 initial;
 
-  & > #projects {
-    height: 100%;
+  & > #projectsContainer {
+    display: flex;
+    flex-direction: column;
 
-    #projectsContainer {
-      height: calc(100vh - #{$default-header-height});
+    & > .projectOuterContainer {
+      &:nth-child(2n + 1) {
+        background-color: $darker-background-color;
+      }
 
-      overflow-y: scroll;
+      & > .projectInnerContainer {
+        width: 75%;
 
-      scroll-snap-type: y proximity;
-
-      & > .projectContainer {
-        min-height: 100%;
-
-        box-sizing: border-box;
-        padding: 2rem;
-
-        scroll-snap-align: start;
+        padding: 4rem 0;
+        margin: 0 auto;
       }
     }
   }

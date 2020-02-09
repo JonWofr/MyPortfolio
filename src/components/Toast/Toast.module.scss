@@ -16,8 +16,6 @@
 
   border-radius: 0.5rem;
 
-  box-shadow: $default-box-shadow;
-
   animation-name: showToast;
   animation-duration: 5s;
   animation-timing-function: ease-in-out;
@@ -38,9 +36,15 @@
     background-color: #801515;
   }
 
-  & > p {
-    color: $lighter-font-color;
+  &.light > p {
+    color: $darker-font-color;
+  }
 
+  &.dark > p {
+    color: $lighter-font-color;
+  }
+
+  & > p {
     margin: 0;
   }
 }

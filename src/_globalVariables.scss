@@ -4,27 +4,27 @@ $primary-accent-color-hover: hsl(263, 73%, 34%);
 $secondary-accent-color: hsl(68, 95%, 62%);
 $secondary-accent-color-hover: hsl(68, 95%, 52%);
 
-$lightest-background-color: hsl(250, 10, 90);
-$lighter-background-color: hsl(250, 10, 85);
-$light-background-color: hsl(250, 10, 80);
-$dark-background-color: hsl(250, 10, 20);
-$darker-background-color: hsl(250, 10, 15);
-$darkest-background-color: hsl(250, 10, 10);
+$lightest-background-color: hsl(250, 5, 90);
+$lighter-background-color: hsl(250, 5, 80);
+$light-background-color: hsl(250, 5, 70);
+$dark-background-color: hsl(250, 5, 30);
+$darker-background-color: hsl(250, 5, 20);
+$darkest-background-color: hsl(250, 5, 10);
 
-$lightest-font-color: hsl(250, 10, 90);
-$lighter-font-color: hsl(250, 10, 85);
-$light-font-color: hsl(250, 10, 80);
-$dark-font-color: hsl(250, 10, 20);
-$darker-font-color: hsl(250, 10, 15);
-$darkest-font-color: hsl(250, 10, 10);
+$lightest-font-color: hsl(250, 0, 90);
+$lighter-font-color: hsl(250, 0, 80);
+$light-font-color: hsl(250, 0, 70);
+$dark-font-color: hsl(250, 0, 30);
+$darker-font-color: hsl(250, 0, 20);
+$darkest-font-color: hsl(250, 0, 10);
 
 $default-header-height: 50px;
 
 $default-border: 1px solid #999999;
-$default-box-shadow: 2.5px 2.5px 5px rgba(0, 0, 0, 0.1);
 
 $default-button-border-radius: .3rem;
 
+$default-card-box-shadow: 0px 2.5px 15px rgba(0, 0, 0, 0.5);
 $default-card-border-radius: .5rem;
 
 $header-footer-padding-left-right: 1rem;

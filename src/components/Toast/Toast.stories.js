@@ -16,6 +16,11 @@ export const mockingData = {
         heading: "Success!",
         description: "Everything worked."
     }, {
+        type: "success",
+        heading: "Success!",
+        description: "Everything worked.",
+        colorMode: "dark"
+    }, {
         type: "info",
         heading: "Info!",
         description: "This happenned."

@@ -6,30 +6,27 @@ import Heading from '../Heading';
 import Paragraph from '../Paragraph';
 import Button from '../Button';
 import BadgeList from '../BadgeList';
+import ShowMoreButton from '../ShowMoreButton';
 
 // Styles
 import styles from './Project.module.scss';
 
-// Icons
-import arrowDownIcon from '../../assets/icons/arrowDown.svg';
-import arrowUpIcon from '../../assets/icons/arrowUp.svg';
-
-const Project = ({ projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs }) => {
+const Project = ({ projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs, colorMode }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const visibleParagraphs = isExpanded ? paragraphs : (paragraphs.length > 0 ? [paragraphs[0]] : []);
 
     return (
-        <article className={styles.project}>
+        <article className={`${styles.project} ${styles[colorMode]}`}>
             <div className={styles.heading}>
-                <Heading type="secondary">
+                <Heading type="secondary" colorMode={colorMode}>
                     {projectName}
                 </Heading>
             </div>
             <div className={styles.content}>
                 <section>
                     <div>
-                        <Heading type="tertiary">
+                        <Heading type="tertiary" colorMode={colorMode}>
                             Kategorien
                         </Heading>
                     </div>
@@ -37,12 +34,13 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                         <BadgeList
                             items={categories}
                             direction="horizontal"
+                            colorMode={colorMode}
                         />
                     </div>
                 </section>
                 <section>
                     <div>
-                        <Heading type="tertiary">
+                        <Heading type="tertiary" colorMode={colorMode}>
                             Verwendete Technologien:
                         </Heading>
                     </div>
@@ -50,12 +48,13 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                         <BadgeList
                             items={technologies}
                             direction="horizontal"
+                            colorMode={colorMode}
                         />
                     </div>
                 </section>
                 <section>
                     <div>
-                        <Heading type="tertiary">
+                        <Heading type="tertiary" colorMode={colorMode}>
                             Teammitglieder
                         </Heading>
                     </div>
@@ -63,12 +62,13 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                         <BadgeList
                             items={teamMembers}
                             direction="horizontal"
+                            colorMode={colorMode}
                         />
                     </div>
                 </section>
                 <section>
                     <div>
-                        <Heading type="tertiary">
+                        <Heading type="tertiary" colorMode={colorMode}>
                             Projectlaufzeit:
                         </Heading>
                     </div>
@@ -85,6 +85,7 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                                     heading={heading}
                                     description={description}
                                     image={image}
+                                    colorMode={colorMode}
                                 />
                             </div>
                         )
@@ -96,13 +97,12 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                     </Button>
                 </a> */}
                 {paragraphs.length > 1 &&
-                    <div className={styles.moreBar}>
-                        <button onClick={() => setIsExpanded(!isExpanded)}>
-                            <span>
-                                {isExpanded ? "Weniger" : "Mehr"}
-                            </span>
-                            <img src={isExpanded ? arrowUpIcon : arrowDownIcon} alt="" />
-                        </button>
+                    <div className={styles.showMoreButtonContainer}>
+                        <ShowMoreButton
+                            isExpanded={isExpanded}
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            colorMode={colorMode}
+                        />
                     </div>
                 }
             </div>
@@ -126,8 +126,15 @@ Project.propTypes = {
             url: PropTypes.string,
             dataUrl: PropTypes.string
         })
-    })).isRequired
+    })).isRequired,
+    colorMode: PropTypes.oneOf(["dark", "light"])
 }
+
+Project.defaultProps = {
+    colorMode: "light"
+}
+
+
 
 export default Project;
 

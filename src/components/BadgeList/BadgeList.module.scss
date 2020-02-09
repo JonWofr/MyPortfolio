@@ -1,15 +1,29 @@
 .badgeList {
     display: flex;
 
-    &.horizontal > *:not(:first-child):not(:last-child) {
-            margin: 0 .25rem;
+    &.horizontal > .badgeContainer {
+        margin: 0 .25rem;
+
+        &:first-child {
+            margin-left: 0;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
     }
 
     &.vertical {
         flex-direction: column;
-
-        & > *:not(:first-child):not(:last-child) {
+        
+        &  > .badgeContainer {
             margin: .25rem 0;
+    
+            &:first-child {
+                margin-top: 0;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
         }
     }
 }

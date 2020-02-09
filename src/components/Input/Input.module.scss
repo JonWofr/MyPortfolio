@@ -1,104 +1,125 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
 .input {
-    height: 2.875rem;
+  height: 2.875rem;
 
-    position: relative;
+  position: relative;
 
-    overflow: hidden;
-    
-    &.small {
-        width: 100px;
-    }
+  overflow: hidden;
 
-    &.medium {
-        width: 200px;
-    }
+  &.small {
+    width: 100px;
+  }
 
-    &.large {
-        width: 300px;
-    }
+  &.medium {
+    width: 200px;
+  }
 
-    &.fluid {
-        width: 100%;
-    }
+  &.large {
+    width: 300px;
+  }
 
-    & > input {
-        width: 100%;
-        height: 100%;
+  &.fluid {
+    width: 100%;
+  }
 
-        box-sizing: border-box;
-        padding: 0;
-        padding-top: .875rem;
-        border: none;
+  &.light {
+      & > input {
+          color: $darker-font-color;
+      }
 
-        outline: none;
+      & > label > .labelContent {
+        color: $darkest-font-color;
+      }
+  }
 
-        font-size: 1rem;
-        line-height: 2rem;
+  &.dark {
+      & > input {
+          color: $lighter-font-color;
+      }
+
+      & > label > .labelContent {
         color: $lightest-font-color;
+      }
+  }
 
-        background-color: transparent;
+  input:focus + label > .labelContent,
+  input:valid:not([value=""]) + label > .labelContent,
+  input:disabled:not([value=""]) + label > .labelContent {
+    transform: translateY(-2rem);
+
+    font-size: 0.875rem;
+    line-height: 0.875rem;
+  }
+
+  input:focus + label::after,
+  input:valid:not([value=""]) + label::after,
+  input:disabled:not([value=""]) {
+    transform: translateX(0%);
+  }
+
+  input:disabled {
+  }
+
+  & > input {
+    width: 100%;
+    height: 100%;
+
+    box-sizing: border-box;
+    padding: 0;
+    padding-top: 0.875rem;
+    border: none;
+
+    outline: none;
+
+    font-size: 1rem;
+    line-height: 2rem;
+
+    background-color: transparent;
+  }
+
+  & > label {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid black;
+
+    pointer-events: none;
+
+    &::after {
+      width: 100%;
+      height: 100%;
+
+      content: "";
+
+      box-sizing: border-box;
+
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+
+      border-bottom: 3px solid $primary-accent-color;
+
+      transform: translateX(-100%);
+
+      transition: transform 0.3s ease;
     }
 
-    input:focus + label > .labelContent, input:valid:not([value=""]) + label > .labelContent, input:disabled:not([value=""]) + label > .labelContent {
-        transform: translateY(-2rem);
+    & > .labelContent {
+      position: absolute;
+      bottom: 0;
+      left: 0;
 
-        font-size: .875rem;
-        line-height: .875rem;
+      font-size: 1rem;
+      line-height: 2rem;
+
+      transition: all 0.3s ease;
     }
-
-    input:focus + label::after, input:valid:not([value=""]) + label::after, input:disabled:not([value=""]) {
-        transform: translateX(0%);
-    }
-
-    input:disabled {
-
-    }
-    
-    label {
-        width: 100%;
-        height: 100%;
-
-        position: absolute;
-        left: 0;
-        top: 0;
-
-        box-sizing: border-box;
-
-        border-bottom: 1px solid black;
-
-        pointer-events: none;
-
-        & > .labelContent {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-
-            font-size: 1rem;
-            line-height: 2rem;
-            color: $lighter-font-color;
-
-            transition: all .3s ease;
-        }
-    }
-
-    label::after {
-        width: 100%;
-        height: 100%;
-
-        content: "";
-
-        box-sizing: border-box;
-
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-
-        border-bottom: 3px solid $primary-accent-color;
-
-        transform: translateX(-100%);
-
-        transition: transform .3s ease;
-    }
+  }
 }

@@ -5,10 +5,10 @@ import PropTypes from 'prop-types';
 import styles from './Input.module.scss';
 
 const Input = (props) => {
-    const { type, placeholder, size } = props;
+    const { type, placeholder, size, colorMode } = props;
     // Input type hidden needs a special workaround to be displayed properly
     return (
-        <div className={`${styles.input} ${styles[size]}`}>
+        <div className={`${styles.input} ${styles[size]} ${styles[colorMode]}`}>
             {getInputTagViaProps(props)}
             {type !== "hidden"  &&
                 <label>
@@ -72,7 +72,8 @@ Input.propTypes = {
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
     required: PropTypes.bool,
-    id: PropTypes.string
+    id: PropTypes.string,
+    colorMode: PropTypes.oneOf(["light", "dark"])
 }
 
 Input.defaultProps = {
@@ -83,7 +84,8 @@ Input.defaultProps = {
     onChange: () => { console.log("input's value with no specified onChangeHandler has been changed") },
     placeholder: "",
     required: false,
-    id: undefined
+    id: undefined,
+    colorMode: "light"
 }
 
 export default Input;

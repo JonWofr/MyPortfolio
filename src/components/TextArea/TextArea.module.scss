@@ -26,6 +26,26 @@
     &.fluid {
         width: 100%;
     }
+
+    &.light {
+        & > textarea {
+            color: $darker-font-color;
+        }
+
+        & > label > .labelContent {
+            color: $darkest-font-color;
+        }
+    }
+
+    &.dark {
+        & > textarea {
+            color: $lighter-font-color;
+        }
+
+        & > label > .labelContent {
+            color: $lightest-font-color;
+        }
+    }
     
     & > textarea {
         width: 100%;
@@ -41,7 +61,6 @@
 
         font-size: 1rem;
         line-height: 2rem;
-        color: $lightest-font-color;
 
         background-color: transparent;
 

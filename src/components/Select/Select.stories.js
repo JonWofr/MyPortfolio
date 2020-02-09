@@ -36,6 +36,21 @@ export const mockingData = {
             value: "maus",
             textNode: "Maus"
         }],
+        selectedValue: ["hund"],
+        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        mode: "multi",
+        colorMode: "dark"
+    }, {
+        options: [{
+            value: "hund",
+            textNode: "Hund"
+        }, {
+            value: "katze",
+            textNode: "Katze"
+        }, {
+            value: "maus",
+            textNode: "Maus"
+        }],
         selectedValue: "fisch",
         onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
         mode: "single"

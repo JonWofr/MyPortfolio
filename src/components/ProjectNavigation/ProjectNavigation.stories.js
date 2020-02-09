@@ -2,22 +2,23 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import BadgeList from './BadgeList';
+import ProjectNavigation from './ProjectNavigation';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "BadgeList",
-    Component: BadgeList,
+    componentName: "ProjectNavigation",
+    Component: ProjectNavigation,
     stories: [{
-        items: ["Kotlin", "Swift", "Java", "JavaScript", "PHP"],
+        default: true,
+        onClickArrowUpButton: () => {},
+        onClickArrowDownButton: () => {}
     }, {
-        items: ["Kotlin", "Swift", "Java", "JavaScript", "PHP"],
-        direction: "vertical",
-    }, {
-        items: ["Kotlin", "Swift", "Java", "JavaScript", "PHP"],
+        default: true,
+        onClickArrowUpButton: () => {},
+        onClickArrowDownButton: () => {},
         colorMode: "dark"
     }]
 }

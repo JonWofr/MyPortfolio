@@ -12,7 +12,10 @@ export const mockingData = {
     componentName: "Badge",
     Component: Badge,
     stories: [{
-        children: "Kotlin"
+        children: "Kotlin",
+    }, {
+        children: "Kotlin",
+        colorMode: "dark"
     }]
 }
 

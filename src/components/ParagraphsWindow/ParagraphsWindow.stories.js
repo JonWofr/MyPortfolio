@@ -19,6 +19,13 @@ export const mockingData = {
         onClickAddNewParagraph: () => console.log("Adding new paragraph"),
         onClickRemoveParagraph: () => console.log("Removing old paragraph"),
         isEditable: true
+    }, {
+        paragraphs: paragraphStoriesMockingData.stories,
+        onChangeValue: () => console.log("Changed value"),
+        onClickAddNewParagraph: () => console.log("Adding new paragraph"),
+        onClickRemoveParagraph: () => console.log("Removing old paragraph"),
+        isEditable: true,
+        colorMode: "dark"
     }]
 }
 

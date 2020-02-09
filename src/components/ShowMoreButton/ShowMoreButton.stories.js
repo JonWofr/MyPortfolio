@@ -1,33 +1,27 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-//Import component
-import Heading from './Heading.js';
+// Components
+import ShowMoreButton from './ShowMoreButton';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "Heading",
-    Component: Heading,
+    componentName: "ShowMoreButton",
+    Component: ShowMoreButton,
     stories: [{
-        type: "primary",
-        children: "Primary"
+        isExpanded: false,
+        onClick: () => {}
     }, {
-        type: "primary",
-        children: "Primary",
+        isExpanded: false,
+        onClick: () => {},
         colorMode: "dark"
     }, {
-        type: "secondary",
-        children: "Secondary"
-    }, {
-        type: "tertiary",
-        children: "Tertiary"
-    }, {
-        type: "quatenary",
-        children: "Quatenary"
-    }, ]
+        isExpanded: true,
+        onClick: () => {}
+    }]
 }
 
 mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => <mockingData.Component {...story} />))

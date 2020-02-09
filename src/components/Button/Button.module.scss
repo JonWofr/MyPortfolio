@@ -3,15 +3,11 @@
 .button {
     border-radius: $default-button-border-radius;
 
-    box-shadow: $default-box-shadow;
-
     transition-timing-function: ease-in-out;
     transition-duration: .25s;
     transition-property: color, background-color;
 
     padding: .5rem 0;
-
-    cursor: pointer;
 
     font-size: 1rem;
     line-height: 1;
@@ -39,8 +35,6 @@
 
         background-color: $primary-accent-color;
 
-        border: none;
-
         &:hover {
             background-color: $primary-accent-color-hover;
         }
@@ -51,8 +45,6 @@
 
         background-color: $secondary-accent-color;
 
-        border: none;
-
         &:hover {
             background-color: $secondary-accent-color-hover;
         }
@@ -60,8 +52,6 @@
 
     &.invertedPrimaryAccent {
         color: $primary-accent-color;
-
-        background-color: transparent;
 
         border: 1px solid $primary-accent-color;
 
@@ -74,8 +64,6 @@
 
     &.invertedSecondaryAccent {
         color: $secondary-accent-color;
-
-        background-color: transparent;
 
         border: 1px solid $secondary-accent-color;
 

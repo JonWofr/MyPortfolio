@@ -3,10 +3,11 @@
 .list {
     display: flex;
 
-    padding: 0;
-    margin: 0;
+    &.light > li {
+        color: $darker-font-color;
+    }
 
-    & > li {
+    &.dark > li {
         color: $lighter-font-color;
     }
 }
