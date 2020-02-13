@@ -1,0 +1,24 @@
+ul.checkboxList {
+    background-color: lightblue;
+
+    & > li {
+        margin: .25rem 0;
+
+        display: flex;
+
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-top: 0;
+        }
+
+        & > .checkboxContainer {
+
+        }
+
+        & > label {
+            flex: 1;
+        }
+    }
+}
