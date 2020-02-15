@@ -1,0 +1,19 @@
+div.filtersBar {
+    display: flex;
+    justify-content: space-between;
+
+    & > div.checkboxListDropdownsContainer {
+        display: flex;
+
+        & > * {
+            margin: 0 .5rem;
+    
+            &:first-child{
+                margin-left: 0;
+            }
+            &:last-child{
+                margin-right: 0;
+            }
+        }
+    }
+}

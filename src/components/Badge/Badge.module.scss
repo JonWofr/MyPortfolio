@@ -12,12 +12,12 @@
     &.light {
         color: $lighter-font-color;
 
-        background-color: $darkest-background-color;
+        background-color: $darker-background-color;
     }
 
     &.dark {
         color: $darker-font-color;
 
-        background-color: $lightest-background-color;
+        background-color: $lighter-background-color;
     }
 }

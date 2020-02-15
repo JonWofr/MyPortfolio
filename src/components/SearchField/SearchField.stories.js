@@ -2,25 +2,18 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import Checkbox from './Checkbox';
+import SearchField from './SearchField';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "Checkbox",
-    Component: Checkbox,
+    componentName: "SearchField",
+    Component: SearchField,
     stories: [{
-        isChecked: true
-    }, {
-        isChecked: true,
-        colorScheme: "secondaryAccent"
-    }, {
-        isChecked: false
-    }, {
-        isChecked: false,
-        colorScheme: "secondaryAccent"
+        value: "",
+        onChange: () => console.info("No onChangeHandler specified")
     }]
 }
 

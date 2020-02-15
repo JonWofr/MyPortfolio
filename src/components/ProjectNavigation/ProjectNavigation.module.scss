@@ -5,11 +5,11 @@
     flex-direction: column;
 
     &.light > button:nth-child(2) > svg > path:first-child {
-        fill: $lighter-background-color;
+        fill: $lightest-background-color;
     }
 
     &.dark > button:nth-child(2) > svg > path:first-child {
-        fill: $darker-background-color;
+        fill: $darkest-background-color;
     }
 
     & > * {

@@ -1,20 +1,39 @@
+@import '../../globalVariables';
+
 ul.checkboxList {
-    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+
+    &.light > li > label {
+        color: $darkest-font-color;
+    }
+
+    &.dark > li > label {
+        color: $lightest-font-color;
+    }
 
     & > li {
         margin: .25rem 0;
 
         display: flex;
+        align-items: center;
 
         &:first-child {
             margin-top: 0;
         }
         &:last-child {
-            margin-top: 0;
-        }
+            margin-bottom: 0;
+        } 
+        
+        & > div.checkboxContainer, & > label {
+            margin: 0 .125rem;
 
-        & > .checkboxContainer {
-
+            &:first-child {
+                margin-left: 0;
+            }
+            &:last-child {
+                margin-right: 0;
+            }
         }
 
         & > label {

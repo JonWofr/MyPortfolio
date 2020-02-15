@@ -1,26 +1,26 @@
 // Colors
 $primary-accent-color: hsl(263, 73%, 44%);
-$primary-accent-color-hover: hsl(263, 73%, 34%);
+$primary-accent-color-hover: hsl(263, 73%, 24%);
 $secondary-accent-color: hsl(68, 95%, 62%);
-$secondary-accent-color-hover: hsl(68, 95%, 52%);
+$secondary-accent-color-hover: hsl(68, 95%, 42%);
 
-$lightest-background-color: hsl(250, 5, 90);
-$lighter-background-color: hsl(250, 5, 80);
-$light-background-color: hsl(250, 5, 70);
-$dark-background-color: hsl(250, 5, 30);
+$lightest-background-color: hsl(250, 5, 95);
+$lighter-background-color: hsl(250, 5, 90);
+$light-background-color: hsl(250, 5, 85);
+$dark-background-color: hsl(250, 5, 25);
 $darker-background-color: hsl(250, 5, 20);
-$darkest-background-color: hsl(250, 5, 10);
+$darkest-background-color: hsl(250, 5, 15);
 
 $lightest-font-color: hsl(250, 0, 90);
-$lighter-font-color: hsl(250, 0, 80);
-$light-font-color: hsl(250, 0, 70);
+$lighter-font-color: hsl(250, 0, 75);
+$light-font-color: hsl(250, 0, 60);
 $dark-font-color: hsl(250, 0, 30);
 $darker-font-color: hsl(250, 0, 20);
 $darkest-font-color: hsl(250, 0, 10);
 
 $default-header-height: 50px;
 
-$default-border: 1px solid #999999;
+$default-border: 1px solid hsl(0, 0%, 70%);
 
 $default-button-border-radius: .3rem;
 

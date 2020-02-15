@@ -11,7 +11,7 @@ main {
 
     & > .projectOuterContainer {
       &:nth-child(2n + 1) {
-        background-color: $darker-background-color;
+        background-color: $darkest-background-color;
       }
 
       & > .projectInnerContainer {
