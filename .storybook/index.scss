@@ -15,13 +15,7 @@ body {
 
   font-family: 'Quicksand', sans-serif;
 
-  background-color: $darkest-background-color;
-}
-
-#root {
-  min-height: 100%;
-
-  overflow: auto;
+  background-color: $lightest-background-color;
 }
 
 a {
@@ -45,6 +39,8 @@ button {
   cursor: pointer;
 
   padding: 0;
+
+  outline: none;
 }
 
 @media only screen and (min-width: $sm-breakpoint) {

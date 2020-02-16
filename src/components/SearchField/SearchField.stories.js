@@ -14,6 +14,10 @@ export const mockingData = {
     stories: [{
         value: "",
         onChange: () => console.info("No onChangeHandler specified")
+    }, {
+        value: "",
+        onChange: () => console.info("No onChangeHandler specified"),
+        colorScheme: "dark"
     }]
 }
 

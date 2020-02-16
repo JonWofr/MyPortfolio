@@ -12,32 +12,40 @@ export const mockingData = {
     componentName: "CheckboxListDropdown",
     Component: CheckboxListDropdown,
     stories: [{
-        listName: "Categories",
+        name: "categories",
+        label: "Categories",
         listItems: [{
-            name: "Web Application",
+            value: "webApplication",
+            label: "Web Application",
             isChecked: true
         }, {
-            name: "Mobile Application",
+            value: "mobileApplication",
+            label: "Mobile Application",
             isChecked: false
         }, {
-            name: "Other",
+            value: "other",
+            label: "Other",
             isChecked: true
         }],
-        onChangeCheckbox: (checkboxIndex, value) => console.info(`Changed Checkbox at index ${checkboxIndex} to value ${value}`),
+        onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
         checkedCheckboxesCount: 2
     }, {
-        listName: "Categories",
+        name: "categories",
+        label: "Categories",
         listItems: [{
-            name: "Web Application",
+            value: "webApplication",
+            label: "Web Application",
             isChecked: true
         }, {
-            name: "Mobile Application",
+            value: "mobileApplication",
+            label: "Mobile Application",
             isChecked: false
         }, {
-            name: "Other",
+            value: "other",
+            label: "Other",
             isChecked: true
         }],
-        onChangeCheckbox: (checkboxIndex, value) => console.info(`Changed Checkbox at index ${checkboxIndex} to value ${value}`),
+        onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
         checkedCheckboxesCount: 2,
         colorScheme: "dark"
     }]

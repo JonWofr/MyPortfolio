@@ -13,28 +13,34 @@ export const mockingData = {
     Component: CheckboxList,
     stories: [{
         items: [{
-            name: "Android",
+            value: "android",
+            label: "Android",
             isChecked: false
         }, {
-            name: "iOS",
+            value: "ios",
+            label: "iOS",
             isChecked: true
         }, {
-            name: "Web",
+            value: "web",
+            label: "Web",
             isChecked: true
         }],
-        onChangeCheckbox: (checkboxIndex, value) => console.info(`Changed Checkbox at index ${checkboxIndex} to value ${value}`)
+        onChangeCheckbox: (value, isChecked) => console.info(`Changed Checkbox with value ${value} to checked ${isChecked}`)
     }, {
         items: [{
-            name: "Android",
+            value: "android",
+            label: "Android",
             isChecked: false
         }, {
-            name: "iOS",
+            value: "ios",
+            label: "iOS",
             isChecked: true
         }, {
-            name: "Web",
+            value: "web",
+            label: "Web",
             isChecked: true
         }],
-        onChangeCheckbox: (checkboxIndex, value) => console.info(`Changed Checkbox at index ${checkboxIndex} to value ${value}`),
+        onChangeCheckbox: (value, isChecked) => console.info(`Changed Checkbox with value ${value} to checked ${isChecked}`),
         colorScheme: "dark"
     }]
 }

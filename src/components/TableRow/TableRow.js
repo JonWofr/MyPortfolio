@@ -11,9 +11,9 @@ import styles from './TableRow.module.scss';
 const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChangeColumnValue, onClickDelete, onClickEdit, onClickSave, onClickShowParagraphs, colorMode }) => (
     <tr className={`${styles.tableRow} ${styles[colorMode]}`}>
         {formElementDefinitions.map((formElementDefinition, columnIndex) => {
-            const { propertyName, element, elementAttributes } = formElementDefinition;
+            const { name, label, element, elementAttributes } = formElementDefinition;
 
-            let value = data[propertyName];
+            let value = data[name];
 
             const { required } = elementAttributes;
 
@@ -24,7 +24,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     }
 
                     let type;
-                    if (propertyName === "_id" && tableRowId === "newResource") {
+                    if (name === "_id" && tableRowId === "newResource") {
                         type = "hidden"
                     }
                     else {
@@ -34,14 +34,14 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     return (
                         <td key={columnIndex}>
                             <Input
-                                placeholder={propertyName}
+                                placeholder={label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
                                 value={value}
                                 required={required}
                                 type={type}
                                 size="fluid"
-                                onChange={(e) => onChangeColumnValue(propertyName, e.target.value)}
+                                onChange={(e) => onChangeColumnValue(name, e.target.value)}
                                 colorMode={colorMode}
                             />
                         </td>
@@ -51,7 +51,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     return (
                         <td key={columnIndex}>
                             <Select
-                                placeholder={propertyName}
+                                placeholder={label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
                                 selectedValue={value}
@@ -60,7 +60,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                                 mode={mode}
                                 options={options}
                                 size="fluid"
-                                onChangeValue={(value) => onChangeColumnValue(propertyName, value)}
+                                onChangeValue={(value) => onChangeColumnValue(name, value)}
                                 colorMode={colorMode}
                             />
                         </td>
@@ -127,7 +127,8 @@ TableRow.propTypes = {
     tableRowId: PropTypes.string.isRequired,
     data: PropTypes.any.isRequired,
     formElementDefinitions: PropTypes.arrayOf(PropTypes.exact({
-        propertyName: PropTypes.string,
+        name: PropTypes.string,
+        label: PropTypes.string,
         element: PropTypes.string,
         elementAttributes: PropTypes.object
     })).isRequired,

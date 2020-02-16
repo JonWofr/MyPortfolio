@@ -11,7 +11,7 @@ import Header from '../../components/Header';
 
 // Utils
 import * as http from '../../utils/http';
-import { parseDocumentsToProjects, parseFileToDataUrl } from '../../utils/parser';
+import * as parser from '../../utils/parser';
 import { getHttpToast } from '../../utils/toast';
 
 // Models
@@ -112,7 +112,6 @@ class ProjectsOverview extends Component {
                             Projects-formular
                         </Heading>
                         <table>
-                            {this.renderTableHead()}
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
                         </table>
@@ -136,13 +135,15 @@ class ProjectsOverview extends Component {
             limit
         }
 
-        http.get(`${process.env.REACT_APP_BACKEND_URL}/projects`, queryObject)
+        const queryString = parser.parseObjectToQueryString(queryObject)
+
+        http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`)
             .then(({ status, statusText, response }) => {
                 const { data, appendix: { lastPage } } = response;
 
                 this.triggerHttpToast(status, statusText);
 
-                const projects = parseDocumentsToProjects(data);
+                const projects = parser.parseDocumentsToProjects(data);
                 this.setState({
                     page,
                     limit,
@@ -183,18 +184,6 @@ class ProjectsOverview extends Component {
             toasts: deepClonedToasts
         })
     }, ms);
-
-    renderTableHead = () => (
-        <thead>
-            <tr>
-                {formElementDefinitions.map((formElementDefinition, index) => (
-                    <th key={index}>
-                        {formElementDefinition.propertyName}
-                    </th>
-                ))}
-            </tr>
-        </thead>
-    )
 
     renderTableBody = () => {
         const { projects, editableProjectId } = this.state;
@@ -376,7 +365,7 @@ class ProjectsOverview extends Component {
             // In order to send this data via a json object we have to encode it. We are encoding it to a dataURL, which consists of different parts (i.e. MIME-type, the data in Base64 format etc.).
             // This Url is additionally useful for HTML-elements with src attribute. If we would just encode the Blob with btoa method (which creates a Base64 encoded String) we would not be able to
             // directly use it inside the src attribute.
-            parseFileToDataUrl(value)
+            parser.parseFileToDataUrl(value)
                 .then((dataUrl) => {
                     this.changeParagraphValue(paragraphIndex, "url", value.name);
                     this.changeParagraphValue(paragraphIndex, propertyName, dataUrl);
@@ -410,7 +399,7 @@ class ProjectsOverview extends Component {
                 deepClonedProject.paragraphs[paragraphIndex].image[propertyName] = value;
                 break;
             default:
-                throw `PropertyName ${propertyName} is not known`;
+                throw new Error (`PropertyName ${propertyName} is not known`);
         }
 
         if (currentlyVisibleParagraphsProjectId) {

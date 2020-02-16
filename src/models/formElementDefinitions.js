@@ -1,154 +1,163 @@
 export const projectOverviewFormElementDefinitions = [{
-    propertyName: "_id",
+    name: "_id",
+    label: "Id",
     element: "input",
     elementAttributes: {
         type: "text",
         required: false
     }
 }, {
-    propertyName: "projectName",
+    name: "projectName",
+    label: "Project Name",
     element: "input",
     elementAttributes: {
         type: "text",
         required: true
     }
 }, {
-    propertyName: "categories",
+    name: "categories",
+    label: "Categories",
     element: "select",
     elementAttributes: {
         options: [{
             value: "desktop",
-            textNode: "Desktop-App",
+            label: "Desktop-App",
         }, {
             value: "web",
-            textNode: "Web-App",
+            label: "Web-App",
         }, {
             value: "iOS",
-            textNode: "iOS-App",
+            label: "iOS-App",
         }, {
             value: "android",
-            textNode: "Android-App",
+            label: "Android-App",
         }, {
             value: "conceptsAndPrototypes",
-            textNode: "Concepts & Prototypes",
+            label: "Concepts & Prototypes",
         }, {
             value: "other",
-            textNode: "Other",
+            label: "Other",
         }],
         required: true,
         defaultValue: "web",
         mode: "multi"
     }
 }, {
-    propertyName: "languages",
+    name: "languages",
+    label: "Languages",
     element: "select",
     elementAttributes: {
         options: [{
             value: "java",
-            textNode: "Java",
+            label: "Java",
         }, {
             value: "javaScript",
-            textNode: "JavaScript",
+            label: "JavaScript",
         }, {
             value: "html",
-            textNode: "HTML5",
+            label: "HTML5",
         }, {
             value: "css",
-            textNode: "CSS3",
+            label: "CSS3",
         }, {
             value: "php",
-            textNode: "PHP",
+            label: "PHP",
         }, {
             value: "swift",
-            textNode: "Swift",
+            label: "Swift",
         }, {
             value: "kotlin",
-            textNode: "Kotlin",
+            label: "Kotlin",
         }, {
             value: "c",
-            textNode: "C",
+            label: "C",
         }, {
             value: "other",
-            textNode: "Other",
+            label: "Other",
         }],
         required: true,
         defaultValue: "html",
         mode: "multi"
      }
 }, {
-    propertyName: "technologies",
+    name: "technologies",
+    label: "Technologies",
     element: "select",
     elementAttributes: {
         options: [{
             value: "mySQL",
-            textNode: "MySQL",
+            label: "MySQL",
         }, {
             value: "sqLite",
-            textNode: "SQLite",
+            label: "SQLite",
         }, {
             value: "oracleSQL",
-            textNode: "Oracle SQL",
+            label: "Oracle SQL",
         }, {
             value: "coreData",
-            textNode: "Core Data",
+            label: "Core Data",
         }, {
             value: "node",
-            textNode: "node",
+            label: "node",
         }, {
             value: "mongoDB",
-            textNode: "mongo DB",
+            label: "mongo DB",
         }, {
             value: "react",
-            textNode: "React",
+            label: "React",
         }, {
             value: "angular",
-            textNode: "Angular",
+            label: "Angular",
         }, {
             value: "express",
-            textNode: "Express.js",
+            label: "Express.js",
         }, {
             value: "scss",
-            textNode: "Sass",
+            label: "Sass",
         }, {
             value: "xml",
-            textNode: "XML",
+            label: "XML",
         }, {
             value: "json",
-            textNode: "JSON",
+            label: "JSON",
         }, {
             value: "git",
-            textNode: "GIT",
+            label: "GIT",
         }, {
             value: "other",
-            textNode: "Other",
+            label: "Other",
         }],
         required: true,
         defaultValue: "react",
         mode: "multi"
      }
 }, {
-    propertyName: "teamMembers",
+    name: "teamMembers",
+    label: "Teammembers",
     element: "input",
     elementAttributes: {
         type: "text",
         required: true
     }
 }, {
-    propertyName: "startDate",
+    name: "startDate",
+    label: "Startdate",
     element: "input",
     elementAttributes: {
         type: "date",
         required: true
     }
 }, {
-    propertyName: "endDate",
+    name: "endDate",
+    label: "Enddate",
     element: "input",
     elementAttributes: {
         type: "date",
         required: false
     }
 }, {
-    propertyName: "gitRepoLink",
+    name: "gitRepoLink",
+    label: "Git Repo Link",
     element: "input",
     elementAttributes: {
         type: "text",

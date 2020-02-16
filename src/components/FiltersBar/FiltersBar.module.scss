@@ -1,9 +1,25 @@
+@import '../../globalVariables';
+
 div.filtersBar {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
+
+    &.light > div.checkboxListDropdownsContainer > button.clearFilters {
+        color: $darkest-font-color;
+
+        background-color: $light-background-color;
+    }
+
+    &.dark > div.checkboxListDropdownsContainer > button.clearFilters {
+        color: $lightest-font-color;
+
+        background-color: $dark-background-color;
+    }
 
     & > div.checkboxListDropdownsContainer {
         display: flex;
+        align-items: flex-start;
 
         & > * {
             margin: 0 .5rem;
@@ -14,6 +30,14 @@ div.filtersBar {
             &:last-child{
                 margin-right: 0;
             }
+        }
+
+        & > button.clearFilters {
+            padding: .375rem 1rem;
+ 
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.25;
         }
     }
 }

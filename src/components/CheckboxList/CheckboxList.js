@@ -9,18 +9,18 @@ import Checkbox from '../Checkbox';
 
 const CheckboxList = ({ items, onChangeCheckbox, colorScheme }) => (
     <ul className={`${styles.checkboxList} ${styles[colorScheme]}`}>
-        {items.map(({ name, isChecked }, itemIndex) => (
+        {items.map(({ value, label, isChecked }, itemIndex) => (
             <li key={itemIndex}>
                 <div className={styles.checkboxContainer}>
                     <Checkbox
+                        id={`${value}${itemIndex}`}
                         isChecked={isChecked}
-                        onChange={(e) => onChangeCheckbox(itemIndex, e.target.value)}
-                        id={`${name}${itemIndex}`}
+                        onChange={({ target: { checked: isChecked } }) => onChangeCheckbox(value, isChecked)}
                         colorScheme={colorScheme === "light" ? "primaryAccent" : "secondaryAccent"}
                     />
                 </div>
-                <label htmlFor={`${name}${itemIndex}`}>
-                    {name}
+                <label htmlFor={`${value}${itemIndex}`}>
+                    {label}
                 </label>
             </li>
         ))}
@@ -28,10 +28,11 @@ const CheckboxList = ({ items, onChangeCheckbox, colorScheme }) => (
 );
 
 CheckboxList.propTypes = {
-    items: PropTypes.exact({
-        name: PropTypes.string,
+    items: PropTypes.arrayOf(PropTypes.exact({
+        value: PropTypes.string,
+        label: PropTypes.string,
         isChecked: PropTypes.bool
-    }).isRequired,
+    })).isRequired,
     onChangeCheckbox: PropTypes.func.isRequired,
     colorScheme: PropTypes.oneOf(["light", "dark"])
 };

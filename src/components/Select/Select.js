@@ -18,8 +18,8 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                     >
                         <option selected value=""></option>
                         {options.map((option, optionIndex) => {
-                            const { value, textNode } = option;
-                            return <option key={optionIndex} value={value}>{textNode}</option>
+                            const { value, label } = option;
+                            return <option key={optionIndex} value={value}>{label}</option>
                         })}
                     </select>
                     <label>
@@ -42,8 +42,8 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                     >
                         <option value=""></option>
                         {options.map((option, optionIndex) => {
-                            const { value, textNode } = option;
-                            return <option key={optionIndex} value={value}>{textNode}</option>
+                            const { value, label } = option;
+                            return <option key={optionIndex} value={value}>{label}</option>
                         })}
                     </select>
                     <label>
@@ -54,16 +54,16 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                     <ul>
                         {/*On a Multi-Select the selectedValue prop has multiple values*/}
                         {selectedValue && selectedValue.map((value, index) => {
-                            let textNode;
+                            let label;
                             options.forEach(option => {
                                 if (option.value === value) {
-                                    textNode = option.textNode;
+                                    label = option.label;
                                 }
                             })
                             return (
                                 <li key={index}>
                                     <span className={disabled ? styles.disabled : styles.enabled}>
-                                        {textNode}
+                                        {label}
                                     </span>
                                     <button disabled={disabled} type="button" onClick={() => onClickDeleteListItem(selectedValue, index, onChangeValue)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">

@@ -5,6 +5,25 @@ main {
 
   margin: 0 initial;
 
+  & > div.filtersBarOuterContainer {
+    background-color: $lightest-background-color;
+    & > div.filtersBarInnerContainer {
+      width: 75%;
+
+      margin: 0 auto;
+
+      height: 4rem;
+
+      box-sizing: border-box;
+      padding: 1rem 0;
+
+      overflow-y: visible;
+
+      position: relative;
+      z-index: 1;
+    }
+  }
+
   & > #projectsContainer {
     display: flex;
     flex-direction: column;

@@ -13,55 +13,136 @@ export const mockingData = {
     Component: FiltersBar,
     stories: [{
         filters: [{
-            listName: "Category",
+            name: "category",
+            label: "Category",
             listItems: [{
-                name: "Android",
+                value: "android",
+                label: "Android",
                 isChecked: false
             }, {
-                name: "iOS",
+                value: "ios",
+                label: "iOS",
                 isChecked: true
             }, {
-                name: "Web",
+                value: "web",
+                label: "Web",
                 isChecked: false
             }],
             checkedCheckboxesCount: 1
         }, {
-            listName: "Technology",
+            name: "technology",
+            label: "Technology",
             listItems: [{
-                name: "React",
+                value: "react",
+                label: "React",
                 isChecked: true
             }, {
-                name: "Angular",
+                value: "angular",
+                label: "Angular",
                 isChecked: false
             }],
             checkedCheckboxesCount: 1
         }, {
-            listName: "Language",
+            name: "language",
+            label: "Language",
             listItems: [{
-                name: "JavaScript",
+                value: "javaScript",
+                label: "JavaScript",
                 isChecked: true
             }, {
-                name: "Kotlin",
+                value: "kotlin",
+                label: "Kotlin",
                 isChecked: false
             }, {
-                name: "Java",
+                value: "java",
+                label: "Java",
                 isChecked: true
             }, {
-                name: "Swift",
+                value: "swift",
+                label: "Swift",
                 isChecked: false
             }, {
-                name: "SQL",
+                value: "sql",
+                label: "SQL",
                 isChecked: true
             }, {
-                name: "C",
+                value: "c",
+                label: "C",
                 isChecked: false
             }], 
             checkedCheckboxesCount: 3
-        }]
-    }],
-    onChangeCheckbox: (filterIndex, checkboxIndex) => console.info(`Clicked item at filter nr ${filterIndex} and listIndex ${checkboxIndex}`),
-    searchFieldValue: "And",
-    onChangeSearchField: () => console.info("No onChangeHandler specified")
+        }],
+        onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
+        searchFieldValue: "And",
+        onChangeSearchFieldValue: () => console.info("No onChangeHandler specified"),
+        onClickClearFiltersButton: () => console.info("clicked")
+    }, {
+        filters: [{
+            name: "category",
+            label: "Category",
+            listItems: [{
+                value: "android",
+                label: "Android",
+                isChecked: false
+            }, {
+                value: "ios",
+                label: "iOS",
+                isChecked: true
+            }, {
+                value: "web",
+                label: "Web",
+                isChecked: false
+            }],
+            checkedCheckboxesCount: 1
+        }, {
+            name: "technology",
+            label: "Technology",
+            listItems: [{
+                value: "react",
+                label: "React",
+                isChecked: true
+            }, {
+                value: "angular",
+                label: "Angular",
+                isChecked: false
+            }],
+            checkedCheckboxesCount: 1
+        }, {
+            name: "language",
+            label: "Language",
+            listItems: [{
+                value: "javaScript",
+                label: "JavaScript",
+                isChecked: true
+            }, {
+                value: "kotlin",
+                label: "Kotlin",
+                isChecked: false
+            }, {
+                value: "java",
+                label: "Java",
+                isChecked: true
+            }, {
+                value: "swift",
+                label: "Swift",
+                isChecked: false
+            }, {
+                value: "sql",
+                label: "SQL",
+                isChecked: true
+            }, {
+                value: "c",
+                label: "C",
+                isChecked: false
+            }], 
+            checkedCheckboxesCount: 3
+        }],
+        onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
+        searchFieldValue: "And",
+        onChangeSearchFieldValue: () => console.info("No onChangeHandler specified"),
+        onClickClearFiltersButton: () => console.info("clicked"),
+        colorMode: "dark"
+    }]
 }
 
 mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => <mockingData.Component {...story} />))

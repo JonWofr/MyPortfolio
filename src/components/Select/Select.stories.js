@@ -14,13 +14,13 @@ export const mockingData = {
     stories: [{
         options: [{
             value: "hund",
-            textNode: "Hund"
+            label: "Hund"
         }, {
             value: "katze",
-            textNode: "Katze"
+            label: "Katze"
         }, {
             value: "maus",
-            textNode: "Maus"
+            label: "Maus"
         }],
         selectedValue: ["hund"],
         onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
@@ -28,13 +28,13 @@ export const mockingData = {
     }, {
         options: [{
             value: "hund",
-            textNode: "Hund"
+            label: "Hund"
         }, {
             value: "katze",
-            textNode: "Katze"
+            label: "Katze"
         }, {
             value: "maus",
-            textNode: "Maus"
+            label: "Maus"
         }],
         selectedValue: ["hund"],
         onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
@@ -43,13 +43,13 @@ export const mockingData = {
     }, {
         options: [{
             value: "hund",
-            textNode: "Hund"
+            label: "Hund"
         }, {
             value: "katze",
-            textNode: "Katze"
+            label: "Katze"
         }, {
             value: "maus",
-            textNode: "Maus"
+            label: "Maus"
         }],
         selectedValue: "fisch",
         onChangeValue: (e) => console.log(`Selected ${e.target.value}`),

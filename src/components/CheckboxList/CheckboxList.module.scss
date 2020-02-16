@@ -5,11 +5,11 @@ ul.checkboxList {
     flex-direction: column;
 
     &.light > li > label {
-        color: $darkest-font-color;
+        color: $darker-font-color;
     }
 
     &.dark > li > label {
-        color: $lightest-font-color;
+        color: $lighter-font-color;
     }
 
     & > li {

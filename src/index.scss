@@ -56,6 +56,8 @@ button {
   cursor: pointer;
 
   padding: 0;
+
+  outline: none;
 }
 
 @media only screen and (min-width: $sm-breakpoint) {

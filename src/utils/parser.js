@@ -2,15 +2,25 @@ export const parseObjectToQueryString = (object) => {
     let queryString = "";
 
     const keys = Object.keys(object);
-    keys.forEach((key, index) => {
-        key = key.toLowerCase();
-        keys[index] = replaceInvalidUrlSigns(key)
-    })
     const values = Object.values(object);
+
     values.forEach((value, index) => {
-        if (typeof value === "string") {
-            value = value.toLowerCase()
-            values[index] = replaceInvalidUrlSigns(value);
+        switch (typeof value) {
+            case "undefined":
+                keys.splice(index, 1);
+                values.splice(index, 1);
+                break;
+            case "object":
+                values[index] = JSON.stringify(value);
+                break;
+            case "boolean":
+            case "number":
+            case "string":
+            case "symbol":
+                break;
+            case "function":
+            default:
+                throw new Error(`Value ${value} with type ${typeof value} can't be sent via QueryString`);
         }
     })
 
@@ -26,13 +36,6 @@ export const parseObjectToQueryString = (object) => {
     console.log("Parsed Object to querystring", object, queryString);
 
     return queryString;
-}
-
-const replaceInvalidUrlSigns = (queryString) => {
-    const regExpArg = /\s+/;
-    const regExp = new RegExp(regExpArg);
-
-    return queryString.split(regExp).join("-");
 }
 
 export const parseDocumentsToProjects = (documents) => {
@@ -67,7 +70,55 @@ export const parseShallowPropsObjectToPropsString = (props) => {
 
         if (value.length > 30) value = `${value.substring(0, 31)}...`;
 
-        propsString += propsString === "" ?  `${key}: ${value}` : `, ${key}: ${value}`
+        propsString += propsString === "" ? `${key}: ${value}` : `, ${key}: ${value}`
     }
     return propsString;
+}
+
+export const parseFormElementDefinitionsToFilters = (formElementDefinitions) => {
+    const filters = [];
+    formElementDefinitions.forEach(({ name, label, element, elementAttributes: { options, mode } }) => {
+        if (element === "select" && mode === "multi") {
+            const filter = {
+                name,
+                label,
+                listItems: [],
+                checkedCheckboxesCount: 0
+            }
+            options.forEach(({ value, label }) => {
+                filter.listItems.push({
+                    value,
+                    label,
+                    isChecked: false
+                })
+            })
+            filters.push(filter);
+        }
+    })
+    return filters;
+}
+
+export const parseFiltersToMongoDbQueryObject = (filters) => {
+    let mongoDbQueryObject = undefined;
+    const andConditions = [];
+    filters.forEach(({ name, listItems }) => {
+        const orConditions = []
+        listItems.forEach(({ value, isChecked }) => {
+            if (!isChecked) return;
+            orConditions.push({
+                [name]: value
+            })
+        })
+        if (orConditions.length === 0) return;
+        else if (orConditions.length === 1) andConditions.push(orConditions[0])
+        else andConditions.push({
+            $or: orConditions
+        })
+    })
+    if (andConditions.length === 0) return "";
+    else if (andConditions.length === 1) mongoDbQueryObject = andConditions[0];
+    else mongoDbQueryObject = {
+        $and: andConditions
+    }
+    return mongoDbQueryObject;
 }

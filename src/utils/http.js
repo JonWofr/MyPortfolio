@@ -1,8 +1,6 @@
-import { parseObjectToQueryString } from './parser';
-
 const defaultReject = (err) => console.warn("An error occurred", err);
 
-export const get = (url, queryObject, requestHeaderOptions) => {
+export const get = (url, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
         const request = new XMLHttpRequest();
@@ -10,7 +8,7 @@ export const get = (url, queryObject, requestHeaderOptions) => {
 
         addListeners(request, resolve, reject);
 
-        request.open("GET", url + parseObjectToQueryString(queryObject), true);
+        request.open("GET", url, true);
 
         if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
 
