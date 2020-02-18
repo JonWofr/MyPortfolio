@@ -98,7 +98,7 @@ export const parseFormElementDefinitionsToFilters = (formElementDefinitions) => 
     return filters;
 }
 
-export const parseFiltersToMongoDbQueryObject = (filters) => {
+export const parseFiltersAndSearchFieldValueToMongoDbQueryObject = (filters, searchFieldValue) => {
     let mongoDbQueryObject = undefined;
     const andConditions = [];
     filters.forEach(({ name, listItems }) => {
@@ -115,6 +115,16 @@ export const parseFiltersToMongoDbQueryObject = (filters) => {
             $or: orConditions
         })
     })
+
+    if (searchFieldValue !== "") {
+        andConditions.push({
+            projectName: {
+                $regex: searchFieldValue,
+                $options: "i"
+            }
+        })
+    }
+
     if (andConditions.length === 0) return "";
     else if (andConditions.length === 1) mongoDbQueryObject = andConditions[0];
     else mongoDbQueryObject = {

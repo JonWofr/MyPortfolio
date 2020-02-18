@@ -31,32 +31,6 @@ class Projects extends Component {
         }
     }
 
-    componentDidMount = () => {
-        this.fetchProjects()
-            .then(({ data }) => {
-                const projects = parser.parseDocumentsToProjects(data);
-                this.setState({
-                    page: 1,
-                    limit: 5,
-                    projects
-                })
-            })
-    }
-
-    fetchProjects = async (query, page = 1, limit = 5) => {
-        const queryObject = {
-            query,
-            page,
-            limit
-        }
-
-        const queryString = parser.parseObjectToQueryString(queryObject);
-
-        const { response } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
-
-        return response;
-    }
-
     render() {
         const { page, lastPage, projects, filters, searchFieldValue } = this.state;
 
@@ -106,6 +80,33 @@ class Projects extends Component {
         );
     }
 
+    componentDidMount = () => {
+        const queryObject = {
+            page: 1,
+            limit: 5
+        }
+        this.fetchProjects(queryObject)
+            .then(({ data }) => {
+                const projects = parser.parseDocumentsToProjects(data);
+                this.setState({
+                    page: 1,
+                    limit: 5,
+                    projects
+                })
+            })
+
+        this.debouncerTimeoutId = undefined;
+    }
+
+    fetchProjects = async (queryObject) => {
+
+        const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
+
+        const { response } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
+
+        return response;
+    }
+
 
     onClickPaginationPage = page => {
         const { limit } = this.state;
@@ -113,13 +114,33 @@ class Projects extends Component {
     }
 
     onChangeSearchFieldValue = ({ target: { value } }) => {
+        const { filters } = this.state;
+
+        const queryObject = {
+            page: 1,
+            limit: 5,
+            query: parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(filters, value)
+        }
+
+        this.debounce(async () => {
+            const { data } = await this.fetchProjects(queryObject);
+            this.setState({
+                projects: data
+            })
+        }, 500)
+        
         this.setState({
             searchFieldValue: value
         })
     }
 
+    debounce = (timeoutCallback, ms) => {
+        if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
+        this.debouncerTimeoutId = setTimeout(timeoutCallback, ms);
+    }
+
     onChangeFilterCheckbox = (name, value, isChecked) => {
-        const { filters } = this.state;
+        const { filters, searchFieldValue } = this.state;
 
         const deepClonedFilters = cloneDeep(filters);
 
@@ -130,16 +151,23 @@ class Projects extends Component {
             : this.incrementCheckedCheckboxesCount(affectedFilter);
         affectedListItem.isChecked = isChecked;
 
-        const mongoDbQueryObject = parser.parseFiltersToMongoDbQueryObject(deepClonedFilters);
+        const queryObject =  {
+            page: 1,
+            limit: 5,
+            query: parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(deepClonedFilters, searchFieldValue)
+        }
 
-        this.fetchProjects(mongoDbQueryObject)
-            .then(({ data }) => {
-                const projects = parser.parseDocumentsToProjects(data);
-                this.setState({
-                    projects,
-                    filters: deepClonedFilters
-                })
+        this.debounce(async () => {
+            const { data } = await this.fetchProjects(queryObject);
+            const projects = parser.parseDocumentsToProjects(data);
+            this.setState({
+                projects,
             })
+        }, 500)
+
+        this.setState({
+            filters: deepClonedFilters
+        })
     }
 
     incrementCheckedCheckboxesCount = (filter) => filter.checkedCheckboxesCount++;
@@ -156,10 +184,13 @@ class Projects extends Component {
             deepClonedFilter.listItems.forEach(listItem => listItem.isChecked = false)
         });
 
+        if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
+
         this.fetchProjects()
             .then(({ data }) => this.setState({
                 projects: data,
-                filters: deepClonedFilters
+                filters: deepClonedFilters,
+                searchFieldValue: ""
             }))
     }
 }
