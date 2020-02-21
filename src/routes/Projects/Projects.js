@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash';
 // Utils
 import * as http from '../../utils/http';
 import * as parser from '../../utils/parser';
+import * as intersectionObserver from '../../utils/intersectionObserver';
 
 // Styles
 import styles from './Projects.module.scss';
@@ -23,16 +24,18 @@ class Projects extends Component {
 
         this.state = {
             page: undefined,
-            limit: undefined,
             lastPage: undefined,
             projects: [],
             filters: parser.parseFormElementDefinitionsToFilters(models.projectOverviewFormElementDefinitions),
             searchFieldValue: ""
         }
+
+        this.debouncerTimeoutId = undefined;
+        this.projectsObserver = undefined;
     }
 
     render() {
-        const { page, lastPage, projects, filters, searchFieldValue } = this.state;
+        const { projects, filters, searchFieldValue } = this.state;
 
         const projectIds = Object.keys(projects);
 
@@ -51,12 +54,12 @@ class Projects extends Component {
                             />
                         </div>
                     </div>
-                    <div id={styles.projectsContainer}>
+                    <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
                         {
                             projectIds.map((projectId, projectIdIndex) => {
                                 const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
                                 return (
-                                    <div className={styles.projectOuterContainer}>
+                                    <div className={`${styles.projectOuterContainer} projectsObserverItem`}>
                                         <div className={styles.projectInnerContainer}>
                                             <Project
                                                 projectName={projectName}
@@ -81,54 +84,77 @@ class Projects extends Component {
     }
 
     componentDidMount = () => {
-        const queryObject = {
-            page: 1,
-            limit: 5
-        }
-        this.fetchProjects(queryObject)
-            .then(({ data }) => {
-                const projects = parser.parseDocumentsToProjects(data);
-                this.setState({
-                    page: 1,
-                    limit: 5,
-                    projects
-                })
-            })
 
-        this.debouncerTimeoutId = undefined;
+        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+            const { page } = this.state;
+            const queryObject = {
+                page: page + 1,
+            }
+            this.fetchProjects(queryObject)
+        }, {});
+
+        this.initiallyFetchProjects();
+    }
+
+    initiallyFetchProjects = async (queryObject) => {
+        const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
+        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
+
+        const projects = parser.parseDocumentsToProjects(data);
+
+        this.setState({
+            page,
+            lastPage,
+            projects
+        }, this.observeLastProject);
     }
 
     fetchProjects = async (queryObject) => {
+        const { projects } = this.state;
 
         const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
+        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
 
-        const { response } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
+        const newProjects = parser.parseDocumentsToProjects(data);
 
-        return response;
+        this.setState({
+            page,
+            lastPage,
+            projects: {
+                ...projects,
+                ...newProjects
+            }
+        }, this.observeLastProject);
     }
 
-
-    onClickPaginationPage = page => {
-        const { limit } = this.state;
-        this.fetchProjects(page, limit);
+    observeLastProject = () => {
+        const { page, lastPage } = this.state;
+        if (page !== lastPage) {
+            const lastProject = document.querySelector(`.projectsObserverItem:last-child`);
+            if (lastProject !== null) this.projectsObserver.observe(lastProject);
+        }
     }
 
     onChangeSearchFieldValue = ({ target: { value } }) => {
         const { filters } = this.state;
 
+        const query = parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(filters, value);
+
         const queryObject = {
-            page: 1,
-            limit: 5,
-            query: parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(filters, value)
+            query
         }
 
-        this.debounce(async () => {
-            const { data } = await this.fetchProjects(queryObject);
-            this.setState({
-                projects: data
-            })
-        }, 500)
-        
+        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+            const { page } = this.state;
+            const queryObject = {
+                page: page + 1,
+                query
+            }
+            this.fetchProjects(queryObject)
+        }, {});
+
+        this.debounce(this.initiallyFetchProjects(queryObject), 500)
+
         this.setState({
             searchFieldValue: value
         })
@@ -151,19 +177,22 @@ class Projects extends Component {
             : this.incrementCheckedCheckboxesCount(affectedFilter);
         affectedListItem.isChecked = isChecked;
 
-        const queryObject =  {
-            page: 1,
-            limit: 5,
-            query: parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(deepClonedFilters, searchFieldValue)
+        const query = parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(deepClonedFilters, searchFieldValue);
+
+        const queryObject = {
+            query
         }
 
-        this.debounce(async () => {
-            const { data } = await this.fetchProjects(queryObject);
-            const projects = parser.parseDocumentsToProjects(data);
-            this.setState({
-                projects,
-            })
-        }, 500)
+        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+            const { page } = this.state;
+            const queryObject = {
+                query,
+                page: page + 1,
+            }
+            this.fetchProjects(queryObject)
+        }, {});
+
+        this.debounce(this.initiallyFetchProjects(queryObject), 500)
 
         this.setState({
             filters: deepClonedFilters
@@ -186,12 +215,20 @@ class Projects extends Component {
 
         if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
 
-        this.fetchProjects()
-            .then(({ data }) => this.setState({
-                projects: data,
-                filters: deepClonedFilters,
-                searchFieldValue: ""
-            }))
+        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+            const { page } = this.state;
+            const queryObject = {
+                page: page + 1,
+            }
+            this.fetchProjects(queryObject)
+        }, {});
+
+        this.initiallyFetchProjects();
+
+        this.setState({
+            filters: deepClonedFilters,
+            searchFieldValue: ""
+        })
     }
 }
 
