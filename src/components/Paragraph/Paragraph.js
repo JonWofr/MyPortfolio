@@ -8,10 +8,9 @@ import styles from './Paragraph.module.scss';
 import Heading from '../Heading';
 
 const Paragraph = ({ description, heading, image: { position, url, dataUrl }, colorMode }) => (
-    <section className={`${styles.paragraph} ${styles[colorMode]}`}>
+    <section className={`${styles.paragraph} ${styles[colorMode]} ${styles[position]}`}>
         {url !== "" &&
             <img
-                className={styles[position]}
                 src={url}
                 alt=""
             />

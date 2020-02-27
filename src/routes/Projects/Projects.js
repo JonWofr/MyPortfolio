@@ -57,13 +57,14 @@ class Projects extends Component {
                     <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
                         {
                             projectIds.map((projectId, projectIdIndex) => {
-                                const { projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
+                                const { projectName, categories, languages, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
                                 return (
                                     <div className={`${styles.projectOuterContainer} projectsObserverItem`}>
                                         <div className={styles.projectInnerContainer}>
                                             <Project
                                                 projectName={projectName}
                                                 categories={categories}
+                                                languages={languages}
                                                 technologies={technologies}
                                                 teamMembers={teamMembers}
                                                 startDate={startDate}

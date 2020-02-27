@@ -205,7 +205,8 @@ class ProjectsOverview extends Component {
                                 onClickDelete={() => this.onClickDelete(projectId)}
                                 onClickEdit={() => this.onClickEdit(projectId)}
                                 onClickSave={() => this.onClickSave(projectId)}
-                                onClickShowParagraphs={() => this.toggleShowParagraphs(projectId)} />
+                                onClickShowParagraphs={() => this.toggleShowParagraphs(projectId)}
+                                 />
                         )
                     })
                 }
@@ -243,6 +244,7 @@ class ProjectsOverview extends Component {
                 delete deepClonedProjects[projectId];
                 this.setState({
                     projects: deepClonedProjects,
+                    editableProjectId: undefined,
                     lastPage
                 })
             })

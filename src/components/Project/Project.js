@@ -11,14 +11,14 @@ import ShowMoreButton from '../ShowMoreButton';
 // Styles
 import styles from './Project.module.scss';
 
-const Project = ({ projectName, categories, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs, colorMode }) => {
+const Project = ({ projectName, categories, languages, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs, colorMode }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const visibleParagraphs = isExpanded ? paragraphs : (paragraphs.length > 0 ? [paragraphs[0]] : []);
 
     return (
         <article className={`${styles.project} ${styles[colorMode]}`}>
-            <div className={styles.heading}>
+            <div className={styles.headingContainer}>
                 <Heading type="secondary" colorMode={colorMode}>
                     {projectName}
                 </Heading>
@@ -33,6 +33,20 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                     <div>
                         <BadgeList
                             items={categories}
+                            direction="horizontal"
+                            colorMode={colorMode}
+                        />
+                    </div>
+                </section>
+                <section>
+                    <div>
+                        <Heading type="tertiary" colorMode={colorMode}>
+                            Sprachen
+                        </Heading>
+                    </div>
+                    <div>
+                        <BadgeList
+                            items={languages}
                             direction="horizontal"
                             colorMode={colorMode}
                         />
@@ -72,25 +86,32 @@ const Project = ({ projectName, categories, technologies, teamMembers, startDate
                             Projectlaufzeit:
                         </Heading>
                     </div>
-                    <p className={styles.projectTimespan}>
+                    <div className={styles.projectDuration}>
                         {`${startDate} - ${endDate}`}
-                    </p>
+                    </div>
                 </section>
-                <div>
-                    {visibleParagraphs.map((visibleParagraph, visibleParagraphIndex) => {
-                        const { heading, description, image } = visibleParagraph;
-                        return (
-                            <div className={styles.paragraphContainer} key={visibleParagraphIndex}>
-                                <Paragraph
-                                    heading={heading}
-                                    description={description}
-                                    image={image}
-                                    colorMode={colorMode}
-                                />
-                            </div>
-                        )
-                    })}
-                </div>
+                <section>
+                    <div>
+                        <Heading type="tertiary" colorMode={colorMode}>
+                            Beschreibung:
+                        </Heading>
+                    </div>
+                    <div className={styles.paragraphsContainer}>
+                        {visibleParagraphs.map((visibleParagraph, visibleParagraphIndex) => {
+                            const { heading, description, image } = visibleParagraph;
+                            return (
+                                <div className={styles.paragraphContainer} key={visibleParagraphIndex}>
+                                    <Paragraph
+                                        heading={heading}
+                                        description={description}
+                                        image={image}
+                                        colorMode={colorMode}
+                                    />
+                                </div>
+                            )
+                        })}
+                    </div>
+                </section>
                 {/*                 <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
                     <Button type="button" size="medium">
                         Zum Git Repo!
