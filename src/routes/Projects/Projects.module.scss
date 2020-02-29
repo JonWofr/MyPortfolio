@@ -28,18 +28,5 @@ main {
   & > .projectsContainer {
     display: flex;
     flex-direction: column;
-
-    & > .projectOuterContainer {
-      &:nth-child(2n + 1) {
-        background-color: $darkest-background-color;
-      }
-
-      & > .projectInnerContainer {
-        width: 75%;
-
-        padding: 4rem 0;
-        margin: 0 auto;
-      }
-    }
   }
 }

@@ -11,7 +11,7 @@ const BadgeList = ({ items, direction, colorMode }) => {
     return (
         <div className={`${styles.badgeList} ${styles[direction]}`}>
             {items.map((item, index) => (
-                <div className={styles.badgeContainer}>
+                <div key={index} className={styles.badgeContainer}>
                     <Badge key={index} colorMode={colorMode}>
                         {item}
                     </Badge>

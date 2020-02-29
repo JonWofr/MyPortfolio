@@ -67,6 +67,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     )
                 default:
                     console.log(`The element ${element} is not known and cannot be rendered`);
+                    return <Fragment />;
             }
         })}
         <td>

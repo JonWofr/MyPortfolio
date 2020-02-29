@@ -1,11 +1,10 @@
-export const getListItemIntersectionObserver = (intersectingCallback, options) => {
+export const getIntersectionObserver = (isIntersectingCallback, options) => {
     return new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry, index) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const { target } = entry;
-                console.info("Is intersecting the list", target);
                 observer.unobserve(target);
-                intersectingCallback();
+                isIntersectingCallback(target);
             }
         });
     }, options)

@@ -13,23 +13,29 @@ export const mockingData = {
     componentName: "Project",
     Component: Project,
     stories: [{
-        projectName: "Clubber",
-        categories: ["Web"],
-        technologies: ["HTML5", "CSS", "JS", "PHP", "My SQL"],
-        teamMembers: ["Nico", "Jonas"],
-        startDate: "01.01.1919",
-        endDate: "02.02.1091",
-        gitRepoLink: "https://google.com",
-        paragraphs: paragraphStoriesMockingData.stories
+        data: {
+            projectName: "Clubber",
+            categories: ["Web"],
+            languages: ["Java", "PHP", "CSS"],
+            technologies: ["HTML5", "CSS", "JS", "PHP", "My SQL"],
+            teamMembers: ["Nico", "Jonas"],
+            startDate: "01.01.1919",
+            endDate: "02.02.1091",
+            gitRepoLink: "https://google.com",
+            paragraphs: paragraphStoriesMockingData.stories
+        }
     }, {
-        projectName: "Clubber",
-        categories: ["Web"],
-        technologies: ["HTML5", "CSS", "JS", "PHP", "My SQL"],
-        teamMembers: ["Nico", "Jonas"],
-        startDate: "01.01.1919",
-        endDate: "02.02.1091",
-        gitRepoLink: "https://google.com",
-        paragraphs: paragraphStoriesMockingData.stories,
+        data: {
+            projectName: "Clubber",
+            categories: ["Web"],
+            languages: ["Java", "PHP", "CSS"],
+            technologies: ["HTML5", "CSS", "JS", "PHP", "My SQL"],
+            teamMembers: ["Nico", "Jonas"],
+            startDate: "01.01.1919",
+            endDate: "02.02.1091",
+            gitRepoLink: "https://google.com",
+            paragraphs: paragraphStoriesMockingData.stories
+        },
         colorMode: "dark"
     }]
 }

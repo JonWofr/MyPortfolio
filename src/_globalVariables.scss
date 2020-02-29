@@ -22,12 +22,18 @@ $default-header-height: 50px;
 
 $default-border: 1px solid hsl(0, 0%, 70%);
 
-$default-button-border-radius: .3rem;
+$default-button-border-radius: 0.3rem;
 
 $default-card-box-shadow: 0px 2.5px 15px rgba(0, 0, 0, 0.5);
-$default-card-border-radius: .5rem;
+$default-card-border-radius: 0.5rem;
 
 $header-footer-padding-left-right: 1rem;
+
+$default-main-width: 95%;
+$sm-breakpoint-main-width: 92.5%;
+$md-breakpoint-main-width: 90%;
+$lg-breakpoint-main-width: 85%;
+$xl-breakpoint-main-width: 75%;
 
 // Media query breakpoints
 $sm-breakpoint: 576px;

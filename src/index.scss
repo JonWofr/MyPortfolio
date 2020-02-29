@@ -28,7 +28,7 @@ body {
 }
 
 main {
-  width: 95%;
+  width: $default-main-width;
 
   margin: auto;
 
@@ -60,13 +60,30 @@ button {
   outline: none;
 }
 
+.fade-in {
+  animation-name: fade-in;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
 @media only screen and (min-width: $sm-breakpoint) {
   html {
     font-size: 14.5px;
   }
 
   main {
-      width: 92.5%;
+      width: $sm-breakpoint-main-width;
   }
 }
 @media only screen and (min-width: $md-breakpoint) {
@@ -75,7 +92,7 @@ button {
   }
 
   main {
-      width: 90%;
+      width:  $md-breakpoint-main-width;
   }
 }
 @media only screen and (min-width: $lg-breakpoint) {
@@ -84,7 +101,7 @@ button {
   }
 
   main {
-      width: 85%;
+      width: $lg-breakpoint-main-width;
   }
 }
 @media only screen and (min-width: $xl-breakpoint) {
@@ -93,6 +110,6 @@ button {
   }
 
   main {
-      width: 75%;
+      width: $xl-breakpoint-main-width;
   }
 }

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { cloneDeep } from 'lodash';
 
 // Utils
@@ -25,13 +24,15 @@ class Projects extends Component {
         this.state = {
             page: undefined,
             lastPage: undefined,
-            projects: [],
+            projects: {},
             filters: parser.parseFormElementDefinitionsToFilters(models.projectOverviewFormElementDefinitions),
             searchFieldValue: ""
         }
 
         this.debouncerTimeoutId = undefined;
+
         this.projectsObserver = undefined;
+        this.fadingInElementsObserver = undefined;
     }
 
     render() {
@@ -56,27 +57,14 @@ class Projects extends Component {
                     </div>
                     <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
                         {
-                            projectIds.map((projectId, projectIdIndex) => {
-                                const { projectName, categories, languages, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = projects[projectId];
-                                return (
-                                    <div className={`${styles.projectOuterContainer} projectsObserverItem`}>
-                                        <div className={styles.projectInnerContainer}>
-                                            <Project
-                                                projectName={projectName}
-                                                categories={categories}
-                                                languages={languages}
-                                                technologies={technologies}
-                                                teamMembers={teamMembers}
-                                                startDate={startDate}
-                                                endDate={endDate}
-                                                gitRepoLink={gitRepoLink}
-                                                paragraphs={paragraphs}
-                                                colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
-                                            />
-                                        </div>
-                                    </div>
-                                )
-                            })
+                            projectIds.map((projectId, projectIdIndex) => (
+                                <div key={projectId} className="projectsObserverItem fade">
+                                    <Project
+                                        data={projects[projectId]}
+                                        colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
+                                    />
+                                </div>
+                            ))
                         }
                     </div>
                 </main>
@@ -86,7 +74,7 @@ class Projects extends Component {
 
     componentDidMount = () => {
 
-        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
@@ -94,20 +82,12 @@ class Projects extends Component {
             this.fetchProjects(queryObject)
         }, {});
 
-        this.initiallyFetchProjects();
-    }
+        this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => {
+            console.info("Is Intersecting", target);
+            target.className += " fade-in";
+        }, {});
 
-    initiallyFetchProjects = async (queryObject) => {
-        const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
-        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
-
-        const projects = parser.parseDocumentsToProjects(data);
-
-        this.setState({
-            page,
-            lastPage,
-            projects
-        }, this.observeLastProject);
+        this.fetchProjects();
     }
 
     fetchProjects = async (queryObject) => {
@@ -125,7 +105,10 @@ class Projects extends Component {
                 ...projects,
                 ...newProjects
             }
-        }, this.observeLastProject);
+        }, () => {
+            this.observeLastProject();
+            this.observeFadingInElements();
+        });
     }
 
     observeLastProject = () => {
@@ -134,6 +117,11 @@ class Projects extends Component {
             const lastProject = document.querySelector(`.projectsObserverItem:last-child`);
             if (lastProject !== null) this.projectsObserver.observe(lastProject);
         }
+    }
+
+    observeFadingInElements = () => {
+        const fadingInElements = document.querySelectorAll(".fade");
+        fadingInElements.forEach(fadingInElement => this.fadingInElementsObserver.observe(fadingInElement));
     }
 
     onChangeSearchFieldValue = ({ target: { value } }) => {
@@ -145,7 +133,7 @@ class Projects extends Component {
             query
         }
 
-        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
@@ -154,7 +142,7 @@ class Projects extends Component {
             this.fetchProjects(queryObject)
         }, {});
 
-        this.debounce(this.initiallyFetchProjects(queryObject), 500)
+        this.debounce(this.fetchProjects(queryObject), 500)
 
         this.setState({
             searchFieldValue: value
@@ -184,7 +172,7 @@ class Projects extends Component {
             query
         }
 
-        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 query,
@@ -193,7 +181,7 @@ class Projects extends Component {
             this.fetchProjects(queryObject)
         }, {});
 
-        this.debounce(this.initiallyFetchProjects(queryObject), 500)
+        this.debounce(this.fetchProjects(queryObject), 500)
 
         this.setState({
             filters: deepClonedFilters
@@ -216,7 +204,7 @@ class Projects extends Component {
 
         if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
 
-        this.projectsObserver = intersectionObserver.getListItemIntersectionObserver(async () => {
+        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
@@ -224,7 +212,7 @@ class Projects extends Component {
             this.fetchProjects(queryObject)
         }, {});
 
-        this.initiallyFetchProjects();
+        this.fetchProjects();
 
         this.setState({
             filters: deepClonedFilters,

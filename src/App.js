@@ -9,7 +9,7 @@ const App = () => {
       <Router>
         <Switch>
           {unprotectedRoutes.map((route, index) => {
-            const { path, exact, Layout, layoutProps, Component } = route;
+            const { path, exact, Component } = route;
             return (
               <Route
                 key={index}
