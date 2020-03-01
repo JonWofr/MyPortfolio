@@ -10,6 +10,13 @@ import styles from './FiltersBar.module.scss';
 
 const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearchFieldValue, onClickClearFiltersButton, colorScheme }) => (
     <div className={`${styles.filtersBar} ${styles[colorScheme]}`}>
+        <div className={styles.searchFieldContainer}>
+            <SearchField
+                value={searchFieldValue}
+                onChangeValue={onChangeSearchFieldValue}
+                colorScheme={colorScheme}
+            />
+        </div>
         <div className={styles.checkboxListDropdownsContainer}>
             {filters.map(({ name, label, listItems, checkedCheckboxesCount }, filterIndex) => (
                 <div key={filterIndex} className={styles.checkboxListDropdownContainer}>
@@ -26,14 +33,7 @@ const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearc
             ))}
             <button className={styles.clearFilters} onClick={onClickClearFiltersButton}>
                 Clear All
-                </button>
-        </div>
-        <div>
-            <SearchField
-                value={searchFieldValue}
-                onChangeValue={onChangeSearchFieldValue}
-                colorScheme={colorScheme}
-            />
+            </button>
         </div>
     </div>
 );

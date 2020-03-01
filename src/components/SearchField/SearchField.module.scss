@@ -1,8 +1,6 @@
 @import "../../globalVariables";
 
 div.searchField {
-  display: inline-block;
-
   position: relative;
 
   &.light {
@@ -28,6 +26,8 @@ div.searchField {
   }
 
   & > input[type="text"] {
+    width: 100%;
+    
     background-color: transparent;
 
     border: none;

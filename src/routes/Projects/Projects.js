@@ -102,14 +102,10 @@ class Projects extends Component {
             })
         }, {});
 
-        const fadingInElementsObserverOptions = {
-            rootMargin: "150px 0px"
-        }
-
         this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => {
             console.info("Is Intersecting", target);
             target.classList.add("fade-in");
-        }, fadingInElementsObserverOptions);
+        }, {});
 
         this.fetchProjects();
         this.setState({

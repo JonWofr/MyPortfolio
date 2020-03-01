@@ -1,148 +1,265 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
-header {
-    width: 100%;
-    height: $default-header-height;
+.header {
+  width: 100%;
+  height: $default-header-height;
 
-    position: fixed;
-    top: inherit;
-    z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 
-    background-color: $primary-accent-color;
-    color: $lightest-font-color;
+  background-color: $primary-accent-color;
 
-    & > #navContainer {
-        display: none;
+  & > header {
+    width: $default-main-width;
+    height: 100%;
 
-        height: 100vh;
+    margin: 0 auto;
+
+    & > #mobileBurgerButton {
+      display: inline-block;
+
+      margin: 7.5px 0 7.5px 7.5px;
+
+      &:after {
+        content: "";
+
+        width: 100vw;
+        height: calc(100vh - #{$default-header-height});
+
+        visibility: hidden;
+
+        background-color: $darkest-background-color;
+
+        margin-top: $default-header-height;
 
         position: fixed;
         top: 0;
         left: 0;
-        right: 0;
 
-        & > nav {
-            width: 70vw;
-            height: 100%;
+        opacity: 0;
 
-            & > ul {
-                height: 100%;
+        transition: opacity 0.5s ease;
+      }
 
-                display: flex;
-                flex-direction: column;
+      & > svg {
+        width: 35px;
+        height: 35px;
 
-                & > #rightSideContainer {
-                    flex: 1;
-
-                    display: flex;
-                    flex-direction: column;
-                    align-items: stretch;
-                }
-
-                & > #rightSideContainer, > #leftSideContainer {
-                    & > li {
-                        height: fit-content;
-                        
-                        border-top: $default-border;
-
-                        & > a {
-                            display: block;
-
-                            padding: 1rem;
-
-                            color: $lightest-font-color;
-
-                            transition-timing-function: ease-in-out;
-                            transition-duration: .25s;
-                            transition-property: color, background-color;
-                        
-                            &:hover {
-                                color: $primary-accent-color;
-
-                                background-color: $lightest-font-color;
-                            }
-                        }
-                    }
-                }
-            }
+        & > path:last-child {
+          fill: $lightest-background-color;
         }
+      }
     }
 
-    & > i {
-        // height of the icon is 24px by default
-        padding: calc((#{$default-header-height} - 24px) / 2) $header-footer-padding-left-right;
+    & > #menuToggle {
+      display: none;
 
-        &:hover + #navContainer {
+      &:checked {
+        & + #mobileBurgerButton {
+          &:after {
+            visibility: visible;
+
+            opacity: 0.5;
+          }
+        }
+
+        & ~ nav {
+          transform: translateX(0);
+        }
+      }
+    }
+
+    & > nav {
+      width: 70%;
+      height: calc(100vh - #{$default-header-height});
+
+      margin-top: $default-header-height;
+
+      position: fixed;
+      top: 0;
+      left: 0;
+
+      transform: translateX(-100%);
+
+      background-color: $lightest-background-color;
+
+      transition: transform 0.5s ease-in-out;
+
+      display: flex;
+      flex-direction: column;
+
+      & > div.homeLinkContainer {
+        border-bottom: $default-border;
+
+        & > a {
+          display: block;
+
+          padding: 1rem 0.5rem;
+
+          color: $darkest-font-color;
+          font-size: 1rem;
+          line-height: 1;
+          letter-spacing: 1px;
+
+          transition-property: color, background-color;
+          transition-duration: .25s;
+          transition-timing-function: ease-in-out;
+
+          &.selected {
+            color: $darker-font-color;
+            background-color: $lighter-background-color;
+          }
+
+          &:hover {
+            color: $dark-font-color;
+            background-color: $lighter-background-color;
+          }
+        }
+      }
+
+      & > ul {
+        display: flex;
+        flex-direction: column;
+
+        align-items: stretch;
+
+        & > li {
+          border-bottom: $default-border;
+
+          & > a {
             display: block;
+
+            padding: 1rem 0.5rem;
+
+            color: $darkest-font-color;
+            font-size: 1rem;
+            line-height: 1;
+            letter-spacing: 1px;
+
+            transition-property: color, background-color;
+            transition-duration: .25s;
+            transition-timing-function: ease-in-out;
+
+            &.selected {
+              color: $darker-font-color;
+              background-color: $lighter-background-color;
+            }
+
+            &:hover {
+              color: $dark-font-color;
+              background-color: $lighter-background-color;
+            }
+          }
         }
+      }
     }
+  }
+}
+
+@media only screen and (min-width: $sm-breakpoint) {
+  .header > header {
+    width: $sm-breakpoint-main-width;
+  }
 }
 
 @media only screen and (min-width: $md-breakpoint) {
+  .header {
     header {
-        & > i {
-            display: none !important;
-        }
+      & > #mobileBurgerButton {
+        display: none;
+      }
 
-        & > #navContainer {
-            display: block;
+      & > nav {
+        width: initial;
+        height: 100%;
 
+        margin-top: initial;
+
+        position: initial;
+        top: initial;
+        left: initial;
+
+        transform: initial;
+
+        background-color: initial;
+
+        transition: initial;
+
+        flex-direction: row;
+        justify-content: space-between;
+
+        & > div.homeLinkContainer {
+          height: 100%;
+
+          border-bottom: none;
+
+          & > a {
             height: 100%;
 
-            position: static;
+            padding: 0;
 
-            & > nav {
-                width: 100%;
+            line-height: $default-header-height;
+            color: $lightest-font-color;
 
-                box-sizing: border-box;
-
-                padding: 0 $header-footer-padding-left-right;
-                
-                & > ul {
-                    flex-direction: row;
-                    justify-content: space-between;
-
-                    & > #leftSideContainer {
-                        flex-basis: 10%;
-                    }
-
-                    & > #rightSideContainer {
-                        flex-direction: row;
-                        flex: unset;
-                        flex-basis: 50%;
-                    }
-
-                    & > #leftSideContainer, > #rightSideContainer {
-                        & > li {
-                            height: 100%;
-
-                            flex: 1;
-
-                            border: none;
-
-                            & > a {
-                                height: 100%;
-
-                                box-sizing: border-box;
-
-                                text-align: center;
-                            }
-                        }
-                    }
-                }
+            &.selected {
+                color: $lightest-font-color;
+                background-color: initial;
             }
+
+            &:hover {
+              color: $primary-accent-color;
+              background-color: $lightest-background-color;
+            }
+          }
         }
+
+        & > ul {
+          height: 100%;
+
+          flex-direction: initial;
+
+          & > li {
+            height: 100%;
+
+            border-bottom: none;
+
+            & > a {
+              height: 100%;
+
+              padding: 0 1rem;
+
+              color: $lightest-font-color;
+
+              line-height: $default-header-height;
+              text-align: center;
+
+              &.selected {
+                color: $lightest-font-color;
+                background-color: initial;
+            }
+
+              &:hover {
+                color: $primary-accent-color;
+                background-color: $lightest-background-color;
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
 
 @media only screen and (min-width: $lg-breakpoint) {
-    header > #navContainer > nav > ul > #rightSideContainer {
-        flex-basis: 40%;
-    }
+  .header > header {
+    width: $lg-breakpoint-main-width;
+  }
 }
 
 @media only screen and (min-width: $xl-breakpoint) {
-    header > #navContainer > nav > ul > #rightSideContainer {
-        flex-basis: 30%;
-    }
+  .header > header {
+    width: $xl-breakpoint-main-width;
+  }
 }

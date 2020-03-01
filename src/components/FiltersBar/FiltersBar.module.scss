@@ -1,43 +1,86 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
 div.filtersBar {
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    margin: .5rem 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &.light > div.checkboxListDropdownsContainer > button.clearFilters {
+    color: $darkest-font-color;
+
+    background-color: $light-background-color;
+  }
+
+  &.dark > div.checkboxListDropdownsContainer > button.clearFilters {
+    color: $lightest-font-color;
+
+    background-color: $dark-background-color;
+  }
+
+  & > div.checkboxListDropdownsContainer {
     display: flex;
+    flex-direction: column;
+
+    & > * {
+        margin: .25rem 0;
+    
+        &:first-child {
+          margin-top: 0;
+        }
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+    & > button.clearFilters {
+      padding: 0.375rem 1rem;
+
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+  }
+}
+
+@media only screen and (min-width: $md-breakpoint) {
+  div.filtersBar {
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
 
-    &.light > div.checkboxListDropdownsContainer > button.clearFilters {
-        color: $darkest-font-color;
-
-        background-color: $light-background-color;
-    }
-
-    &.dark > div.checkboxListDropdownsContainer > button.clearFilters {
-        color: $lightest-font-color;
-
-        background-color: $dark-background-color;
+    & > * {
+        margin: 0;
     }
 
     & > div.checkboxListDropdownsContainer {
-        display: flex;
-        align-items: flex-start;
+      flex-direction: row;
+      align-items: flex-start;
+      order: 1;
 
-        & > * {
-            margin: 0 .5rem;
-    
-            &:first-child{
-                margin-left: 0;
-            }
-            &:last-child{
-                margin-right: 0;
-            }
-        }
+      & > * {
+        margin: 0 0.5rem;
 
-        & > button.clearFilters {
-            padding: .375rem 1rem;
- 
-            font-weight: 600;
-            font-size: 1rem;
-            line-height: 1.25;
+        &:first-child {
+          margin-left: 0;
         }
+        &:last-child {
+          margin-right: 0;
+        }
+      }
     }
+
+    & div.searchFieldContainer {
+        order: 2;
+    }
+  }
 }

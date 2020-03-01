@@ -60,11 +60,15 @@ button {
   outline: none;
 }
 
+.fade {
+  opacity: 0;
+}
+
 .fade-in {
   animation-name: fade-in;
-  animation-duration: 1s;
+  animation-duration: .75s;
   animation-timing-function: ease-in-out;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
 @keyframes fade-in {

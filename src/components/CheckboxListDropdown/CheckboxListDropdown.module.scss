@@ -1,8 +1,6 @@
 @import "../../globalVariables";
 
 div.checkboxListDropdown {
-  display: inline-block;
-
   overflow-y: hidden;
 
   &.light {
@@ -16,9 +14,9 @@ div.checkboxListDropdown {
       }
     }
     & > div.checkboxListContainer {
-        border-right: 1px solid $light-background-color;
-        border-bottom: 1px solid $light-background-color;
-        border-left: 1px solid $light-background-color;
+      border-right: 1px solid $light-background-color;
+      border-bottom: 1px solid $light-background-color;
+      border-left: 1px solid $light-background-color;
     }
   }
 
@@ -51,14 +49,14 @@ div.checkboxListDropdown {
     padding: 0.375rem 1rem;
     border: 1px solid transparent;
 
-    transition: border .25s ease-in-out;
+    transition: border 0.25s ease-in-out;
 
     position: relative;
     z-index: 1;
 
     &.expanded,
     &:hover {
-        border: 1px solid $light-background-color;
+      border: 1px solid $light-background-color;
     }
 
     & > div.listName {
@@ -71,21 +69,26 @@ div.checkboxListDropdown {
     }
 
     & > svg {
-        width: 1.25rem;
-        height: 1.25rem;
+      width: 1.25rem;
+      height: 1.25rem;
     }
   }
 
   & > div.checkboxListContainer {
     padding: 0.5rem;
-    visibility: hidden;
 
+    background-color: $lightest-background-color;
+  }
+}
+
+@media only screen and (min-width: $md-breakpoint) {
+  div.checkboxListDropdown > div.checkboxListContainer {
     position: relative;
     transform: translateY(-100%);
 
-    background-color: $lightest-background-color;
+    transition: transform 0.25s ease-in-out;
 
-    transition: transform .25s ease-in-out;
+    visibility: hidden;
 
     &.expanded {
       visibility: visible;
