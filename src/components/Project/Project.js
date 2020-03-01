@@ -7,6 +7,7 @@ import Paragraph from '../Paragraph';
 import Button from '../Button';
 import BadgeList from '../BadgeList';
 import ShowMoreButton from '../ShowMoreButton';
+import GitRepoLink from '../GitRepoLink';
 
 // Styles
 import styles from './Project.module.scss';
@@ -19,13 +20,18 @@ const Project = ({ data, colorMode }) => {
     return (
         <article className={`${styles.projectOuterContainer} ${styles[colorMode]} ${isExpanded ? styles.expanded : ""}`}>
             <div className={styles.projectInnerContainer}>
-                <div className={styles.headingContainer}>
+                <div className={`${styles.headingContainer} fade`}>
                     <Heading type="secondary" colorMode={colorMode}>
                         {projectName}
                     </Heading>
                 </div>
+                {gitRepoLink !== "" &&
+                    <div className={styles.gitRepoLinkContainer}>
+                        <GitRepoLink to={gitRepoLink} />
+                    </div>
+                }
                 <div className={styles.content}>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Kategorien
@@ -39,7 +45,7 @@ const Project = ({ data, colorMode }) => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Sprachen
@@ -53,7 +59,7 @@ const Project = ({ data, colorMode }) => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Verwendete Technologien:
@@ -67,7 +73,7 @@ const Project = ({ data, colorMode }) => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Teammitglieder
@@ -81,7 +87,7 @@ const Project = ({ data, colorMode }) => {
                             />
                         </div>
                     </section>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Projectlaufzeit:
@@ -91,11 +97,11 @@ const Project = ({ data, colorMode }) => {
                             {`${startDate} - ${endDate}`}
                         </div>
                     </section>
-                    <section>
+                    <section className="fade">
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Beschreibung:
-                        </Heading>
+                            </Heading>
                         </div>
                         <div className={styles.paragraphsContainer}>
                             {paragraphs.map((paragraph, paragraphIndex) => {
@@ -113,11 +119,6 @@ const Project = ({ data, colorMode }) => {
                             })}
                         </div>
                     </section>
-                    {/*                 <a href={gitRepoLink} target="_blank" rel="noopener noreferrer">
-                    <Button type="button" size="medium">
-                        Zum Git Repo!
-                    </Button>
-                </a> */}
                     {paragraphs.length > 1 &&
                         <div className={styles.showMoreButtonContainer}>
                             <ShowMoreButton

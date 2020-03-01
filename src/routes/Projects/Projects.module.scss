@@ -25,6 +25,27 @@ main {
     }
   }
 
+  & > .spinnerContainer.centered {
+    width: 100px;
+    height: 100px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  & > .spinnerContainer.bottom {
+    width: 50px;
+    height: 50px;
+
+    box-sizing: content-box;
+    padding: 25px 0;
+    margin: 0 auto;
+
+    background-color: $lightest-background-color;
+  }
+
   & > .projectsContainer {
     display: flex;
     flex-direction: column;

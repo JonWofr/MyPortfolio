@@ -13,6 +13,7 @@ import styles from './Projects.module.scss';
 import Project from '../../components/Project';
 import Header from '../../components/Header';
 import FiltersBar from '../../components/FiltersBar';
+import Spinner from '../../components/Spinner';
 
 // FormElementDefinitions
 import * as models from '../../models/formElementDefinitions';
@@ -26,17 +27,19 @@ class Projects extends Component {
             lastPage: undefined,
             projects: {},
             filters: parser.parseFormElementDefinitionsToFilters(models.projectOverviewFormElementDefinitions),
-            searchFieldValue: ""
+            searchFieldValue: "",
+            isInitiallyFetchingData: true,
+            isFurtherFetchingData: false
         }
 
         this.debouncerTimeoutId = undefined;
 
-        this.projectsObserver = undefined;
+        this.fetchingProjectsObserver = undefined;
         this.fadingInElementsObserver = undefined;
     }
 
     render() {
-        const { projects, filters, searchFieldValue } = this.state;
+        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData } = this.state;
 
         const projectIds = Object.keys(projects);
 
@@ -55,18 +58,32 @@ class Projects extends Component {
                             />
                         </div>
                     </div>
-                    <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
-                        {
-                            projectIds.map((projectId, projectIdIndex) => (
-                                <div key={projectId} className="projectsObserverItem fade">
-                                    <Project
-                                        data={projects[projectId]}
-                                        colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
-                                    />
+                    {isInitiallyFetchingData &&
+                        <div className={`${styles.spinnerContainer} ${styles.centered}`}>
+                            <Spinner />
+                        </div>
+                    }
+                    {!isInitiallyFetchingData &&
+                        <Fragment>
+                            <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
+                                {
+                                    projectIds.map((projectId, projectIdIndex) => (
+                                        <div key={projectId} className="projectsObserverItem">
+                                            <Project
+                                                data={projects[projectId]}
+                                                colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            {isFurtherFetchingData &&
+                                <div className={`${styles.spinnerContainer} ${styles.bottom}`}>
+                                    <Spinner />
                                 </div>
-                            ))
-                        }
-                    </div>
+                            }
+                        </Fragment>
+                    }
                 </main>
             </Fragment>
         );
@@ -74,20 +91,30 @@ class Projects extends Component {
 
     componentDidMount = () => {
 
-        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
             }
-            this.fetchProjects(queryObject)
+            this.fetchProjects(queryObject);
+            this.setState({
+                isFurtherFetchingData: true
+            })
         }, {});
+
+        const fadingInElementsObserverOptions = {
+            rootMargin: "150px 0px"
+        }
 
         this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => {
             console.info("Is Intersecting", target);
-            target.className += " fade-in";
-        }, {});
+            target.classList.add("fade-in");
+        }, fadingInElementsObserverOptions);
 
         this.fetchProjects();
+        this.setState({
+            isInitiallyFetchingData: true
+        })
     }
 
     fetchProjects = async (queryObject) => {
@@ -104,7 +131,9 @@ class Projects extends Component {
             projects: {
                 ...projects,
                 ...newProjects
-            }
+            },
+            isInitiallyFetchingData: false,
+            isFurtherFetchingData: false
         }, () => {
             this.observeLastProject();
             this.observeFadingInElements();
@@ -115,7 +144,7 @@ class Projects extends Component {
         const { page, lastPage } = this.state;
         if (page !== lastPage) {
             const lastProject = document.querySelector(`.projectsObserverItem:last-child`);
-            if (lastProject !== null) this.projectsObserver.observe(lastProject);
+            if (lastProject !== null) this.fetchingProjectsObserver.observe(lastProject);
         }
     }
 
@@ -133,16 +162,24 @@ class Projects extends Component {
             query
         }
 
-        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
                 query
             }
-            this.fetchProjects(queryObject)
+            this.fetchProjects(queryObject);
+            this.setState({
+                isFurtherFetchingData: true
+            })
         }, {});
 
-        this.debounce(this.fetchProjects(queryObject), 500)
+        this.debounce(() => {
+            this.fetchProjects(queryObject);
+            this.setState({
+                isInitiallyFetchingData: true
+            })
+        }, 500)
 
         this.setState({
             searchFieldValue: value
@@ -172,16 +209,24 @@ class Projects extends Component {
             query
         }
 
-        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
-                query,
                 page: page + 1,
+                query
             }
-            this.fetchProjects(queryObject)
+            this.fetchProjects(queryObject);
+            this.setState({
+                isFurtherFetchingData: true
+            })
         }, {});
 
-        this.debounce(this.fetchProjects(queryObject), 500)
+        this.debounce(() => {
+            this.fetchProjects(queryObject);
+            this.setState({
+                isInitiallyFetchingData: true
+            })
+        }, 500)
 
         this.setState({
             filters: deepClonedFilters
@@ -204,19 +249,22 @@ class Projects extends Component {
 
         if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
 
-        this.projectsObserver = intersectionObserver.getIntersectionObserver(async () => {
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
             const { page } = this.state;
             const queryObject = {
                 page: page + 1,
             }
-            this.fetchProjects(queryObject)
+            this.fetchProjects(queryObject);
+            this.setState({
+                isFurtherFetchingData: true
+            })
         }, {});
 
         this.fetchProjects();
-
         this.setState({
             filters: deepClonedFilters,
-            searchFieldValue: ""
+            searchFieldValue: "",
+            isInitiallyFetchingData: true
         })
     }
 }

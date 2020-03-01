@@ -32,6 +32,8 @@ article.projectOuterContainer {
     display: flex;
     flex-direction: column;
 
+    position: relative;
+
     & > * {
       margin: 0.625rem 0;
 
@@ -41,6 +43,13 @@ article.projectOuterContainer {
       &:last-child {
         margin-bottom: 0;
       }
+    }
+
+    & > div.gitRepoLinkContainer {
+      position: absolute;
+      top: 3rem;
+      right: 0;
+      z-index: 1;
     }
 
     & > div.content {
