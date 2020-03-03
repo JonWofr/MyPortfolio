@@ -8,7 +8,7 @@ import SearchField from '../SearchField';
 // Styles
 import styles from './FiltersBar.module.scss';
 
-const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearchFieldValue, onClickClearFiltersButton, colorScheme }) => (
+const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearchFieldValue, onClickClearFiltersButton, totalCheckedCheckboxesCount, colorScheme }) => (
     <div className={`${styles.filtersBar} ${styles[colorScheme]}`}>
         <div className={styles.searchFieldContainer}>
             <SearchField
@@ -33,6 +33,7 @@ const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearc
             ))}
             <button className={styles.clearFilters} onClick={onClickClearFiltersButton}>
                 Clear All
+                {totalCheckedCheckboxesCount > 0 ? ` (${totalCheckedCheckboxesCount})` : ""}
             </button>
         </div>
     </div>
@@ -53,6 +54,7 @@ FiltersBar.propTypes = {
     searchFieldValue: PropTypes.string.isRequired,
     onChangeSearchFieldValue: PropTypes.func.isRequired,
     onClickClearFiltersButton: PropTypes.func.isRequired,
+    totalCheckedCheckboxesCount: PropTypes.number.isRequired,
     colorScheme: PropTypes.oneOf(["light", "dark"])
 };
 

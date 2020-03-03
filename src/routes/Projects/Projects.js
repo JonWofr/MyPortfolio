@@ -29,7 +29,8 @@ class Projects extends Component {
             filters: parser.parseFormElementDefinitionsToFilters(models.projectOverviewFormElementDefinitions),
             searchFieldValue: "",
             isInitiallyFetchingData: true,
-            isFurtherFetchingData: false
+            isFurtherFetchingData: false,
+            totalCheckedCheckboxesCount: 0
         }
 
         this.debouncerTimeoutId = undefined;
@@ -39,7 +40,7 @@ class Projects extends Component {
     }
 
     render() {
-        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData } = this.state;
+        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalCheckedCheckboxesCount } = this.state;
 
         const projectIds = Object.keys(projects);
 
@@ -47,6 +48,18 @@ class Projects extends Component {
             <Fragment>
                 <Header />
                 <main>
+                    <input id={styles.menuToggle} type="checkbox" />
+                    <label id={styles.mobileFilterButton} htmlFor={styles.menuToggle}>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M11 18h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1zm4 6h10c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1z" />
+                        </svg>
+                        {totalCheckedCheckboxesCount > 0 &&
+                            <div className={styles.totalCheckedCheckboxesCount}>
+                                {totalCheckedCheckboxesCount}
+                            </div>
+                        }
+                    </label>
                     <div className={styles.filtersBarOuterContainer}>
                         <div className={styles.filtersBarInnerContainer}>
                             <FiltersBar
@@ -55,6 +68,7 @@ class Projects extends Component {
                                 searchFieldValue={searchFieldValue}
                                 onChangeSearchFieldValue={this.onChangeSearchFieldValue}
                                 onClickClearFiltersButton={this.onClickClearFiltersButton}
+                                totalCheckedCheckboxesCount={totalCheckedCheckboxesCount}
                             />
                         </div>
                     </div>
@@ -229,9 +243,23 @@ class Projects extends Component {
         })
     }
 
-    incrementCheckedCheckboxesCount = (filter) => filter.checkedCheckboxesCount++;
+    incrementCheckedCheckboxesCount = filter => {
+        const { totalCheckedCheckboxesCount } = this.state;
 
-    decrementCheckedCheckboxesCount = (filter) => filter.checkedCheckboxesCount--;
+        filter.checkedCheckboxesCount++;
+        this.setState({
+            totalCheckedCheckboxesCount: totalCheckedCheckboxesCount + 1
+        })
+    }
+
+    decrementCheckedCheckboxesCount = filter => {
+        const { totalCheckedCheckboxesCount } = this.state;
+
+        filter.checkedCheckboxesCount--;
+        this.setState({
+            totalCheckedCheckboxesCount: totalCheckedCheckboxesCount - 1
+        })
+    }
 
     onClickClearFiltersButton = () => {
         const { filters } = this.state;
@@ -260,7 +288,8 @@ class Projects extends Component {
         this.setState({
             filters: deepClonedFilters,
             searchFieldValue: "",
-            isInitiallyFetchingData: true
+            isInitiallyFetchingData: true,
+            totalCheckedCheckboxesCount: 0
         })
     }
 }
