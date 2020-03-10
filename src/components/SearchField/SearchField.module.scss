@@ -10,7 +10,8 @@ div.searchField {
       color: $darkest-font-color;
     }
 
-    & > svg > path:first-child {
+    & > svg > path:first-child,
+    & > button > svg > path:first-child {
       fill: $darkest-font-color;
     }
   }
@@ -20,7 +21,8 @@ div.searchField {
 
       color: $lightest-font-color;
     }
-    & > svg > path:first-child {
+    & > svg > path:first-child,
+    & > button > svg > path:first-child {
       fill: $lightest-font-color;
     }
   }
@@ -36,12 +38,13 @@ div.searchField {
     line-height: 1.25;
 
     box-sizing: border-box;
-    padding: .375rem 3.5rem .375rem 1rem;
+    padding: calc(.375rem + 1px) 3.5rem  .375rem 1rem;
 
     outline: none;
   }
 
-  & > svg {
+  & > svg,
+  & > button > svg {
     width: 1.25rem;
     height: 1.25rem;
 

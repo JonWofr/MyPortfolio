@@ -37,11 +37,11 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                                 placeholder={label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
-                                value={value}
+                                value={type === "file" ? undefined : value}
                                 required={required}
                                 type={type}
                                 size="fluid"
-                                onChange={(e) => onChangeColumnValue(name, e.target.value)}
+                                onChange={(e) => type === "file" ? onChangeColumnValue(name, e.target.files[0]) : onChangeColumnValue(name, e.target.value)}
                                 colorMode={colorMode}
                             />
                         </td>

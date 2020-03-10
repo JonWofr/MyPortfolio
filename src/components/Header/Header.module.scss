@@ -104,7 +104,7 @@
           letter-spacing: 1px;
 
           transition-property: color, background-color;
-          transition-duration: .25s;
+          transition-duration: 0.25s;
           transition-timing-function: ease-in-out;
 
           &.selected {
@@ -139,7 +139,7 @@
             letter-spacing: 1px;
 
             transition-property: color, background-color;
-            transition-duration: .25s;
+            transition-duration: 0.25s;
             transition-timing-function: ease-in-out;
 
             &.selected {
@@ -165,32 +165,63 @@
 }
 
 @media only screen and (min-width: $md-breakpoint) {
-  .header {
-    header {
-      & > #mobileBurgerButton {
-        display: none;
-      }
+  .header > header {
+    width: $md-breakpoint-main-width;
 
-      & > nav {
-        width: initial;
+    & > #mobileBurgerButton {
+      display: none;
+    }
+
+    & > nav {
+      width: initial;
+      height: 100%;
+
+      margin-top: initial;
+
+      position: initial;
+      top: initial;
+      left: initial;
+
+      transform: initial;
+
+      background-color: initial;
+
+      transition: initial;
+
+      flex-direction: row;
+      justify-content: space-between;
+
+      & > div.homeLinkContainer {
         height: 100%;
 
-        margin-top: initial;
+        border-bottom: none;
 
-        position: initial;
-        top: initial;
-        left: initial;
+        & > a {
+          height: 100%;
 
-        transform: initial;
+          padding: 0;
 
-        background-color: initial;
+          line-height: $default-header-height;
+          color: $lightest-font-color;
 
-        transition: initial;
+          &.selected {
+            color: $lightest-font-color;
+            background-color: initial;
+          }
 
-        flex-direction: row;
-        justify-content: space-between;
+          &:hover {
+            color: $primary-accent-color;
+            background-color: $lightest-background-color;
+          }
+        }
+      }
 
-        & > div.homeLinkContainer {
+      & > ul {
+        height: 100%;
+
+        flex-direction: initial;
+
+        & > li {
           height: 100%;
 
           border-bottom: none;
@@ -198,52 +229,21 @@
           & > a {
             height: 100%;
 
-            padding: 0;
+            padding: 0 1rem;
 
-            line-height: $default-header-height;
             color: $lightest-font-color;
 
+            line-height: $default-header-height;
+            text-align: center;
+
             &.selected {
-                color: $lightest-font-color;
-                background-color: initial;
+              color: $lightest-font-color;
+              background-color: initial;
             }
 
             &:hover {
               color: $primary-accent-color;
               background-color: $lightest-background-color;
-            }
-          }
-        }
-
-        & > ul {
-          height: 100%;
-
-          flex-direction: initial;
-
-          & > li {
-            height: 100%;
-
-            border-bottom: none;
-
-            & > a {
-              height: 100%;
-
-              padding: 0 1rem;
-
-              color: $lightest-font-color;
-
-              line-height: $default-header-height;
-              text-align: center;
-
-              &.selected {
-                color: $lightest-font-color;
-                background-color: initial;
-            }
-
-              &:hover {
-                color: $primary-accent-color;
-                background-color: $lightest-background-color;
-              }
             }
           }
         }

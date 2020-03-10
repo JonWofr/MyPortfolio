@@ -1,3 +1,5 @@
+@import '../../globalVariables';
+
 a.gitRepoLink {
   cursor: pointer;
 
@@ -8,8 +10,8 @@ a.gitRepoLink {
   }
 
   & > div.gitRepoLogosContainer {
-    width: 90px;
-    height: 50px;
+    width: 80px;
+    height: 40px;
 
     position: relative;
 
@@ -22,11 +24,11 @@ a.gitRepoLink {
 
       &.bitBucketLogoContainer,
       &.gitLabLogoContainer {
-        padding: 7.5px;
+        padding: 5px;
 
         & > svg {
-          width: 35px;
-          height: 35px;
+          width: 30px;
+          height: 30px;
         }
       }
 
@@ -53,13 +55,37 @@ a.gitRepoLink {
         z-index: 1;
 
         & > svg {
-          width: 50px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
         }
       }
 
       & > svg {
         display: block;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $md-breakpoint) {
+  a.gitRepoLink > div.gitRepoLogosContainer {
+    width: 100px;
+    height: 50px;
+
+    & > div {
+      &.bitBucketLogoContainer,
+      &.gitLabLogoContainer {
+        padding: 7.5px;
+
+        & > svg {
+          width: 35px;
+          height: 35px;
+        }
+      }
+
+      &.gitHubLogoContainer > svg {
+        width: 50px;
+        height: 50px;
       }
     }
   }

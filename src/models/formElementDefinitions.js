@@ -1,4 +1,4 @@
-export const projectOverviewFormElementDefinitions = [{
+export const projectsOverviewFormElementDefinitions = [{
     name: "_id",
     label: "Id",
     element: "input",
@@ -164,3 +164,59 @@ export const projectOverviewFormElementDefinitions = [{
         required: false
     }
 }];
+
+export const slidesOverviewFormElementsDefinitions = [{
+    name: "_id",
+    label: "Id",
+    element: "input",
+    elementAttributes: {
+        type: "text",
+        required: false
+    }
+}, {
+    name: "heading",
+    label: "Heading",
+    element: "input",
+    elementAttributes: {
+        type: "text",
+        required: true
+    }
+}, {
+    name: "subHeading",
+    label: "Subheading",
+    element: "input",
+    elementAttributes: {
+        type: "text",
+        required: false
+    }
+}, {
+    name: "buttonColorScheme",
+    label: "ColorScheme",
+    element: "select",
+    elementAttributes: {
+        options: [{
+            value: "primaryAccent",
+            label: "Primary Accent"
+        }, {
+            value: "secondaryAccent",
+            label: "Secondary Accent"
+        }, {
+            value: "invertedPrimaryAccent",
+            label: "Inverted Primary Accent"
+        }, {
+            value: "invertedSecondaryAccent",
+            label: "Inverted Secondary Accent"
+        }],
+        required: true,
+        defaultValue: "primaryAccent",
+        mode: "single"
+      } 
+}, {
+    name: "image",
+    label: "Image Url",
+    element: "input",
+    elementAttributes: {
+        type: "file",
+        required: false
+    }
+}]

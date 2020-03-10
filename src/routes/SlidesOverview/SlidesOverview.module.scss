@@ -1,0 +1,20 @@
+@import "../../globalVariables";
+
+#slidesOverview {
+  overflow-x: hidden;
+
+  & > table {
+    width: 100%;
+
+    & > tbody,
+    & > tfoot {
+      width: 100%;
+
+      vertical-align: top;
+    }
+  }
+
+  & > #paginationContainer {
+    text-align: center;
+  }
+}

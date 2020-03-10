@@ -6,23 +6,11 @@
   & > table {
     width: 100%;
 
-    & > thead,
     & > tbody,
     & > tfoot {
       width: 100%;
 
       vertical-align: top;
-    }
-
-    & > thead > tr {
-      width: 100%;
-
-      display: flex;
-      flex-direction: column;
-
-      & > th {
-        text-align: start;
-      }
     }
   }
 
@@ -54,21 +42,7 @@
 }
 
 @media only screen and (min-width: $md-breakpoint) {
-  #projectsOverview {
-    & > table > thead > tr {
-      flex-direction: row;
-
-      margin: 0 -0.125rem;
-
-      & > th {
-        width: calc(10% - 2 * 0.125rem);
-
-        padding: 0;
-        margin: 0 0.125rem;
-      }
-    }
-    & > #paragraphsWindowOverlay > #paragraphsWindowContainer {
-      width: 700px;
-    }
+  #projectsOverview > #paragraphsWindowOverlay > #paragraphsWindowContainer {
+    width: 700px;
   }
 }

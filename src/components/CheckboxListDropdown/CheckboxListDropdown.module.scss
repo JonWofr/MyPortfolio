@@ -3,6 +3,9 @@
 div.checkboxListDropdown {
   overflow-y: hidden;
 
+  display: flex;
+  flex-direction: column;
+
   &.light {
     & > button {
       & > div.listName {
@@ -12,11 +15,6 @@ div.checkboxListDropdown {
       & > svg > path:first-child {
         fill: $darkest-font-color;
       }
-    }
-    & > div.checkboxListContainer {
-      border-right: 1px solid $light-background-color;
-      border-bottom: 1px solid $light-background-color;
-      border-left: 1px solid $light-background-color;
     }
   }
 
@@ -30,11 +28,17 @@ div.checkboxListDropdown {
         fill: $lightest-font-color;
       }
     }
+  }
 
-    & > div.checkboxListContainer {
-      border-right: 1px solid $dark-background-color;
-      border-bottom: 1px solid $dark-background-color;
-      border-left: 1px solid $dark-background-color;
+  & > * {
+    margin: .375rem 0; 
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
@@ -46,18 +50,8 @@ div.checkboxListDropdown {
     display: flex;
     align-items: center;
 
-    padding: 0.375rem 1rem;
-    border: 1px solid transparent;
-
-    transition: border 0.25s ease-in-out;
-
     position: relative;
     z-index: 1;
-
-    &.expanded,
-    &:hover {
-      border: 1px solid $light-background-color;
-    }
 
     & > div.listName {
       flex: 1;
@@ -65,35 +59,78 @@ div.checkboxListDropdown {
       font-weight: 600;
       font-size: 1rem;
       line-height: 1.25;
-      text-align: center;
+
+      text-align: start;
     }
 
     & > svg {
       width: 1.25rem;
       height: 1.25rem;
+
+      display: none;
     }
   }
 
   & > div.checkboxListContainer {
-    padding: 0.5rem;
-
     background-color: $lightest-background-color;
   }
 }
 
 @media only screen and (min-width: $md-breakpoint) {
-  div.checkboxListDropdown > div.checkboxListContainer {
-    position: relative;
-    transform: translateY(-100%);
+  div.checkboxListDropdown {
+    &.light > div.checkboxListContainer {
+      border-right: 1px solid $light-background-color;
+      border-bottom: 1px solid $light-background-color;
+      border-left: 1px solid $light-background-color;
+    }
 
-    transition: transform 0.25s ease-in-out;
+    &.dark > div.checkboxListContainer {
+      border-right: 1px solid $dark-background-color;
+      border-bottom: 1px solid $dark-background-color;
+      border-left: 1px solid $dark-background-color;
+    }
 
-    visibility: hidden;
+    & > * {
+      margin: initial;
+    }
 
-    &.expanded {
-      visibility: visible;
+    & > button {
+      border: 1px solid transparent;
+  
+      transition: border 0.25s ease-in-out;
 
-      transform: translateY(0);
+      padding: 0.375rem 0.5rem;
+
+  
+      &.expanded,
+      &:hover {
+        border: 1px solid $light-background-color;
+      }
+
+      & > div.listName {
+        text-align: center;
+      }
+  
+      & > svg {
+        display: initial;
+      }
+    }
+
+    & > div.checkboxListContainer {
+      position: relative;
+      transform: translateY(-100%);
+
+      transition: transform 0.25s ease-in-out;
+
+      visibility: hidden;
+
+      padding: 0.375rem 0.5rem;
+
+      &.expanded {
+        visibility: visible;
+
+        transform: translateY(0);
+      }
     }
   }
 }

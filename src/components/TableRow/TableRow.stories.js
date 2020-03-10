@@ -8,7 +8,7 @@ import TableRow from './TableRow.js'
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
-import { projectOverviewFormElementDefinitions } from '../../models/formElementDefinitions';
+import { projectsOverviewFormElementDefinitions } from '../../models/formElementDefinitions';
 export const mockingData = {
     componentName: "TableRow",
     Component: TableRow,
@@ -33,9 +33,8 @@ export const mockingData = {
                     "dataUrl": null
                 }
             }]
-            
         },
-        formElementDefinitions: projectOverviewFormElementDefinitions,
+        formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: true,
         onChangeColumnValue: () => {},
         onClickDelete: () => {},
@@ -63,9 +62,8 @@ export const mockingData = {
                     "dataUrl": null
                 }
             }]
-            
         },
-        formElementDefinitions: projectOverviewFormElementDefinitions,
+        formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: true,
         onChangeColumnValue: () => {},
         onClickDelete: () => {},
@@ -94,9 +92,8 @@ export const mockingData = {
                     "dataUrl": null
                 }
             }]
-            
         },
-        formElementDefinitions: projectOverviewFormElementDefinitions,
+        formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: false,
         onChangeColumnValue: () => {},
         onClickDelete: () => {},

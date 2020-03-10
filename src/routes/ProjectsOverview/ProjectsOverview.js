@@ -15,7 +15,7 @@ import * as parser from '../../utils/parser';
 import { getHttpToast } from '../../utils/toast';
 
 // Models
-import { projectOverviewFormElementDefinitions as formElementDefinitions } from '../../models/formElementDefinitions';
+import { projectsOverviewFormElementDefinitions as formElementDefinitions } from '../../models/formElementDefinitions';
 
 // Styles
 import styles from './ProjectsOverview.module.scss';
@@ -260,10 +260,12 @@ class ProjectsOverview extends Component {
     }
 
     onClickSave = (projectId) => {
-        const { projects } = this.state;
+        const { projects, limit } = this.state;
         const body = {
             data: projects[projectId],
-            appendix: {}
+            appendix: {
+                limit
+            }
         }
         http.put(`${process.env.REACT_APP_BACKEND_URL}/projects/${projectId}`, body)
             .then(({ status, statusText }) => {

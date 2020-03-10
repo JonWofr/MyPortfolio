@@ -8,12 +8,13 @@ import SearchField from '../SearchField';
 // Styles
 import styles from './FiltersBar.module.scss';
 
-const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearchFieldValue, onClickClearFiltersButton, totalCheckedCheckboxesCount, colorScheme }) => (
+const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearchFieldValue, onClickSearchFieldResetButton, onClickClearFiltersButton, totalAppliedFiltersCount, colorScheme }) => (
     <div className={`${styles.filtersBar} ${styles[colorScheme]}`}>
         <div className={styles.searchFieldContainer}>
             <SearchField
                 value={searchFieldValue}
                 onChangeValue={onChangeSearchFieldValue}
+                onClickResetButton={onClickSearchFieldResetButton}
                 colorScheme={colorScheme}
             />
         </div>
@@ -33,7 +34,7 @@ const FiltersBar = ({ filters, onChangeCheckbox, searchFieldValue, onChangeSearc
             ))}
             <button className={styles.clearFilters} onClick={onClickClearFiltersButton}>
                 Clear All
-                {totalCheckedCheckboxesCount > 0 ? ` (${totalCheckedCheckboxesCount})` : ""}
+                {totalAppliedFiltersCount > 0 ? ` (${totalAppliedFiltersCount})` : ""}
             </button>
         </div>
     </div>
@@ -53,8 +54,9 @@ FiltersBar.propTypes = {
     onChangeCheckbox: PropTypes.func.isRequired,
     searchFieldValue: PropTypes.string.isRequired,
     onChangeSearchFieldValue: PropTypes.func.isRequired,
+    onClickSearchFieldResetButton: PropTypes.func.isRequired,
     onClickClearFiltersButton: PropTypes.func.isRequired,
-    totalCheckedCheckboxesCount: PropTypes.number.isRequired,
+    totalAppliedFiltersCount: PropTypes.number.isRequired,
     colorScheme: PropTypes.oneOf(["light", "dark"])
 };
 

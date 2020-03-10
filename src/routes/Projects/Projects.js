@@ -26,11 +26,11 @@ class Projects extends Component {
             page: undefined,
             lastPage: undefined,
             projects: {},
-            filters: parser.parseFormElementDefinitionsToFilters(models.projectOverviewFormElementDefinitions),
+            filters: parser.parseFormElementDefinitionsToFilters(models.projectsOverviewFormElementDefinitions),
             searchFieldValue: "",
             isInitiallyFetchingData: true,
             isFurtherFetchingData: false,
-            totalCheckedCheckboxesCount: 0
+            totalAppliedFiltersCount: 0
         }
 
         this.debouncerTimeoutId = undefined;
@@ -40,23 +40,23 @@ class Projects extends Component {
     }
 
     render() {
-        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalCheckedCheckboxesCount } = this.state;
+        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalAppliedFiltersCount } = this.state;
 
         const projectIds = Object.keys(projects);
 
         return (
             <Fragment>
                 <Header />
-                <main>
+                <main className={styles.customSize}>
                     <input id={styles.menuToggle} type="checkbox" />
                     <label id={styles.mobileFilterButton} htmlFor={styles.menuToggle}>
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
                             <path d="M0 0h24v24H0V0z" fill="none" />
                             <path d="M11 18h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM3 7c0 .55.45 1 1 1h16c.55 0 1-.45 1-1s-.45-1-1-1H4c-.55 0-1 .45-1 1zm4 6h10c.55 0 1-.45 1-1s-.45-1-1-1H7c-.55 0-1 .45-1 1s.45 1 1 1z" />
                         </svg>
-                        {totalCheckedCheckboxesCount > 0 &&
-                            <div className={styles.totalCheckedCheckboxesCount}>
-                                {totalCheckedCheckboxesCount}
+                        {totalAppliedFiltersCount > 0 &&
+                            <div className={styles.totalAppliedFiltersCount}>
+                                {totalAppliedFiltersCount}
                             </div>
                         }
                     </label>
@@ -67,8 +67,9 @@ class Projects extends Component {
                                 onChangeCheckbox={this.onChangeFilterCheckbox}
                                 searchFieldValue={searchFieldValue}
                                 onChangeSearchFieldValue={this.onChangeSearchFieldValue}
+                                onClickSearchFieldResetButton={this.onClickSearchFieldResetButton}
                                 onClickClearFiltersButton={this.onClickClearFiltersButton}
-                                totalCheckedCheckboxesCount={totalCheckedCheckboxesCount}
+                                totalAppliedFiltersCount={totalAppliedFiltersCount}
                             />
                         </div>
                     </div>
@@ -77,26 +78,22 @@ class Projects extends Component {
                             <Spinner />
                         </div>
                     }
-                    {!isInitiallyFetchingData &&
-                        <Fragment>
-                            <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
-                                {
-                                    projectIds.map((projectId, projectIdIndex) => (
-                                        <div key={projectId} className="projectsObserverItem">
-                                            <Project
-                                                data={projects[projectId]}
-                                                colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
-                                            />
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                            {isFurtherFetchingData &&
-                                <div className={`${styles.spinnerContainer} ${styles.bottom}`}>
-                                    <Spinner />
+                    <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
+                        {
+                            projectIds.map((projectId, projectIdIndex) => (
+                                <div key={projectId} className="projectsObserverItem">
+                                    <Project
+                                        data={projects[projectId]}
+                                        colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
+                                    />
                                 </div>
-                            }
-                        </Fragment>
+                            ))
+                        }
+                    </div>
+                    {isFurtherFetchingData &&
+                        <div className={`${styles.spinnerContainer} ${styles.bottom}`}>
+                            <Spinner />
+                        </div>
                     }
                 </main>
             </Fragment>
@@ -110,10 +107,9 @@ class Projects extends Component {
             const queryObject = {
                 page: page + 1,
             }
-            this.fetchProjects(queryObject);
             this.setState({
                 isFurtherFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, {});
 
         this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => {
@@ -121,14 +117,13 @@ class Projects extends Component {
             target.classList.add("fade-in");
         }, {});
 
-        this.fetchProjects();
         this.setState({
             isInitiallyFetchingData: true
-        })
+        }, () => this.fetchProjects())
     }
 
     fetchProjects = async (queryObject) => {
-        const { projects } = this.state;
+        const { projects, isInitiallyFetchingData } = this.state;
 
         const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
         const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
@@ -138,7 +133,7 @@ class Projects extends Component {
         this.setState({
             page,
             lastPage,
-            projects: {
+            projects: isInitiallyFetchingData ? newProjects : {
                 ...projects,
                 ...newProjects
             },
@@ -164,7 +159,7 @@ class Projects extends Component {
     }
 
     onChangeSearchFieldValue = ({ target: { value } }) => {
-        const { filters } = this.state;
+        const { filters, searchFieldValue, totalAppliedFiltersCount } = this.state;
 
         const query = parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(filters, value);
 
@@ -178,18 +173,27 @@ class Projects extends Component {
                 page: page + 1,
                 query
             }
-            this.fetchProjects(queryObject);
             this.setState({
                 isFurtherFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, {});
 
         this.debounce(() => {
-            this.fetchProjects(queryObject);
             this.setState({
                 isInitiallyFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, 500)
+
+        if (searchFieldValue.length === 0 && value.length === 1) {
+            this.setState({
+                totalAppliedFiltersCount: totalAppliedFiltersCount + 1
+            })
+        }
+        else if (searchFieldValue.length > 0 && value.length === 0) {
+            this.setState({
+                totalAppliedFiltersCount: totalAppliedFiltersCount - 1
+            })
+        }
 
         this.setState({
             searchFieldValue: value
@@ -199,6 +203,33 @@ class Projects extends Component {
     debounce = (timeoutCallback, ms) => {
         if (this.debouncerTimeoutId) clearTimeout(this.debouncerTimeoutId);
         this.debouncerTimeoutId = setTimeout(timeoutCallback, ms);
+    }
+
+    onClickSearchFieldResetButton = () => {
+        const { filters, totalAppliedFiltersCount } = this.state;
+
+        const query = parser.parseFiltersAndSearchFieldValueToMongoDbQueryObject(filters, "");
+
+        const queryObject = {
+            query
+        }
+
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
+            const { page } = this.state;
+            const queryObject = {
+                page: page + 1,
+                query
+            }
+            this.setState({
+                isFurtherFetchingData: true
+            }, () => this.fetchProjects(queryObject))
+        }, {});
+
+        this.setState({
+            searchFieldValue: "",
+            totalAppliedFiltersCount: totalAppliedFiltersCount - 1,
+            isInitiallyFetchingData: true
+        }, () => this.fetchProjects(queryObject))
     }
 
     onChangeFilterCheckbox = (name, value, isChecked) => {
@@ -225,17 +256,15 @@ class Projects extends Component {
                 page: page + 1,
                 query
             }
-            this.fetchProjects(queryObject);
             this.setState({
                 isFurtherFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, {});
 
         this.debounce(() => {
-            this.fetchProjects(queryObject);
             this.setState({
                 isInitiallyFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, 500)
 
         this.setState({
@@ -244,20 +273,20 @@ class Projects extends Component {
     }
 
     incrementCheckedCheckboxesCount = filter => {
-        const { totalCheckedCheckboxesCount } = this.state;
+        const { totalAppliedFiltersCount } = this.state;
 
         filter.checkedCheckboxesCount++;
         this.setState({
-            totalCheckedCheckboxesCount: totalCheckedCheckboxesCount + 1
+            totalAppliedFiltersCount: totalAppliedFiltersCount + 1
         })
     }
 
     decrementCheckedCheckboxesCount = filter => {
-        const { totalCheckedCheckboxesCount } = this.state;
+        const { totalAppliedFiltersCount } = this.state;
 
         filter.checkedCheckboxesCount--;
         this.setState({
-            totalCheckedCheckboxesCount: totalCheckedCheckboxesCount - 1
+            totalAppliedFiltersCount: totalAppliedFiltersCount - 1
         })
     }
 
@@ -278,19 +307,17 @@ class Projects extends Component {
             const queryObject = {
                 page: page + 1,
             }
-            this.fetchProjects(queryObject);
             this.setState({
                 isFurtherFetchingData: true
-            })
+            }, () => this.fetchProjects(queryObject))
         }, {});
 
-        this.fetchProjects();
         this.setState({
             filters: deepClonedFilters,
             searchFieldValue: "",
             isInitiallyFetchingData: true,
-            totalCheckedCheckboxesCount: 0
-        })
+            totalAppliedFiltersCount: 0
+        }, () => this.fetchProjects())
     }
 }
 

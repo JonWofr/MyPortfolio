@@ -75,6 +75,8 @@ export const mockingData = {
         onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
         searchFieldValue: "And",
         onChangeSearchFieldValue: () => console.info("No onChangeHandler specified"),
+        onClickSearchFieldResetButton: () => console.info("No onClickHandler specified"),
+        totalAppliedFiltersCount: 4,
         onClickClearFiltersButton: () => console.info("clicked")
     }, {
         filters: [{
@@ -140,7 +142,9 @@ export const mockingData = {
         onChangeCheckbox: (name, value, isChecked) => console.info(`Changed Checkbox from list with name ${name} with value ${value} to checked ${isChecked}`),
         searchFieldValue: "And",
         onChangeSearchFieldValue: () => console.info("No onChangeHandler specified"),
+        onClickSearchFieldResetButton: () => console.info("No onClickHandler specified"),
         onClickClearFiltersButton: () => console.info("clicked"),
+        totalAppliedFiltersCount: 4,
         colorMode: "dark"
     }]
 }
