@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { cloneDeep } from 'lodash';
+import { withRouter } from 'react-router-dom';
 
 // Utils
 import * as http from '../../utils/http';
@@ -40,6 +41,7 @@ class Projects extends Component {
     }
 
     render() {
+        console.info("rendering");
         const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalAppliedFiltersCount } = this.state;
 
         const projectIds = Object.keys(projects);
@@ -101,32 +103,60 @@ class Projects extends Component {
     }
 
     componentDidMount = () => {
+        console.info("mounting");
+        const { filters } = this.state;
+        const { location } = this.props;
 
-        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(async () => {
-            const { page } = this.state;
-            const queryObject = {
-                page: page + 1,
+        let queryObject = {};
+
+        if (location.search !== "") {
+            queryObject = parser.parseQueryStringToObject(location.search.replace(/%22/g, "\""));
+            if ("query" in queryObject) {
+                const deepClonedFilters = cloneDeep(filters);
+                const [updatedDeepClonedFilters, searchFieldValue] = parser.parseMongoDbQueryObjectToFiltersAndSearchFieldValue(deepClonedFilters, queryObject.query);
+                let totalAppliedFiltersCount = 0;
+                updatedDeepClonedFilters.forEach(updatedDeepClonedFilter => totalAppliedFiltersCount += updatedDeepClonedFilter.checkedCheckboxesCount);
+                if (searchFieldValue !== "") totalAppliedFiltersCount++;
+                this.setState({
+                    filters: updatedDeepClonedFilters,
+                    searchFieldValue,
+                    totalAppliedFiltersCount
+                })
             }
-            this.setState({
-                isFurtherFetchingData: true
-            }, () => this.fetchProjects(queryObject))
-        }, {});
+        }
 
-        this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => {
-            console.info("Is Intersecting", target);
-            target.classList.add("fade-in");
-        }, {});
+        this.fetchingProjectsObserver = intersectionObserver.getIntersectionObserver(() => {
+            const { page } = this.state;
+            queryObject.page = page + 1;
 
-        this.setState({
-            isInitiallyFetchingData: true
-        }, () => this.fetchProjects())
+            this.setState({ isFurtherFetchingData: true }, () => this.fetchProjects(queryObject))
+        });
+
+        this.fadingInElementsObserver = intersectionObserver.getIntersectionObserver(target => target.classList.add("fade-in"));
+
+        this.setState({ isInitiallyFetchingData: true }, () => this.fetchProjects(queryObject))
     }
+
+    componentDidUpdate = () => console.info("updating");
 
     fetchProjects = async (queryObject) => {
         const { projects, isInitiallyFetchingData } = this.state;
 
-        const queryString = queryObject ? parser.parseObjectToQueryString(queryObject) : "";
-        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${queryString}`);
+        let queryStringWithoutPagination = "";
+
+        const fullQueryString = parser.parseObjectToQueryString(queryObject);
+
+        if ("page" in queryObject) {
+            delete queryObject.page;
+            queryStringWithoutPagination = parser.parseObjectToQueryString(queryObject);
+        }
+        else {
+            queryStringWithoutPagination = fullQueryString;
+        }
+
+        this.updateBrowserAddressBarUrl(`/projects${queryStringWithoutPagination}`);
+
+        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${fullQueryString}`);
 
         const newProjects = parser.parseDocumentsToProjects(data);
 
@@ -156,6 +186,12 @@ class Projects extends Component {
     observeFadingInElements = () => {
         const fadingInElements = document.querySelectorAll(".fade");
         fadingInElements.forEach(fadingInElement => this.fadingInElementsObserver.observe(fadingInElement));
+    }
+
+    updateBrowserAddressBarUrl = (path) => {
+        const { history } = this.props;
+
+        history.replace(path, null);
     }
 
     onChangeSearchFieldValue = ({ target: { value } }) => {
@@ -317,8 +353,8 @@ class Projects extends Component {
             searchFieldValue: "",
             isInitiallyFetchingData: true,
             totalAppliedFiltersCount: 0
-        }, () => this.fetchProjects())
+        }, () => this.fetchProjects({}))
     }
 }
 
-export default Projects;
+export default withRouter(Projects);

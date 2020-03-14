@@ -9,7 +9,7 @@ import styles from './Slideshow.module.scss';
 
 const Slideshow = ({ slides }) => {
     const slideFrozenTimeInSeconds = 5;
-    const slideTransitionTimeInSeconds = 1;
+    const slideTransitionTimeInSeconds = 0.5;
     const animationDuration = slides.length * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds);
     const oneSecondInPercent = 100 / animationDuration;
 
@@ -35,7 +35,7 @@ const Slideshow = ({ slides }) => {
             }
             {
                 slides.map((slide, slideIndex) => {
-                    const { title, subtitle, colorMode, customLinkTargetUrl, image } = slide;
+                    const { title, subtitle, colorMode, projectName, image } = slide;
                     const style = {
                         animationName: "fade-out",
                         animationDuration: animationDuration + "s",
@@ -47,7 +47,7 @@ const Slideshow = ({ slides }) => {
                                 title={title}
                                 subtitle={subtitle}
                                 colorMode={colorMode}
-                                customLinkTargetUrl={customLinkTargetUrl}
+                                projectName={projectName}
                                 image={image}
                             />
                         </div>
@@ -63,7 +63,7 @@ Slideshow.propTypes = {
         title: PropTypes.string,
         subtitle: PropTypes.string,
         colorMode: PropTypes.oneOf(["primaryAccent", "secondaryAccent", "invertedPrimaryAccent", "invertedSecondaryAccent"]),
-        customLinkTargetUrl: PropTypes.string,
+        projectName: PropTypes.string,
         image: PropTypes.exact({
             url: PropTypes.string,
             dataUrl: PropTypes.any

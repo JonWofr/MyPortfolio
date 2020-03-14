@@ -206,8 +206,8 @@ export const slidesOverviewFormElementsDefinitions = [{
         mode: "single"
     }
 }, {
-    name: "customLinkTargetUrl",
-    label: "CustomLinkTargetUrl",
+    name: "projectName",
+    label: "ProjectName",
     element: "input",
     elementAttributes: {
         type: "text",

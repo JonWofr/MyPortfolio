@@ -23,7 +23,7 @@ export const mockingData = {
             title: "Clubber:",
             subtitle: "Veranstaltungen in Stuttgart",
             colorMode: "dark",
-            customLinkTargetUrl: "clubber",
+            projectName: "clubber",
             image: {
                 url: slide1,
                 dataUrl: null
@@ -31,7 +31,7 @@ export const mockingData = {
         },
         {
             title: "Travisa:",
-            customLinkTargetUrl: "clubber",
+            projectName: "clubber",
             image: {
                 url: slide2,
                 dataUrl: null
@@ -41,7 +41,7 @@ export const mockingData = {
             title: "Reel",
             subtitle: "The better Netflix",
             colorMode: "dark",
-            customLinkTargetUrl: "reel",
+            projectName: "reel",
             image: {
                 url: slide3,
                 dataUrl: null
@@ -50,7 +50,7 @@ export const mockingData = {
         {
             title: "Wordsearch:",
             subtitle: "Coding challenge",
-            customLinkTargetUrl: "wordsearch",
+            projectName: "wordsearch",
             image: {
                 url: slide4,
                 dataUrl: null

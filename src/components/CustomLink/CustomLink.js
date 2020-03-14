@@ -13,7 +13,7 @@ const CustomLink = ({ children, size, to, colorScheme }) => (
 
 CustomLink.propTypes = {
     children: PropTypes.node.isRequired,
-    to: PropTypes.string.isRequired,
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
     
     size: PropTypes.oneOf(["small", "medium", "large", "fluid"]),
     colorScheme: PropTypes.string

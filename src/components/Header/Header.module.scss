@@ -27,30 +27,42 @@
 
       margin: 7.5px 0;
 
-      &:after {
+      &::before,
+      &::after {
         content: "";
 
-        width: 100vw;
-        height: calc(100vh - #{$default-header-height});
-
         visibility: hidden;
-
-        background-color: $darkest-background-color;
-
-        margin-top: $default-header-height;
 
         position: fixed;
         top: 0;
         left: 0;
+        right: 0;
 
         opacity: 0;
 
         transition: opacity 0.5s ease;
       }
 
+      &::before {
+        height: $default-header-height;
+
+        background-color: $primary-accent-color;
+      }
+
+      &::after {
+        height: calc(100vh - #{$default-header-height});
+
+        background-color: $darkest-background-color;
+
+        margin-top: $default-header-height;
+      }
+
       & > svg {
         width: 35px;
         height: 35px;
+
+        position: relative;
+        z-index: 1;
 
         & > path:last-child {
           fill: $lightest-background-color;
@@ -63,9 +75,14 @@
 
       &:checked {
         & + #mobileBurgerButton {
-          &:after {
+          &::before,
+          &::after {
             visibility: visible;
-
+          }
+          &::before {
+            opacity: 1;
+          }
+          &::after {
             opacity: 0.5;
           }
         }

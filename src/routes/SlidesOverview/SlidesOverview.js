@@ -22,7 +22,7 @@ const initialNewSlide = {
     title: "",
     subtitle: "",
     colorMode: "",
-    customLinkTargetUrl: "",
+    projectName: "",
     image: {
         url: undefined,
         dataUrl: undefined
@@ -47,7 +47,7 @@ class SlidesOverview extends Component {
                 title: "",
                 subtitle: "",
                 colorMode: "",
-                customLinkTargetUrl: "",
+                projectName: "",
                 image: {
                     url: undefined,
                     dataUrl: undefined

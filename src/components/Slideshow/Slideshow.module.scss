@@ -1,11 +1,14 @@
 .slideshow {
     height: 100%;
 
+    position: relative;
 
     & > .slideContainer {
-        height: 100%;
-
         position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
 
         animation-timing-function: linear;
         animation-iteration-count: infinite;

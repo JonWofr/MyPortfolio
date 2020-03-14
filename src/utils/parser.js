@@ -38,6 +38,26 @@ export const parseObjectToQueryString = (object) => {
     return queryString;
 }
 
+export const parseQueryStringToObject = (queryString) => {
+    const object = {};
+
+    const keyValuePairStrings = queryString.slice(1).split("&");
+    keyValuePairStrings.forEach(keyValuePairString => {
+        const keyValuePair = keyValuePairString.split("=");
+        const key = keyValuePair[0];
+        let value = keyValuePair[1];
+        try {
+            value = JSON.parse(value);
+        }
+        catch { }
+        finally {
+            object[key] = value;
+        }
+    })
+
+    return object;
+}
+
 export const parseDocumentsToProjects = (documents) => {
     const projects = {};
     documents.forEach(document => {
@@ -130,5 +150,59 @@ export const parseFiltersAndSearchFieldValueToMongoDbQueryObject = (filters, sea
     else mongoDbQueryObject = {
         $and: andConditions
     }
+    console.log(mongoDbQueryObject);
     return mongoDbQueryObject;
+}
+
+export const parseMongoDbQueryObjectToFiltersAndSearchFieldValue = (filters, mongoDbQueryObject) => {
+    let searchFieldValue = "";
+
+    const mongoDbQueryObjectKeys = Object.keys(mongoDbQueryObject);
+    mongoDbQueryObjectKeys.forEach(mongoDbQueryObjectKey => {
+        switch (mongoDbQueryObjectKey) {
+            case "$and":
+                mongoDbQueryObject[mongoDbQueryObjectKey].forEach(andObject => {
+                    const andObjectKey = Object.keys(andObject)[0];
+                    switch (andObjectKey) {
+                        case "$or":
+                            andObject[andObjectKey].forEach(orObject => {
+                                const filterName = Object.keys(orObject)[0];
+                                const listItemValue = orObject[filterName];
+                                const affectedFilter = filters.find(filter => filter.name === filterName);
+                                affectedFilter.checkedCheckboxesCount++;
+                                affectedFilter.listItems.find(listItem => listItem.value === listItemValue).isChecked = true;
+                            })
+                            break;
+                        case "projectName":
+                            searchFieldValue = andObject[andObjectKey]["$regex"];
+                            break;
+                        default:
+                            const listItemValue = andObject[andObjectKey];
+                            const affectedFilter = filters.find(filter => filter.name === andObjectKey);
+                            affectedFilter.checkedCheckboxesCount++;
+                            affectedFilter.listItems.find(listItem => listItem.value === listItemValue).isChecked = true;
+                    }
+                })
+                break;
+            case "$or":
+                mongoDbQueryObject[mongoDbQueryObjectKey].forEach(orObject => {
+                    const filterName = Object.keys(orObject)[0];
+                    const listItemValue = orObject[filterName];
+                    const affectedFilter = filters.find(filter => filter.name === filterName);
+                    affectedFilter.checkedCheckboxesCount++;
+                    affectedFilter.listItems.find(listItem => listItem.value === listItemValue).isChecked = true;
+                })
+                break;
+            case "projectName":
+                searchFieldValue = mongoDbQueryObject[mongoDbQueryObjectKey]["$regex"];
+                break;
+            default:
+                const listItemValue = mongoDbQueryObject[mongoDbQueryObjectKey];
+                const affectedFilter = filters.find(filter => filter.name === mongoDbQueryObjectKey);
+                affectedFilter.checkedCheckboxesCount++;
+                affectedFilter.listItems.find(listItem => listItem.value === listItemValue).isChecked = true;
+        }
+    })
+
+    return [filters, searchFieldValue];
 }
