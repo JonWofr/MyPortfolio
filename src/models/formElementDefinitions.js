@@ -78,7 +78,7 @@ export const projectsOverviewFormElementDefinitions = [{
         required: true,
         defaultValue: "html",
         mode: "multi"
-     }
+    }
 }, {
     name: "technologies",
     label: "Technologies",
@@ -130,7 +130,7 @@ export const projectsOverviewFormElementDefinitions = [{
         required: true,
         defaultValue: "react",
         mode: "multi"
-     }
+    }
 }, {
     name: "teamMembers",
     label: "Teammembers",
@@ -174,46 +174,48 @@ export const slidesOverviewFormElementsDefinitions = [{
         required: false
     }
 }, {
-    name: "heading",
-    label: "Heading",
+    name: "title",
+    label: "Title",
     element: "input",
     elementAttributes: {
         type: "text",
         required: true
     }
 }, {
-    name: "subHeading",
-    label: "Subheading",
+    name: "subtitle",
+    label: "Subtitle",
     element: "input",
     elementAttributes: {
         type: "text",
         required: false
     }
 }, {
-    name: "buttonColorScheme",
-    label: "ColorScheme",
+    name: "colorMode",
+    label: "ColorMode",
     element: "select",
     elementAttributes: {
         options: [{
-            value: "primaryAccent",
-            label: "Primary Accent"
+            value: "light",
+            label: "Light"
         }, {
-            value: "secondaryAccent",
-            label: "Secondary Accent"
-        }, {
-            value: "invertedPrimaryAccent",
-            label: "Inverted Primary Accent"
-        }, {
-            value: "invertedSecondaryAccent",
-            label: "Inverted Secondary Accent"
+            value: "dark",
+            label: "Dark"
         }],
         required: true,
         defaultValue: "primaryAccent",
         mode: "single"
-      } 
+    }
+}, {
+    name: "customLinkTargetUrl",
+    label: "CustomLinkTargetUrl",
+    element: "input",
+    elementAttributes: {
+        type: "text",
+        required: true
+    }
 }, {
     name: "image",
-    label: "Image Url",
+    label: "Image",
     element: "input",
     elementAttributes: {
         type: "file",

@@ -10,7 +10,7 @@ main.customSize {
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
 
     display: inline-block;
 
@@ -101,7 +101,7 @@ main.customSize {
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 2;
+    z-index: 3;
 
     transform: translateX(100%);
 
@@ -147,8 +147,17 @@ main.customSize {
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media only screen and (min-width: $md-breakpoint) {
-  main {
+  main.customSize {
     & > #mobileFilterButton {
       display: none;
     }
@@ -183,23 +192,14 @@ main.customSize {
   }
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @media only screen and (min-width: $lg-breakpoint) {
-  main > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
+  main.customSize > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
     width: $lg-breakpoint-main-width;
   }
 }
 
 @media only screen and (min-width: $xl-breakpoint) {
-  main > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
+  main.customSize > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
     width: $xl-breakpoint-main-width;
   }
 }

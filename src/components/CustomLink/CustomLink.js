@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 // Styles
 import styles from './CustomLink.module.scss';
 
-const CustomLink = ({ children, size, to, colorScheme, disabled }) => (
+const CustomLink = ({ children, size, to, colorScheme }) => (
         <Link className={`${styles.customLink} ${styles[size]} ${styles[colorScheme]}`} to={to}>
             {children}
         </Link>
@@ -13,16 +13,15 @@ const CustomLink = ({ children, size, to, colorScheme, disabled }) => (
 
 CustomLink.propTypes = {
     children: PropTypes.node.isRequired,
-    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    to: PropTypes.string.isRequired,
+    
     size: PropTypes.oneOf(["small", "medium", "large", "fluid"]),
-    colorScheme: PropTypes.string,
-    disabled: PropTypes.bool
+    colorScheme: PropTypes.string
 }
 
 CustomLink.defaultProps = {
     size: "fluid",
-    colorScheme: "primaryAccent",
-    disabled: false
+    colorScheme: "primaryAccent"
 }
 
 

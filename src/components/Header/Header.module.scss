@@ -7,9 +7,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 3;
 
-  background-color: $primary-accent-color;
+  &.solid {
+    background-color: $primary-accent-color;
+  }
+  &.transparent {
+    background-color: transparent;
+  }
 
   & > header {
     width: $default-main-width;

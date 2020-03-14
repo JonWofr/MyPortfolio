@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { cloneDeep } from 'lodash';
 
 // Components
-import Heading from '../../components/Heading';
 import Toast from '../../components/Toast';
 import Pagination from '../../components/Pagination';
 import TableRow from '../../components/TableRow';
@@ -20,9 +19,10 @@ import { slidesOverviewFormElementsDefinitions as formElementDefinitions } from 
 import styles from './SlidesOverview.module.scss';
 
 const initialNewSlide = {
-    heading: "",
-    subHeading: "",
-    buttonColorScheme: "",
+    title: "",
+    subtitle: "",
+    colorMode: "",
+    customLinkTargetUrl: "",
     image: {
         url: undefined,
         dataUrl: undefined
@@ -44,9 +44,10 @@ class SlidesOverview extends Component {
             toasts: [],
 
             newSlide: {
-                heading: "",
-                subHeading: "",
-                buttonColorScheme: "",
+                title: "",
+                subtitle: "",
+                colorMode: "",
+                customLinkTargetUrl: "",
                 image: {
                     url: undefined,
                     dataUrl: undefined
@@ -69,20 +70,20 @@ class SlidesOverview extends Component {
                     <div id={styles.slidesOverview}>
                         {toasts.length > 0 &&
                             toasts.map((toast, index) => {
-                                const { type, heading, description } = toast;
+                                const { type, title, description } = toast;
                                 return (
                                     <Toast
                                         key={index}
                                         type={type}
-                                        heading={heading}
+                                        title={title}
                                         description={description}
                                     />
                                 )
                             })
                         }
-                        <Heading type="primary">
+                        <title type="primary">
                             Slides-formular
-                        </Heading>
+                        </title>
                         <table>
                             {this.renderTableBody()}
                             {this.renderTableFoot()}

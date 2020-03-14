@@ -1,26 +1,42 @@
 @import '../../globalVariables';
 
-.slide {
+div.slide {
     height: 100%;
     width: 100%;
     position: relative;
 
     & > img {
+        min-width: 0;
+        min-height: 0;
         width: 100%;
         height: 100%;
+
         object-fit: cover;
     }
 
-    & > .content {
-        width: 100%;
-        height: 100%;
-
+    & > div.content {
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
 
         position: absolute;
-        top: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        & > * {
+            margin: .25rem 0;
+
+            &:first-child {
+                margin-top: 0;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        & > div.customLinkContainer {
+            margin-top: 1rem;
+        }
     }
 }

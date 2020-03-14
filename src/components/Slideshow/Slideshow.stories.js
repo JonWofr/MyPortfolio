@@ -12,7 +12,7 @@ storiesOf("Slideshow", module)
     .add("four items", () => {
         return (
             <Router>
-                <div style={{height: "100vh"}}>
+                <div style={{height: "100%"}}>
                     <Slideshow slides={mockingData} />
                 </div>
             </Router>

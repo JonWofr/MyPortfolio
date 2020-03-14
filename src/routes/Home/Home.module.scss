@@ -1,5 +1,10 @@
 main.customSize {
     width: initial;
+    height: 100%;
 
     margin: initial;
+
+    & > div.slideshowContainer {
+        height: 100%;
+    }
 }

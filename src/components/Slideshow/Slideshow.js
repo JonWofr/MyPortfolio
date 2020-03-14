@@ -8,28 +8,52 @@ import Slide from '../Slide';
 import styles from './Slideshow.module.scss';
 
 const Slideshow = ({ slides }) => {
-    let keyframe = `@keyframes sliding { `;
-    const duration = `${slides.length * 5}s`;
+    const slideFrozenTimeInSeconds = 5;
+    const slideTransitionTimeInSeconds = 1;
+    const animationDuration = slides.length * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds);
+    const oneSecondInPercent = 100 / animationDuration;
+
+    let keyframes;
+    if (slides.length >= 2) {
+        keyframes = `@keyframes fade-out {
+            0% { opacity: 1; z-index: 2; }
+            ${oneSecondInPercent * slideFrozenTimeInSeconds}% { opacity: 1; z-index: 2; }
+            ${oneSecondInPercent * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds)}% { opacity: 0; z-index: 2; }
+            ${oneSecondInPercent * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds)}.01% { opacity: 0; z-index: 0; }
+            ${100 - oneSecondInPercent * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds) - 0.01}% { opacity: 0; z-index: 0; }
+            ${100 - oneSecondInPercent * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds)}% { opacity: 1; z-index: 1; }
+            100% { opacity: 1; z-index: 1; }
+        }`;
+    }
+
     return (
-        <div id={styles.slideshow} style={{ animationDuration: duration }}>
-            {slides.length > 0 &&
-                slides.map((slide, index) => {
-                    keyframe += `${100 / (slides.length * 2 - 1) * index * 2}% {transform: translateX(${-100 * index}vw);} ${100 / (slides.length * 2 - 1) * (index * 2 + 1)}% {transform: translateX(${-100 * index}vw);} `;
+        <div className={styles.slideshow}>
+            {keyframes &&
+                <style>
+                    {keyframes}
+                </style>
+            }
+            {
+                slides.map((slide, slideIndex) => {
+                    const { title, subtitle, colorMode, customLinkTargetUrl, image } = slide;
+                    const style = {
+                        animationName: "fade-out",
+                        animationDuration: animationDuration + "s",
+                        animationDelay: (slides.length - 1 - slideIndex) * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds) + "s",
+                    }
                     return (
-                        <div key={index} className={styles.slideContainer}>
+                        <div key={slideIndex} className={styles.slideContainer} style={style}>
                             <Slide
-                                title={slide.title}
-                                subtitle={slide.subtitle}
-                                projectName={slide.projectName}
-                                image={slide.image}
+                                title={title}
+                                subtitle={subtitle}
+                                colorMode={colorMode}
+                                customLinkTargetUrl={customLinkTargetUrl}
+                                image={image}
                             />
                         </div>
                     )
                 })
             }
-            <style>
-                {`${keyframe}}`}
-            </style>
         </div>
     )
 }
@@ -38,8 +62,12 @@ Slideshow.propTypes = {
     slides: PropTypes.arrayOf(PropTypes.exact({
         title: PropTypes.string,
         subtitle: PropTypes.string,
-        projectName: PropTypes.string,
-        image: PropTypes.object
+        colorMode: PropTypes.oneOf(["primaryAccent", "secondaryAccent", "invertedPrimaryAccent", "invertedSecondaryAccent"]),
+        customLinkTargetUrl: PropTypes.string,
+        image: PropTypes.exact({
+            url: PropTypes.string,
+            dataUrl: PropTypes.any
+        })
     })).isRequired
 }
 

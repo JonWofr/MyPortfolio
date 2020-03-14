@@ -38,7 +38,7 @@ const Heading = ({ children, type, colorMode }) => {
 
 Heading.propTypes = {
     children: PropTypes.node.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(["primary", "secondary", "tertiary", "quatenary"]),
     colorMode: PropTypes.oneOf(["dark", "light"])
 }
 

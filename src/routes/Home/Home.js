@@ -5,6 +5,7 @@ import * as http from '../../utils/http';
 
 // Components
 import Header from '../../components/Header';
+import Slideshow from '../../components/Slideshow';
 
 // Styles
 import styles from './Home.module.scss';
@@ -29,14 +30,13 @@ class Home extends Component {
     }
 
     render() {
+        const { slides } = this.state;
         return (
             <Fragment>
-                <Header />
+                <Header colorMode="transparent" />
                 <main className={styles.customSize}>
-                    <div className={styles.slideshowWindow}>
-                        <div >
-
-                        </div>
+                    <div className={styles.slideshowContainer}>
+                        <Slideshow slides={slides} />
                     </div>
                 </main>
             </Fragment>

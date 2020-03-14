@@ -1,17 +1,20 @@
 @import '../../globalVariables';
 
 .customLink {
+    display: inline-block;
+
     border-radius: $default-button-border-radius;
 
     transition-timing-function: ease-in-out;
     transition-duration: .25s;
     transition-property: color, background-color;
 
+    box-sizing: border-box;
     padding: .5rem 0;
 
     font-size: 1rem;
     line-height: 1;
-    font-weight: 500;
+    font-family: Quicksand-Bold;
     letter-spacing: 1px;
     text-align: center;
 
@@ -42,7 +45,7 @@
     }
 
     &.secondaryAccent {
-        color: $dark-font-color;
+        color: $darkest-font-color;
 
         background-color: $secondary-accent-color;
 
@@ -69,7 +72,7 @@
         border: 1px solid $secondary-accent-color;
 
         &:hover {
-            color: $dark-font-color;
+            color: $darkest-font-color;
 
             background-color: $secondary-accent-color;
         }

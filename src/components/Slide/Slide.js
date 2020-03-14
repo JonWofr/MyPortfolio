@@ -3,38 +3,48 @@ import PropTypes from 'prop-types';
 
 // Components
 import CustomLink from '../CustomLink';
+import Heading from '../Heading';
 
 // Styles
 import styles from './Slide.module.scss';
 
-const Slide = ({ title, subtitle, projectName, image }) => (
-    <div className={styles.slide}>
-        <img src={image.url} alt="" />
-        {
-            //if a title exists a subtitle must exist aswell
-        }
+const Slide = ({ title, subtitle, colorMode, customLinkTargetUrl, image }) => (
+    <div className={`${styles.slide} ${styles[colorMode]}`}>
+        <img
+            src={image.url}
+            alt=""
+        />
         <div className={styles.content}>
-            <h2>
+            <Heading type="primary" colorMode={colorMode}>
                 {title}
-            </h2>
+            </Heading>
             {subtitle &&
-                <h3>
+                <Heading type="secondary" colorMode={colorMode}>
                     {subtitle}
-                </h3>
+                </Heading>
             }
-            <CustomLink to={{ pathname: "/projects", search: `?projectName = ${projectName}` }} size="small">
-                Mehr
-            </CustomLink>
+            <div className={styles.customLinkContainer}>
+                <CustomLink to={customLinkTargetUrl} colorScheme={colorMode === "light" ? "primaryAccent" : "secondaryAccent"} size="small">
+                    Mehr
+                </CustomLink>
+            </div>
         </div>
     </div>
 )
 
 Slide.propTypes = {
-    title: PropTypes.string.isRequired,
-    projectName: PropTypes.string.isRequired,
-    image: PropTypes.object.isRequired,
+    title: PropTypes.string,
+    subtitle: PropTypes.string,
+    colorMode: PropTypes.oneOf(["light", "dark"]),
+    customLinkTargetUrl: PropTypes.string,
+    image: PropTypes.exact({
+        url: PropTypes.string,
+        dataUrl: PropTypes.any
+    })
+}
 
-    subtitle: PropTypes.string
+Slide.defaultProps = {
+    colorMode: "light"
 }
 
 export default Slide;

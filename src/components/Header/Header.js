@@ -1,11 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 //Styling
 import styles from './Header.module.scss';
 
-const Header = () => (
-    <div className={styles.header}>
+const Header = ({ colorMode }) => (
+    <div className={`${styles.header} ${styles[colorMode]}`}>
         <header>
             <input id={styles.menuToggle} type="checkbox" />
             <label id={styles.mobileBurgerButton} htmlFor={styles.menuToggle}>
@@ -41,5 +42,13 @@ const Header = () => (
         </header>
     </div>
 )
+
+Header.propTypes = {
+    colorMode: PropTypes.oneOf(["solid", "transparent"])
+}
+
+Header.defaultProps = {
+    colorMode: "solid"
+}
 
 export default Header;
