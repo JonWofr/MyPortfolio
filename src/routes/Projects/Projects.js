@@ -12,7 +12,7 @@ import styles from './Projects.module.scss';
 
 // Components
 import Project from '../../components/Project';
-import Header from '../../components/Header';
+import CustomHeader from '../../components/CustomHeader';
 import FiltersBar from '../../components/FiltersBar';
 import Spinner from '../../components/Spinner';
 
@@ -48,7 +48,7 @@ class Projects extends Component {
 
         return (
             <Fragment>
-                <Header />
+                <CustomHeader />
                 <main className={styles.customSize}>
                     <input id={styles.menuToggle} type="checkbox" />
                     <label id={styles.mobileFilterButton} htmlFor={styles.menuToggle}>

@@ -7,7 +7,7 @@ import Toast from '../../components/Toast';
 import Pagination from '../../components/Pagination';
 import TableRow from '../../components/TableRow';
 import ParagraphsWindow from '../../components/ParagraphsWindow';
-import Header from '../../components/Header';
+import CustomHeader from '../../components/CustomHeader';
 
 // Utils
 import * as http from '../../utils/http';
@@ -92,7 +92,7 @@ class ProjectsOverview extends Component {
         const { toasts, page, lastPage, shouldShowParagraphs } = this.state;
         return (
             <Fragment>
-                <Header />
+                <CustomHeader />
                 <main>
                     <div id={styles.projectsOverview}>
                         {toasts.length > 0 &&

@@ -4,7 +4,7 @@ import React, { Component, Fragment } from 'react';
 import * as http from '../../utils/http';
 
 // Components
-import Header from '../../components/Header';
+import CustomHeader from '../../components/CustomHeader';
 import Slideshow from '../../components/Slideshow';
 
 // Styles
@@ -33,7 +33,7 @@ class Home extends Component {
         const { slides } = this.state;
         return (
             <Fragment>
-                <Header colorMode="transparent" />
+                <CustomHeader colorMode="transparent" />
                 <main className={styles.customSize}>
                     <div className={styles.slideshowContainer}>
                         <Slideshow slides={slides} />

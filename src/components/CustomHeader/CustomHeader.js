@@ -3,10 +3,13 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 //Styling
-import styles from './Header.module.scss';
+import styles from './CustomHeader.module.scss';
 
-const Header = ({ colorMode }) => (
-    <div className={`${styles.header} ${styles[colorMode]}`}>
+//Logo
+import logo from '../../assets/logos/logo_64x64.png'
+
+const CustomHeader = ({ colorMode }) => (
+    <div className={`${styles.customHeader} ${styles[colorMode]}`}>
         <header>
             <input id={styles.menuToggle} type="checkbox" />
             <label id={styles.mobileBurgerButton} htmlFor={styles.menuToggle}>
@@ -18,7 +21,10 @@ const Header = ({ colorMode }) => (
             <nav>
                 <div className={styles.homeLinkContainer}>
                     <NavLink exact to="/" activeClassName={styles.selected}>
-                        Startseite
+                        <img src={logo} alt="" />
+                        <div>
+                            Startseite
+                        </div>
                     </NavLink>
                 </div>
                 <ul>
@@ -43,12 +49,12 @@ const Header = ({ colorMode }) => (
     </div>
 )
 
-Header.propTypes = {
+CustomHeader.propTypes = {
     colorMode: PropTypes.oneOf(["solid", "transparent"])
 }
 
-Header.defaultProps = {
+CustomHeader.defaultProps = {
     colorMode: "solid"
 }
 
-export default Header;
+export default CustomHeader;

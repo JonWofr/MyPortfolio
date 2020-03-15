@@ -3,15 +3,15 @@ import { storiesOf } from '@storybook/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 // Components
-import Header from './Header';
+import CustomHeader from './CustomHeader';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "Header",
-    Component: Header,
+    componentName: "CustomHeader",
+    Component: CustomHeader,
     stories: [{
         default: true
     }]

@@ -15,16 +15,16 @@ const Slide = ({ title, subtitle, colorMode, projectName, image }) => (
             alt=""
         />
         <div className={styles.content}>
-            <Heading type="primary" colorMode={colorMode}>
+            <h1 className={`${styles.heading} ${styles.secondary}`}>
                 {title}
-            </Heading>
+            </h1>
             {subtitle &&
-                <Heading type="secondary" colorMode={colorMode}>
+                <h2 className={`${styles.heading} ${styles.secondary}`}>
                     {subtitle}
-                </Heading>
+                </h2>
             }
             <div className={styles.customLinkContainer}>
-                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} colorScheme={colorMode === "light" ? "primaryAccent" : "secondaryAccent"} size="small">
+                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} colorScheme={colorMode === "light" ? "invertedPrimaryAccent" : "invertedSecondaryAccent"} size="small">
                     Mehr
                 </CustomLink>
             </div>

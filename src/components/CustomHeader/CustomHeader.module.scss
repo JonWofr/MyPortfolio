@@ -1,6 +1,6 @@
 @import "../../globalVariables";
 
-.header {
+div.customHeader {
   width: 100%;
   height: $default-header-height;
 
@@ -17,21 +17,19 @@
   }
 
   & > header {
-    width: $default-main-width;
     height: 100%;
 
-    margin: 0 auto;
-
     & > #mobileBurgerButton {
+      height: 100%;
+
       display: inline-block;
 
-      margin: 7.5px 0;
+      box-sizing: border-box;
+      padding: 7.5px;
 
       &::before,
       &::after {
         content: "";
-
-        visibility: hidden;
 
         position: fixed;
         top: 0;
@@ -39,6 +37,8 @@
         right: 0;
 
         opacity: 0;
+
+        pointer-events: none;
 
         transition: opacity 0.5s ease;
       }
@@ -75,15 +75,13 @@
 
       &:checked {
         & + #mobileBurgerButton {
-          &::before,
-          &::after {
-            visibility: visible;
-          }
           &::before {
             opacity: 1;
           }
           &::after {
             opacity: 0.5;
+
+            pointer-events: initial;
           }
         }
 
@@ -121,13 +119,21 @@
           padding: 1rem 0.5rem;
 
           color: $darkest-font-color;
-          font-size: 1rem;
-          line-height: 1;
-          letter-spacing: 1px;
 
           transition-property: color, background-color;
           transition-duration: 0.25s;
           transition-timing-function: ease-in-out;
+          
+          & > img {
+            display: none;
+          }
+
+          & > div {
+            color: inherit;
+            font-size: 1rem;
+            line-height: 1;
+            font-family: Quicksand-Medium;
+          }
 
           &.selected {
             color: $darker-font-color;
@@ -158,7 +164,7 @@
             color: $darkest-font-color;
             font-size: 1rem;
             line-height: 1;
-            letter-spacing: 1px;
+            font-family: Quicksand-Medium;
 
             transition-property: color, background-color;
             transition-duration: 0.25s;
@@ -180,108 +186,106 @@
   }
 }
 
-@media only screen and (min-width: $sm-breakpoint) {
-  .header > header {
-    width: $sm-breakpoint-main-width;
-  }
-}
-
 @media only screen and (min-width: $md-breakpoint) {
-  .header > header {
-    width: $md-breakpoint-main-width;
-
-    & > #mobileBurgerButton {
-      display: none;
+  div.customHeader {
+    &.transparent > header > nav > ul > li > a:hover {
+      color: $darkest-font-color;
     }
 
-    & > nav {
-      width: initial;
-      height: 100%;
-
-      margin-top: initial;
-
-      position: initial;
-      top: initial;
-      left: initial;
-
-      transform: initial;
-
-      background-color: initial;
-
-      transition: initial;
-
-      flex-direction: row;
-      justify-content: space-between;
-
-      & > div.homeLinkContainer {
-        height: 100%;
-
-        border-bottom: none;
-
-        & > a {
-          height: 100%;
-
-          padding: 0;
-
-          line-height: $default-header-height;
-          color: $lightest-font-color;
-
-          &.selected {
-            color: $lightest-font-color;
-            background-color: initial;
-          }
-
-          &:hover {
-            color: $primary-accent-color;
-            background-color: $lightest-background-color;
-          }
-        }
+    & > header {
+      & > #mobileBurgerButton {
+        display: none;
       }
-
-      & > ul {
+  
+      & > nav {
+        width: initial;
         height: 100%;
-
-        flex-direction: initial;
-
-        & > li {
+  
+        margin-top: initial;
+  
+        position: initial;
+        top: initial;
+        left: initial;
+  
+        transform: initial;
+  
+        background-color: initial;
+  
+        transition: initial;
+  
+        flex-direction: row;
+        justify-content: space-between;
+  
+        & > div.homeLinkContainer {
           height: 100%;
-
+  
           border-bottom: none;
-
+  
           & > a {
             height: 100%;
-
-            padding: 0 1rem;
-
-            color: $lightest-font-color;
-
-            line-height: $default-header-height;
-            text-align: center;
-
+  
+            box-sizing: border-box;
+            padding: .25rem;
+  
+            color: initial;
+  
+            display: block;
+  
+            transition-property: initial;
+            transition-duration: initial;
+            transition-timing-function: initial;
+  
+            & > img {
+              height: 100%;
+              
+              display: initial;
+            }
+  
+            & > div {
+              display: none;
+            }
+  
+            &:hover,
             &.selected {
-              color: $lightest-font-color;
+              color: initial;
               background-color: initial;
             }
-
-            &:hover {
-              color: $primary-accent-color;
-              background-color: $lightest-background-color;
+          }
+        }
+  
+        & > ul {
+          height: 100%;
+  
+          flex-direction: initial;
+  
+          & > li {
+            height: 100%;
+  
+            border-bottom: none;
+  
+            & > a {
+              height: 100%;
+  
+              padding: 0 1rem;
+  
+              color: $lightest-font-color;
+  
+              line-height: $default-header-height;
+              text-align: center;
+  
+              &.selected {
+                color: $lightest-font-color;
+                background-color: initial;
+              }
+  
+              &:hover {
+                color: $primary-accent-color;
+                background-color: $lightest-background-color;
+              }
             }
           }
         }
       }
     }
-  }
-}
-
-@media only screen and (min-width: $lg-breakpoint) {
-  .header > header {
-    width: $lg-breakpoint-main-width;
-  }
-}
-
-@media only screen and (min-width: $xl-breakpoint) {
-  .header > header {
-    width: $xl-breakpoint-main-width;
   }
 }

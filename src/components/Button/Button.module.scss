@@ -1,77 +1,80 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
 .button {
-    border-radius: $default-button-border-radius;
+  border-radius: $default-button-border-radius;
 
-    transition-timing-function: ease-in-out;
-    transition-duration: .25s;
-    transition-property: color, background-color;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.25s;
+  transition-property: color, background-color;
 
-    padding: .5rem 0;
+  padding: 0.5rem 0;
 
-    font-size: 1rem;
-    line-height: 1;
-    font-family: Quicksand-Bold;
-    letter-spacing: 1px;
+  font-size: 1rem;
+  line-height: 1;
+  font-family: Quicksand-Bold;
 
-    &.small {
-        width: 100px;
+  &.small {
+    width: 100px;
+  }
+
+  &.medium {
+    width: 150px;
+  }
+
+  &.large {
+    width: 200px;
+  }
+
+  &.fluid {
+    width: 100%;
+  }
+
+  &.primaryAccent,
+  &.secondaryAccent {
+    box-shadow: $default-button-box-shadow;
+  }
+
+  &.primaryAccent {
+    color: $lightest-font-color;
+
+    background-color: $primary-accent-color;
+
+    &:hover {
+      background-color: $primary-accent-color-hover;
     }
+  }
 
-    &.medium {
-        width: 150px;
+  &.secondaryAccent {
+    color: $darkest-font-color;
+
+    background-color: $secondary-accent-color;
+
+    &:hover {
+      background-color: $secondary-accent-color-hover;
     }
+  }
 
-    &.large {
-        width: 200px;
+  &.invertedPrimaryAccent {
+    color: $primary-accent-color;
+
+    border: 1px solid $primary-accent-color;
+
+    &:hover {
+      color: $lightest-font-color;
+
+      background-color: $primary-accent-color;
     }
+  }
 
-    &.fluid {
-        width: 100%;
+  &.invertedSecondaryAccent {
+    color: $secondary-accent-color;
+
+    border: 1px solid $secondary-accent-color;
+
+    &:hover {
+      color: $darkest-font-color;
+
+      background-color: $secondary-accent-color;
     }
-
-    &.primaryAccent {
-        color: $lightest-font-color;
-
-        background-color: $primary-accent-color;
-
-        &:hover {
-            background-color: $primary-accent-color-hover;
-        }
-    }
-
-    &.secondaryAccent {
-        color: $darkest-font-color;
-
-        background-color: $secondary-accent-color;
-
-        &:hover {
-            background-color: $secondary-accent-color-hover;
-        }
-    }
-
-    &.invertedPrimaryAccent {
-        color: $primary-accent-color;
-
-        border: 1px solid $primary-accent-color;
-
-        &:hover {
-            color: $lightest-font-color;
-            
-            background-color: $primary-accent-color;
-        }
-    }
-
-    &.invertedSecondaryAccent {
-        color: $secondary-accent-color;
-
-        border: 1px solid $secondary-accent-color;
-
-        &:hover {
-            color: $darkest-font-color;
-
-            background-color: $secondary-accent-color;
-        }
-    }
+  }
 }
-

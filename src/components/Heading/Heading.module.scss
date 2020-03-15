@@ -1,8 +1,12 @@
 @import '../../globalVariables';
 
+h1.heading,
+h2.heading {
+    font-family: Quicksand-Bold;
+}
+
 h1.heading {
     font-size: 2rem;
-    font-family: Quicksand-Bold;
 }
 
 h2.heading {

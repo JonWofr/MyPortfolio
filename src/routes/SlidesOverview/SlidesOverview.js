@@ -5,7 +5,7 @@ import { cloneDeep } from 'lodash';
 import Toast from '../../components/Toast';
 import Pagination from '../../components/Pagination';
 import TableRow from '../../components/TableRow';
-import Header from '../../components/Header';
+import CustomHeader from '../../components/CustomHeader';
 
 // Utils
 import * as http from '../../utils/http';
@@ -65,7 +65,7 @@ class SlidesOverview extends Component {
         const { toasts, page, lastPage } = this.state;
         return (
             <Fragment>
-                <Header />
+                <CustomHeader />
                 <main>
                     <div id={styles.slidesOverview}>
                         {toasts.length > 0 &&

@@ -7,16 +7,16 @@
     border-radius: .9375rem;
 
     font-size: .875rem;
-    font-family: Quicksand-Bold;
+    font-family: Quicksand-SemiBold;
 
     &.light {
-        color: $lighter-font-color;
+        color: $lightest-font-color;
 
         background-color: $darker-background-color;
     }
 
     &.dark {
-        color: $darker-font-color;
+        color: $darkest-font-color;
 
         background-color: $lighter-background-color;
     }

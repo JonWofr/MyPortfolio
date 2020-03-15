@@ -15,7 +15,6 @@
     font-size: 1rem;
     line-height: 1;
     font-family: Quicksand-Bold;
-    letter-spacing: 1px;
     text-align: center;
 
     &.small {
@@ -32,6 +31,11 @@
 
     &.fluid {
         width: 100%;
+    }
+
+    &.primaryAccent,
+    &.secondaryAccent {
+        box-shadow: $default-button-box-shadow;
     }
 
     &.primaryAccent {

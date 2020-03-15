@@ -1,7 +1,7 @@
 @import "../../globalVariables";
 
 div.checkboxListDropdown {
-  overflow-y: hidden;
+  overflow-y: visible;
 
   display: flex;
   flex-direction: column;
@@ -78,6 +78,8 @@ div.checkboxListDropdown {
 
 @media only screen and (min-width: $md-breakpoint) {
   div.checkboxListDropdown {
+    position: relative;
+
     &.light > div.checkboxListContainer {
       border-right: 1px solid $light-background-color;
       border-bottom: 1px solid $light-background-color;
@@ -117,8 +119,10 @@ div.checkboxListDropdown {
     }
 
     & > div.checkboxListContainer {
-      position: relative;
-      transform: translateY(-100%);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
 
       transition: transform 0.25s ease-in-out;
 
@@ -129,7 +133,7 @@ div.checkboxListDropdown {
       &.expanded {
         visibility: visible;
 
-        transform: translateY(0);
+        transform: translateY(100%);
       }
     }
   }

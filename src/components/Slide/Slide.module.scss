@@ -4,6 +4,23 @@ div.slide {
     height: 100%;
     position: relative;
 
+    &.light > div.content {
+        & > h1.heading {
+            color: $darkest-font-color;
+        }
+        & > h2.heading {
+            color: $darker-font-color;
+        }
+    }
+    &.dark > div.content {
+        & > h1.heading {
+            color: $lightest-font-color;
+        }
+        & > h2.heading {
+            color: $lighter-font-color;
+        }
+    }
+
     & > img {
         min-width: 0;
         min-height: 0;
@@ -34,8 +51,25 @@ div.slide {
             }
         }
 
+        & > h1.heading,
+        & > h2.heading {
+            text-shadow: $default-text-shadow;
+            text-align: center;
+        }
+
+        & > h1.heading {
+            font-family: Quicksand-Bold;
+            font-size: 3rem;
+            line-height: 1.25;
+        }
+        & > h2.heading {
+            font-family: Quicksand-SemiBold;
+            font-size: 1.5rem;
+            line-height: 1.25;
+        }
+
         & > div.customLinkContainer {
-            margin-top: 1rem;
+            margin-top: 2rem;
         }
     }
 }
