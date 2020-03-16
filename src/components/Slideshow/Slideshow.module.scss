@@ -1,9 +1,24 @@
-.slideshow {
+div.slideshow {
     height: 100%;
 
     position: relative;
 
-    & > .slideContainer {
+    &.visible > div.slideContainer {
+        visibility: visible;
+    }
+
+    & > div.spinnerContainer {
+        width: 100px;
+        height: 100px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    & > div.slideContainer {
         position: absolute;
         top: 0;
         bottom: 0;
@@ -12,5 +27,7 @@
 
         animation-timing-function: linear;
         animation-iteration-count: infinite;
+
+        visibility: hidden;
     }
 }

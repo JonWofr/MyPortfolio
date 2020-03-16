@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import styles from './CustomHeader.module.scss';
 
 //Logo
-import logo from '../../assets/logos/logo_64x64.png'
+import logo from '../../assets/logos/logo_white_64x64.png'
 
 const CustomHeader = ({ colorMode }) => (
     <div className={`${styles.customHeader} ${styles[colorMode]}`}>
@@ -40,7 +40,7 @@ const CustomHeader = ({ colorMode }) => (
                     </li>
                     <li>
                         <NavLink exact to="/contact" activeClassName={styles.selected}>
-                            Kontakte
+                            Kontakt
                         </NavLink>
                     </li>
                 </ul>

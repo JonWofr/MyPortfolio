@@ -5,41 +5,48 @@ main.customSize {
 
   margin: initial;
   margin-top: $default-header-height;
+  padding: initial;
 
   & > #mobileFilterButton {
+    height: $default-header-height;
+
+    box-sizing: border-box;
+    padding: 7.5px;
+
     position: fixed;
     top: 0;
     right: 0;
     z-index: 3;
 
-    display: inline-block;
-
-    margin: 7.5px 7.5px 7.5px 0;
-
-    &:after {
+    &::after {
       content: "";
-
-      width: 100vw;
-      height: calc(100vh - #{$default-header-height});
-
-      visibility: hidden;
-
-      background-color: $darkest-background-color;
-
-      margin-top: $default-header-height;
 
       position: fixed;
       top: 0;
       left: 0;
+      right: 0;
 
       opacity: 0;
 
+      pointer-events: none;
+
       transition: opacity 0.5s ease;
+    }
+
+    &::after {
+      height: calc(100vh - #{$default-header-height});
+
+      background-color: $darkest-background-color;
+
+      margin-top: $default-header-height;
     }
 
     & > svg {
       width: 35px;
       height: 35px;
+
+      position: relative;
+      z-index: 1;
 
       & > path:last-child {
         fill: $lightest-background-color;
@@ -53,8 +60,9 @@ main.customSize {
       border-radius: 50%;
 
       position: absolute;
-      top: 0;
-      right: 0;
+      top: 5px;
+      right: 5px;
+      z-index: 1;
 
       background-color: red;
 
@@ -62,7 +70,7 @@ main.customSize {
 
       color: $lightest-font-color;
       line-height: 15px;
-      font-size: 0.85rem;
+      font-size: 12px;
       text-align: center;
 
       opacity: 0;
@@ -79,10 +87,10 @@ main.customSize {
 
     &:checked {
       & + #mobileFilterButton {
-        &:after {
-          visibility: visible;
-
+        &::after {
           opacity: 0.5;
+
+          pointer-events: initial;
         }
       }
 
@@ -141,6 +149,12 @@ main.customSize {
     background-color: $lightest-background-color;
   }
 
+  & > div.noResultsFoundHeadingContainer {
+    width: $default-main-width;
+
+    margin: 3rem auto 0 auto;
+  }
+
   & > .projectsContainer {
     display: flex;
     flex-direction: column;
@@ -156,11 +170,18 @@ main.customSize {
   }
 }
 
+@media only screen and (min-width: $sm-breakpoint) {
+  main.customSize > div.noResultsFoundHeadingContainer {
+    width: $sm-breakpoint-main-width;
+  }
+}
+
 @media only screen and (min-width: $md-breakpoint) {
   main.customSize {
     & > #mobileFilterButton {
       display: none;
     }
+
     & > div.filtersBarOuterContainer {
       width: initial;
       height: initial;
@@ -188,17 +209,33 @@ main.customSize {
         z-index: 1;
       }
     }
+
+    & > div.noResultsFoundHeadingContainer {
+      width: $md-breakpoint-main-width;
+    }
   }
 }
 
 @media only screen and (min-width: $lg-breakpoint) {
-  main.customSize > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
-    width: $lg-breakpoint-main-width;
+  main.customSize {
+    & > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
+      width: $lg-breakpoint-main-width;
+    }
+
+    & > div.noResultsFoundHeadingContainer {
+      width: $lg-breakpoint-main-width;
+    }
   }
 }
 
 @media only screen and (min-width: $xl-breakpoint) {
-  main.customSize > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
-    width: $xl-breakpoint-main-width;
+  main.customSize {
+    & > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
+      width: $xl-breakpoint-main-width;
+    }
+
+    & > div.noResultsFoundHeadingContainer {
+      width: $xl-breakpoint-main-width;
+    }
   }
 }

@@ -12,7 +12,9 @@ export const mockingData = {
     componentName: "Spinner",
     Component: Spinner,
     stories: [{
-        default: ""
+        colorMode: "light"
+    }, {
+        colorMode: "dark"
     }]
 }
 

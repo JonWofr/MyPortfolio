@@ -1,0 +1,20 @@
+@import '../../globalVariables';
+
+main {
+    & > div.headingContainer {
+        margin-bottom: 1.5rem;
+    }
+
+    & > div.content > ul > li {
+        margin: .5rem 0 ;
+
+        color: $lighter-font-color;
+        
+        &:first-child {
+            margin-top: 0;
+        }
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

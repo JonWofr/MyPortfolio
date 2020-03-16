@@ -15,6 +15,7 @@ import Project from '../../components/Project';
 import CustomHeader from '../../components/CustomHeader';
 import FiltersBar from '../../components/FiltersBar';
 import Spinner from '../../components/Spinner';
+import Heading from '../../components/Heading';
 
 // FormElementDefinitions
 import * as models from '../../models/formElementDefinitions';
@@ -77,24 +78,34 @@ class Projects extends Component {
                     </div>
                     {isInitiallyFetchingData &&
                         <div className={`${styles.spinnerContainer} ${styles.centered}`}>
-                            <Spinner />
+                            <Spinner colorMode="dark" />
                         </div>
                     }
-                    <div className={`${styles.projectsContainer} projectsOberserverItemsParent`}>
-                        {
-                            projectIds.map((projectId, projectIdIndex) => (
-                                <div key={projectId} className="projectsObserverItem">
-                                    <Project
-                                        data={projects[projectId]}
-                                        colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
-                                    />
-                                </div>
-                            ))
-                        }
-                    </div>
+
+                    {projectIds.length === 0 && !isInitiallyFetchingData &&
+                        <div className={styles.noResultsFoundHeadingContainer}>
+                            <Heading type="secondary">
+                                Für die ausgewählten Filter konnten keine Ergebnisse gefunden werden!
+                            </Heading>
+                        </div>
+                    }
+                    {projectIds.length > 0 &&
+                        <div className={styles.projectsContainer}>
+                            {
+                                projectIds.map((projectId, projectIdIndex) => (
+                                    <div key={projectId} className="projectsObserverItem">
+                                        <Project
+                                            data={projects[projectId]}
+                                            colorMode={projectIdIndex % 2 === 0 ? "dark" : "light"}
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    }
                     {isFurtherFetchingData &&
                         <div className={`${styles.spinnerContainer} ${styles.bottom}`}>
-                            <Spinner />
+                            <Spinner colorMode="dark" />
                         </div>
                     }
                 </main>

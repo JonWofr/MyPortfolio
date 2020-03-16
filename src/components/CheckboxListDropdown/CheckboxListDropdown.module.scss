@@ -123,8 +123,7 @@ div.checkboxListDropdown {
       bottom: 0;
       left: 0;
       right: 0;
-
-      transition: transform 0.25s ease-in-out;
+      transform: translateY(100%);
 
       visibility: hidden;
 
@@ -132,8 +131,6 @@ div.checkboxListDropdown {
 
       &.expanded {
         visibility: visible;
-
-        transform: translateY(100%);
       }
     }
   }

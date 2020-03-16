@@ -33,7 +33,7 @@ body {
 
   font-family: Quicksand-Regular, sans-serif;
 
-  background-color: $lightest-background-color;
+  background-color: $darkest-background-color;
 }
 
 #root {
@@ -46,13 +46,17 @@ body {
 main {
   width: $default-main-width;
 
-  margin: auto;
-
-  margin-top: $default-header-height;
+  margin: $default-header-height auto 0 auto;
+  padding-top: 3rem;
 }
 
 a {
   text-decoration: none;
+  color: $secondary-accent-color;
+
+  &:visited {
+    color: $secondary-accent-color-hover;
+  }
 }
 
 ul, ol {

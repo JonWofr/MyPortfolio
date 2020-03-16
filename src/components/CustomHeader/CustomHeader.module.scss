@@ -123,14 +123,14 @@ div.customHeader {
           transition-property: color, background-color;
           transition-duration: 0.25s;
           transition-timing-function: ease-in-out;
-          
+
           & > img {
             display: none;
           }
 
           & > div {
             color: inherit;
-            font-size: 1rem;
+            font-size: 1.125rem;
             line-height: 1;
             font-family: Quicksand-Medium;
           }
@@ -162,7 +162,7 @@ div.customHeader {
             padding: 1rem 0.5rem;
 
             color: $darkest-font-color;
-            font-size: 1rem;
+            font-size: 1.125rem;
             line-height: 1;
             font-family: Quicksand-Medium;
 
@@ -188,63 +188,75 @@ div.customHeader {
 
 @media only screen and (min-width: $md-breakpoint) {
   div.customHeader {
-    &.transparent > header > nav > ul > li > a:hover {
-      color: $darkest-font-color;
+    &.transparent > header > nav {
+      & > div.homeLinkContainer > a > img {
+        box-shadow: $default-button-box-shadow;
+      }
+      & > ul > li > a {
+        text-shadow: $default-text-shadow;
+
+        transition-property: color, background-color, text-shadow;
+
+        &:hover {
+          color: $darkest-font-color;
+          text-shadow: initial;
+        }
+      }
     }
 
     & > header {
       & > #mobileBurgerButton {
         display: none;
       }
-  
+
       & > nav {
         width: initial;
         height: 100%;
-  
+
         margin-top: initial;
-  
+
         position: initial;
         top: initial;
         left: initial;
-  
+
         transform: initial;
-  
+
         background-color: initial;
-  
+
         transition: initial;
-  
+
         flex-direction: row;
         justify-content: space-between;
-  
+
         & > div.homeLinkContainer {
           height: 100%;
-  
+
           border-bottom: none;
-  
+
           & > a {
             height: 100%;
-  
+
             box-sizing: border-box;
-            padding: .25rem;
-  
+            padding: 5px;
+
             color: initial;
-  
+
             display: block;
-  
+
             transition-property: initial;
             transition-duration: initial;
             transition-timing-function: initial;
-  
+
             & > img {
               height: 100%;
-              
+
               display: initial;
             }
-  
+
             & > div {
               display: none;
             }
-  
+
             &:hover,
             &.selected {
               color: initial;
@@ -252,32 +264,32 @@ div.customHeader {
             }
           }
         }
-  
+
         & > ul {
           height: 100%;
-  
+
           flex-direction: initial;
-  
+
           & > li {
             height: 100%;
-  
+
             border-bottom: none;
-  
+
             & > a {
               height: 100%;
-  
-              padding: 0 1rem;
-  
+
+              padding: 0 1.25rem;
+
               color: $lightest-font-color;
-  
+
               line-height: $default-header-height;
               text-align: center;
-  
+
               &.selected {
                 color: $lightest-font-color;
                 background-color: initial;
               }
-  
+
               &:hover {
                 color: $primary-accent-color;
                 background-color: $lightest-background-color;

@@ -6,6 +6,7 @@ import Toast from '../../components/Toast';
 import Pagination from '../../components/Pagination';
 import TableRow from '../../components/TableRow';
 import CustomHeader from '../../components/CustomHeader';
+import Heading from '../../components/Heading';
 
 // Utils
 import * as http from '../../utils/http';
@@ -77,13 +78,14 @@ class SlidesOverview extends Component {
                                         type={type}
                                         title={title}
                                         description={description}
+                                        colorMode="dark"
                                     />
                                 )
                             })
                         }
-                        <title type="primary">
+                        <Heading type="primary" colorMode="dark">
                             Slides-formular
-                        </title>
+                        </Heading>
                         <table>
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
@@ -93,6 +95,7 @@ class SlidesOverview extends Component {
                                 page={page}
                                 lastPage={lastPage}
                                 onClickPage={this.onClickPaginationPage}
+                                colorMode="dark"
                             />
                         </div>
                     </div>
@@ -177,6 +180,7 @@ class SlidesOverview extends Component {
                                 onClickEdit={() => this.onClickEdit(slideId)}
                                 onClickSave={() => this.onClickSave(slideId)}
                                 onClickShowParagraphs={() => console.info("No onClickHandler specified")}
+                                colorMode="dark"
                             />
                         )
                     })
@@ -270,6 +274,7 @@ class SlidesOverview extends Component {
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewSlide(propertyName, value)}
                     onClickSave={() => this.insertSlide()}
                     onClickShowParagraphs={() => console.info("No onClickHandler specified")}
+                    colorMode="dark"
                 />
             </tfoot>
         )

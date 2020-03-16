@@ -6,10 +6,10 @@ import React from 'react';
 import Slide from './Slide.js'
 
 //Assets
-import slide1 from '../../assets/slide1.jpg';
-import slide2 from '../../assets/slide2.jpg';
-import slide3 from '../../assets/slide3.jpg';
-import slide4 from '../../assets/slide4.jpg';
+import slide1 from '../../assets/images/slide1.jpg';
+import slide2 from '../../assets/images/slide2.jpg';
+import slide3 from '../../assets/images/slide3.jpg';
+import slide4 from '../../assets/images/slide4.jpg';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
@@ -27,7 +27,8 @@ export const mockingData = {
             image: {
                 url: slide1,
                 dataUrl: null
-            }
+            },
+            hasImageLoaded: true
         },
         {
             title: "Travisa:",
@@ -35,7 +36,8 @@ export const mockingData = {
             image: {
                 url: slide2,
                 dataUrl: null
-            }
+            },
+            hasImageLoaded: true
         },
         {
             title: "Reel",
@@ -45,7 +47,8 @@ export const mockingData = {
             image: {
                 url: slide3,
                 dataUrl: null
-            }
+            },
+            hasImageLoaded: true
         },
         {
             title: "Wordsearch:",
@@ -54,7 +57,8 @@ export const mockingData = {
             image: {
                 url: slide4,
                 dataUrl: null
-            }
+            },
+            hasImageLoaded: true
         }
     ]
 }

@@ -104,11 +104,12 @@ class ProjectsOverview extends Component {
                                         type={type}
                                         heading={heading}
                                         description={description}
+                                        colorMode="dark"
                                     />
                                 )
                             })
                         }
-                        <Heading type="primary">
+                        <Heading type="primary" colorMode="dark">
                             Projects-formular
                         </Heading>
                         <table>
@@ -120,6 +121,7 @@ class ProjectsOverview extends Component {
                                 page={page}
                                 lastPage={lastPage}
                                 onClickPage={this.onClickPaginationPage}
+                                colorMode="dark"
                             />
                         </div>
                         {shouldShowParagraphs && this.renderParagraphs()}
@@ -206,7 +208,8 @@ class ProjectsOverview extends Component {
                                 onClickEdit={() => this.onClickEdit(projectId)}
                                 onClickSave={() => this.onClickSave(projectId)}
                                 onClickShowParagraphs={() => this.toggleShowParagraphs(projectId)}
-                                 />
+                                colorMode="dark"
+                            />
                         )
                     })
                 }
@@ -298,6 +301,7 @@ class ProjectsOverview extends Component {
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewProject(propertyName, value)}
                     onClickSave={() => this.insertProject()}
                     onClickShowParagraphs={() => this.toggleShowParagraphs()}
+                    colorMode="dark"
                 />
             </tfoot>
         )
@@ -357,6 +361,7 @@ class ProjectsOverview extends Component {
                         onChangeValue={this.onChangeParagraphsWindowValue}
                         onClickAddNewParagraph={this.onClickParagraphsWindowAddNewParagraph}
                         onClickRemoveParagraph={this.onClickParagraphsWindowRemoveParagraph}
+                        colorMode="dark"
                     />
                 </div>
             </div>
@@ -403,7 +408,7 @@ class ProjectsOverview extends Component {
                 deepClonedProject.paragraphs[paragraphIndex].image[propertyName] = value;
                 break;
             default:
-                throw new Error (`PropertyName ${propertyName} is not known`);
+                throw new Error(`PropertyName ${propertyName} is not known`);
         }
 
         if (currentlyVisibleParagraphsProjectId) {

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 //Components
 import Slide from '../Slide';
+import Spinner from '../Spinner';
 
 //Styling
 import styles from './Slideshow.module.scss';
 
 const Slideshow = ({ slides }) => {
+    const [loadedImagesCounter, setLoadedImagesCounter] = useState(0);
+
     const slideFrozenTimeInSeconds = 5;
     const slideTransitionTimeInSeconds = 0.5;
     const animationDuration = slides.length * (slideFrozenTimeInSeconds + slideTransitionTimeInSeconds);
@@ -26,8 +29,15 @@ const Slideshow = ({ slides }) => {
         }`;
     }
 
+    console.log("slideshow rendering");
+
     return (
-        <div className={styles.slideshow}>
+        <div className={`${styles.slideshow} ${slides.length > 0 && loadedImagesCounter === slides.length ? styles.visible : ""}`}>
+            {slides.length > 0 && loadedImagesCounter !== slides.length &&
+                <div className={styles.spinnerContainer}>
+                    <Spinner colorMode="dark" />
+                </div>
+            }
             {keyframes &&
                 <style>
                     {keyframes}
@@ -45,10 +55,11 @@ const Slideshow = ({ slides }) => {
                         <div key={slideIndex} className={styles.slideContainer} style={style}>
                             <Slide
                                 title={title}
-                                subtitle={subtitle}
-                                colorMode={colorMode}
                                 projectName={projectName}
                                 image={image}
+                                onLoadImage={() => setLoadedImagesCounter(loadedImagesCounter => loadedImagesCounter + 1)}
+                                subtitle={subtitle}
+                                colorMode={colorMode}
                             />
                         </div>
                     )

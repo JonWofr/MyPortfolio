@@ -12,10 +12,16 @@
   display: flex;
   flex-wrap: wrap;
 
+  &.light > div {
+    animation-name: blink-light;
+  }
+  &.dark > div {
+    animation-name: blink-dark;
+  }
+
   & > div {
     flex-basis: calc(50% - 5px);
 
-    animation-name: blink;
     animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
     animation-fill-mode: both;
@@ -38,7 +44,19 @@
   }
 }
 
-@keyframes blink {
+@keyframes blink-light {  
+  0% {
+    background-color: $darkest-background-color;
+  }
+  50% {
+    background-color: $lightest-background-color;
+  }
+  100% {
+    background-color: $darkest-background-color;
+  }
+}
+
+@keyframes blink-dark {
   0% {
     background-color: $lightest-background-color;
   }

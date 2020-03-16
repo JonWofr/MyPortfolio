@@ -5,8 +5,8 @@ import { storiesOf } from '@storybook/react';
 import Paragraph from './Paragraph.js';
 
 //Media
-import clubberLanding from '../../assets/clubberLanding.png';
-import samsungClipart from '../../assets/samsungClipart.png';
+import clubberLanding from '../../assets/images/clubberLanding.png';
+import samsungClipart from '../../assets/images/samsungClipart.png';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';

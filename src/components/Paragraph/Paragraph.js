@@ -7,7 +7,7 @@ import styles from './Paragraph.module.scss';
 // Components
 import Heading from '../Heading';
 
-const Paragraph = ({ description, heading, image: { position, url, dataUrl }, colorMode }) => (
+const Paragraph = ({ description, heading, image: { position, url }, colorMode }) => (
     <section className={`${styles.paragraph} ${styles[colorMode]} ${styles[position]}`}>
         {url !== "" &&
             <img
@@ -44,13 +44,13 @@ Paragraph.propTypes = {
 }
 
 Paragraph.defaultProps = {
-    description: "",
     heading: "",
     image: {
         position: "",
         url: "",
         dataUrl: undefined
-    }
+    },
+    colorMode: "light"
 }
 
 export default Paragraph;
