@@ -7,7 +7,7 @@ import styles from './ParagraphsWindow.module.scss';
 // Components
 import CustomInput from '../CustomInput';
 import CustomSelect from '../Select';
-import CustomTextArea from '../TextArea';
+import CustomTextArea from '../CustomTextArea';
 import Heading from '../Heading';
 
 // Constants

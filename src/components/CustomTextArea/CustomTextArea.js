@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import styles from './TextArea.module.scss';
+import styles from './CustomTextArea.module.scss';
 
 const CustomTextArea = ({ form, disabled, size, onChange, value, required, id, placeholder, colorMode }) => (
         <div className={`${styles.customTextArea} ${styles[size]} ${styles[colorMode]}`}>

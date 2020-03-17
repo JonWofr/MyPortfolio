@@ -2,15 +2,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import TextArea from './TextArea';
+import CustomTextArea from './CustomTextArea';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "TextArea",
-    Component: TextArea,
+    componentName: "CustomTextArea",
+    Component: CustomTextArea,
     stories: [{
         value: "hallo",
         placeholder: "With content"
