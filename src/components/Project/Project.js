@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // Components
 import Heading from '../Heading';
 import Paragraph from '../Paragraph';
-import Button from '../Button';
 import BadgeList from '../BadgeList';
 import ShowMoreButton from '../ShowMoreButton';
 import GitRepoLink from '../GitRepoLink';

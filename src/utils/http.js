@@ -87,8 +87,8 @@ export const remove = (url, body, requestHeaderOptions) => {
 
 const addListeners = (request, resolve, reject) => {
     request.addEventListener("load", ({ target }) => {
-        const { status, statusText } = target;
-        console.info(status, statusText);
+/*         const { status, statusText } = target;
+        console.info(status, statusText); */
         resolve(target);
     });
     request.addEventListener("error", ({ target }) => {

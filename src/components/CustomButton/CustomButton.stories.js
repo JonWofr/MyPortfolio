@@ -2,15 +2,15 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Components
-import Button from './Button.js';
+import CustomButton from './CustomButton.js';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // MockingData
 export const mockingData = {
-    componentName: "Button",
-    Component: Button,
+    componentName: "CustomButton",
+    Component: CustomButton,
     stories: [{
         size: "small",
         type: "button",

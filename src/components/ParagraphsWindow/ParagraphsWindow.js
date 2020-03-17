@@ -5,21 +5,21 @@ import PropTypes from 'prop-types';
 import styles from './ParagraphsWindow.module.scss';
 
 // Components
-import Input from '../Input';
-import Select from '../Select';
-import TextArea from '../TextArea';
+import CustomInput from '../CustomInput';
+import CustomSelect from '../Select';
+import CustomTextArea from '../TextArea';
 import Heading from '../Heading';
 
 // Constants
 const imagePositionSelectValues = [{
     value: "left",
-    textNode: "left"
+    label: "left"
 }, {
     value: "center",
-    textNode: "center"
+    label: "center"
 }, {
     value: "right",
-    textNode: "right"
+    label: "right"
 }];
 
 const ParagraphsWindow = ({ isEditable, paragraphs, onChangeValue, onClickAddNewParagraph, onClickRemoveParagraph, colorMode }) => (
@@ -59,7 +59,7 @@ const ParagraphsWindow = ({ isEditable, paragraphs, onChangeValue, onClickAddNew
 
 const renderParagraphInputFields = (heading, description, onChangeValue, disabled, colorMode) => (
     <Fragment>
-        <Input
+        <CustomInput
             type="text"
             size="fluid"
             value={heading}
@@ -69,7 +69,7 @@ const renderParagraphInputFields = (heading, description, onChangeValue, disable
             colorMode={colorMode}
         />
         <div className={styles.textAreaContainer}>
-            <TextArea
+            <CustomTextArea
                 type="text"
                 size="fluid"
                 value={description}
@@ -84,7 +84,7 @@ const renderParagraphInputFields = (heading, description, onChangeValue, disable
 
 const renderImageInputFields = (image, onChangeValue, disabled, colorMode) => (
     <Fragment>
-        <Select
+        <CustomSelect
             id="paragraphImagePosition"
             options={imagePositionSelectValues}
             selectedValue={image.position}
@@ -95,7 +95,7 @@ const renderImageInputFields = (image, onChangeValue, disabled, colorMode) => (
             placeholder="Image-Position"
             colorMode={colorMode}
         />
-        <Input
+        <CustomInput
             type="text"
             size="fluid"
             value={image.url}
@@ -103,7 +103,7 @@ const renderImageInputFields = (image, onChangeValue, disabled, colorMode) => (
             placeholder={"Image-URL"}
             colorMode={colorMode}
         />
-        <Input
+        <CustomInput
             id="paragraphImageFilePicker"
             type="file"
             size="fluid"

@@ -1,6 +1,6 @@
 @import "../../globalVariables";
 
-.button {
+button.customButton {
   border-radius: $default-button-border-radius;
 
   transition-timing-function: ease-in-out;

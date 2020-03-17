@@ -33,8 +33,6 @@ export const parseObjectToQueryString = (object) => {
         }
     })
 
-    console.log("Parsed Object to querystring", object, queryString);
-
     return queryString;
 }
 
@@ -63,7 +61,6 @@ export const parseDocumentsToProjects = (documents) => {
     documents.forEach(document => {
         projects[document._id] = document;
     });
-    console.log("Parsed Projects into key-value objects", projects);
     return projects;
 }
 
@@ -150,7 +147,6 @@ export const parseFiltersAndSearchFieldValueToMongoDbQueryObject = (filters, sea
     else mongoDbQueryObject = {
         $and: andConditions
     }
-    console.log(mongoDbQueryObject);
     return mongoDbQueryObject;
 }
 

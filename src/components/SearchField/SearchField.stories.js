@@ -13,11 +13,11 @@ export const mockingData = {
     Component: SearchField,
     stories: [{
         value: "",
-        onChange: () => console.info("No onChangeHandler specified"),
+        onChangeValue: () => console.info("No onChangeHandler specified"),
         onClickResetButton: () => console.info("No onClickHandler specified")
     }, {
         value: "",
-        onChange: () => console.info("No onChangeHandler specified"),
+        onChangeValue: () => console.info("No onChangeHandler specified"),
         onClickResetButton: () => console.info("No onClickHandler specified"),
         colorScheme: "dark"
     }]

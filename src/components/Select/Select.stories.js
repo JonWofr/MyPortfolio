@@ -23,7 +23,7 @@ export const mockingData = {
             label: "Maus"
         }],
         selectedValue: ["hund"],
-        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        onChangeValue: (e) => console.info(`Selected ${e.target.value}`),
         mode: "multi"
     }, {
         options: [{
@@ -37,7 +37,7 @@ export const mockingData = {
             label: "Maus"
         }],
         selectedValue: ["hund"],
-        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        onChangeValue: (e) => console.info(`Selected ${e.target.value}`),
         mode: "multi",
         colorMode: "dark"
     }, {
@@ -52,7 +52,7 @@ export const mockingData = {
             label: "Maus"
         }],
         selectedValue: "fisch",
-        onChangeValue: (e) => console.log(`Selected ${e.target.value}`),
+        onChangeValue: (e) => console.info(`Selected ${e.target.value}`),
         mode: "single"
     }]
 }

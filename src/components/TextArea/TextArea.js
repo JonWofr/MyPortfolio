@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 // Styles
 import styles from './TextArea.module.scss';
 
-const TextArea = ({ form, disabled, size, onChange, value, required, id, placeholder, colorMode }) => (
-        <div className={`${styles.textArea} ${styles[size]} ${styles[colorMode]}`}>
+const CustomTextArea = ({ form, disabled, size, onChange, value, required, id, placeholder, colorMode }) => (
+        <div className={`${styles.customTextArea} ${styles[size]} ${styles[colorMode]}`}>
             <textarea
                 form={form}
                 disabled={disabled}
@@ -22,7 +22,7 @@ const TextArea = ({ form, disabled, size, onChange, value, required, id, placeho
         </div>
     )
 
-TextArea.propTypes = {
+CustomTextArea.propTypes = {
     value: PropTypes.string.isRequired,
 
     size: PropTypes.string,
@@ -35,14 +35,14 @@ TextArea.propTypes = {
     colorMode: PropTypes.oneOf(["light", "dark"])
 }
 
-TextArea.defaultProps = {
+CustomTextArea.defaultProps = {
     size: "medium",
     form: "",
     disabled: false,
-    onChange: () => { console.log("textarea's value with no specified onChangeHandler has been changed") },
+    onChange: () => {},
     required: false,
     id: "",
     colorMode: "light"
 }
 
-export default TextArea;
+export default CustomTextArea;

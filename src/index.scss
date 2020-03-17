@@ -36,7 +36,7 @@ body {
   background-color: $darkest-background-color;
 }
 
-#root {
+div#root {
   min-height: 100%;
 
   display: flex;
@@ -55,7 +55,7 @@ a {
   color: $secondary-accent-color;
 
   &:visited {
-    color: $secondary-accent-color-hover;
+    color: $secondary-accent-color;
   }
 }
 

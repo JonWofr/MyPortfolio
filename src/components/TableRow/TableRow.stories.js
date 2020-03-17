@@ -13,9 +13,9 @@ export const mockingData = {
     componentName: "TableRow",
     Component: TableRow,
     stories: [{
-        _id: "5de3eb515ffe02033cd4be8f",
+        tableRowId: "5de3eb515ffe02033cd4be8f",
         data: {
-            "_id": "5de3eb515ffe02033cd4be8f",
+            "tableRowId": "5de3eb515ffe02033cd4be8f",
             "projectName": "sdfsadf",
             "categories": ["web"],
             "languages": ["java"],
@@ -36,15 +36,15 @@ export const mockingData = {
         },
         formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: true,
-        onChangeColumnValue: () => {},
-        onClickDelete: () => {},
-        onClickEdit: () => {},
-        onClickSave: () => {},
-        onClickShowParagraphs: () => {}
+        onChangeColumnValue: () => { },
+        onClickDelete: () => { },
+        onClickEdit: () => { },
+        onClickSave: () => { },
+        onClickShowParagraphs: () => { }
     }, {
-        _id: "5de3eb515ffe02033cd4be8f",
+        tableRowId: "5de3eb515ffe02033cd4be8f",
         data: {
-            "_id": "5de3eb515ffe02033cd4be8f",
+            "tableRowId": "5de3eb515ffe02033cd4be8f",
             "projectName": "sdfsadf",
             "categories": ["web"],
             "languages": ["java"],
@@ -65,16 +65,16 @@ export const mockingData = {
         },
         formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: true,
-        onChangeColumnValue: () => {},
-        onClickDelete: () => {},
-        onClickEdit: () => {},
-        onClickSave: () => {},
-        onClickShowParagraphs: () => {},
+        onChangeColumnValue: () => { },
+        onClickDelete: () => { },
+        onClickEdit: () => { },
+        onClickSave: () => { },
+        onClickShowParagraphs: () => { },
         colorMode: "dark"
     }, {
-        _id: "5de3eb515ffe02033cd4be8f",
+        tableRowId: "5de3eb515ffe02033cd4be8f",
         data: {
-            "_id": "5de3eb515ffe02033cd4be8f",
+            "tableRowId": "5de3eb515ffe02033cd4be8f",
             "projectName": "sdfsadf",
             "categories": ["web"],
             "languages": ["java"],
@@ -95,12 +95,18 @@ export const mockingData = {
         },
         formElementDefinitions: projectsOverviewFormElementDefinitions,
         isEditable: false,
-        onChangeColumnValue: () => {},
-        onClickDelete: () => {},
-        onClickEdit: () => {},
-        onClickSave: () => {},
-        onClickShowParagraphs: () => {}
+        onChangeColumnValue: () => { },
+        onClickDelete: () => { },
+        onClickEdit: () => { },
+        onClickSave: () => { },
+        onClickShowParagraphs: () => { }
     }]
 }
 
-mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => <mockingData.Component {...story} />))
+mockingData.stories.forEach(story => storiesOf(mockingData.componentName, module).add(parseShallowPropsObjectToPropsString(story), () => (
+    <table>
+        <tbody>
+            <mockingData.Component {...story} />
+        </tbody>
+    </table>
+)))

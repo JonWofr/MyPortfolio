@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 // Presentational Components
-import Input from '../Input';
-import Select from '../Select';
+import CustomInput from '../CustomInput';
+import CustomSelect from '../Select';
 
 // Styles
 import styles from './TableRow.module.scss';
@@ -33,7 +33,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
 
                     return (
                         <td key={columnIndex}>
-                            <Input
+                            <CustomInput
                                 placeholder={label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
@@ -50,7 +50,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     const { options, defaultValue, mode } = elementAttributes;
                     return (
                         <td key={columnIndex}>
-                            <Select
+                            <CustomSelect
                                 placeholder={label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
@@ -66,7 +66,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                         </td>
                     )
                 default:
-                    console.log(`The element ${element} is not known and cannot be rendered`);
+                    console.warn(`The element ${element} is not known and cannot be rendered`);
                     return <Fragment />;
             }
         })}

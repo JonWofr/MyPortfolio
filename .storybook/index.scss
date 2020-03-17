@@ -36,6 +36,10 @@ body {
   background-color: $darkest-background-color;
 }
 
+div#root {
+  height: 100%;
+}
+
 a {
   text-decoration: none;
 }

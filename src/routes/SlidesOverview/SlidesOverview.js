@@ -57,10 +57,8 @@ class SlidesOverview extends Component {
         }
     }
 
-    componentDidMount = () => {
-        console.info("mounting");
-        this.fetchSlides();
-    }
+    componentDidMount = () => this.fetchSlides();
+
 
     render = () => {
         const { toasts, page, lastPage } = this.state;
@@ -90,14 +88,16 @@ class SlidesOverview extends Component {
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
                         </table>
-                        <div id={styles.paginationContainer}>
-                            <Pagination
-                                page={page}
-                                lastPage={lastPage}
-                                onClickPage={this.onClickPaginationPage}
-                                colorMode="dark"
-                            />
-                        </div>
+                        {page && lastPage &&
+                            <div id={styles.paginationContainer}>
+                                <Pagination
+                                    page={page}
+                                    lastPage={lastPage}
+                                    onClickPage={this.onClickPaginationPage}
+                                    colorMode="dark"
+                                />
+                            </div>
+                        }
                     </div>
                 </main>
             </Fragment>
@@ -179,7 +179,7 @@ class SlidesOverview extends Component {
                                 onClickDelete={() => this.onClickDelete(slideId)}
                                 onClickEdit={() => this.onClickEdit(slideId)}
                                 onClickSave={() => this.onClickSave(slideId)}
-                                onClickShowParagraphs={() => console.info("No onClickHandler specified")}
+                                onClickShowParagraphs={() => { }}
                                 colorMode="dark"
                             />
                         )
@@ -273,7 +273,9 @@ class SlidesOverview extends Component {
                     isEditable={true}
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewSlide(propertyName, value)}
                     onClickSave={() => this.insertSlide()}
-                    onClickShowParagraphs={() => console.info("No onClickHandler specified")}
+                    onClickShowParagraphs={() => { }}
+                    onClickDelete={() => {}}
+                    onClickEdit={() => {}}
                     colorMode="dark"
                 />
             </tfoot>
@@ -313,7 +315,7 @@ class SlidesOverview extends Component {
 
                 this.triggerHttpToast(status, statusText);
 
-                const deepClonedSlides = cloneDeep(slides); 
+                const deepClonedSlides = cloneDeep(slides);
                 deepClonedSlides[_id] = {
                     ...newSlide,
                     _id

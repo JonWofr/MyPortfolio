@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import styles from './Input.module.scss';
+import styles from './CustomInput.module.scss';
 
-const Input = (props) => {
+const CustomInput = (props) => {
     const { type, placeholder, size, colorMode } = props;
     // Input type hidden needs a special workaround to be displayed properly
     return (
-        <div className={`${styles.input} ${styles[size]} ${styles[colorMode]}`}>
+        <div className={`${styles.customInput} ${styles[size]} ${styles[colorMode]}`}>
             {getInputTagViaProps(props)}
             {type !== "hidden"  &&
                 <label>
@@ -48,21 +48,11 @@ const getInputTagViaProps = (props) => {
                 />
             )
         default:
-            return (
-                <input
-                    form={form}
-                    disabled={disabled}
-                    type={type}
-                    onChange={onChange}
-                    value={value}
-                    required={required}
-                    id={id}
-                />
-            )
+            console.warn(`Input type ${type} is not known`);
     }
 }
 
-Input.propTypes = {
+CustomInput.propTypes = {
     type: PropTypes.string.isRequired,
 
     size: PropTypes.string,
@@ -76,16 +66,16 @@ Input.propTypes = {
     colorMode: PropTypes.oneOf(["light", "dark"])
 }
 
-Input.defaultProps = {
+CustomInput.defaultProps = {
     size: "medium",
     value: "",
     form: undefined,
     disabled: false,
-    onChange: () => { console.log("input's value with no specified onChangeHandler has been changed") },
+    onChange: () => {},
     placeholder: "",
     required: false,
     id: undefined,
     colorMode: "light"
 }
 
-export default Input;
+export default CustomInput;

@@ -2,10 +2,10 @@ import { storiesOf } from '@storybook/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import React from 'react';
 
-//Components
+// Components
 import Slide from './Slide.js'
 
-//Assets
+// Images
 import slide1 from '../../assets/images/slide1.jpg';
 import slide2 from '../../assets/images/slide2.jpg';
 import slide3 from '../../assets/images/slide3.jpg';
@@ -28,7 +28,7 @@ export const mockingData = {
                 url: slide1,
                 dataUrl: null
             },
-            hasImageLoaded: true
+            onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
         {
             title: "Travisa:",
@@ -37,7 +37,7 @@ export const mockingData = {
                 url: slide2,
                 dataUrl: null
             },
-            hasImageLoaded: true
+            onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
         {
             title: "Reel",
@@ -48,7 +48,7 @@ export const mockingData = {
                 url: slide3,
                 dataUrl: null
             },
-            hasImageLoaded: true
+            onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
         {
             title: "Wordsearch:",
@@ -58,7 +58,7 @@ export const mockingData = {
                 url: slide4,
                 dataUrl: null
             },
-            hasImageLoaded: true
+            onLoadImage: () => console.info("no onLoadImageHandler specified")
         }
     ]
 }

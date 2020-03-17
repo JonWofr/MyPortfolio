@@ -1,6 +1,6 @@
 @import "../../globalVariables";
 
-.input {
+div.customInput {
   height: 2.875rem;
 
   position: relative;
@@ -28,7 +28,7 @@
           color: $darker-font-color;
       }
 
-      & > label > .labelContent {
+      & > label > span.labelContent {
         color: $darkest-font-color;
       }
   }
@@ -38,27 +38,24 @@
           color: $lighter-font-color;
       }
 
-      & > label > .labelContent {
+      & > label > span.labelContent {
         color: $lightest-font-color;
       }
   }
 
-  input:focus + label > .labelContent,
-  input:valid:not([value=""]) + label > .labelContent,
-  input:disabled:not([value=""]) + label > .labelContent {
+  & > input:focus + label > span.labelContent,
+  & > input:valid:not([value=""]) + label > span.labelContent,
+  & > input:disabled:not([value=""]) + label > span.labelContent {
     transform: translateY(-2rem);
 
     font-size: 0.875rem;
     line-height: 0.875rem;
   }
 
-  input:focus + label::after,
-  input:valid:not([value=""]) + label::after,
-  input:disabled:not([value=""]) {
+  & > input:focus + label::after,
+  & > input:valid:not([value=""]) + label::after,
+  & > input:disabled:not([value=""]) {
     transform: translateX(0%);
-  }
-
-  input:disabled {
   }
 
   & > input {
@@ -111,7 +108,7 @@
       transition: transform 0.3s ease;
     }
 
-    & > .labelContent {
+    & > span.labelContent {
       position: absolute;
       bottom: 0;
       left: 0;

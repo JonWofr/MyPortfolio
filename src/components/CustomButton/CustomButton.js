@@ -2,22 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import styles from './Button.module.scss';
+import styles from './CustomButton.module.scss';
 
 
-const Button = ({ form, disabled, type, size, onClickButton, children, colorScheme }) => (
+const CustomButton = ({ form, disabled, type, size, onClickButton, children, colorScheme }) => (
     <button
         form={form}
         disabled={disabled}
         type={type}
-        className={`${styles.button} ${styles[size]} ${styles[colorScheme]}`}
+        className={`${styles.customButton} ${styles[size]} ${styles[colorScheme]}`}
         onClick={onClickButton}
     >
         {children}
     </button>
 )
 
-Button.propTypes = {
+CustomButton.propTypes = {
     type: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     size: PropTypes.oneOf(["small", "medium", "large", "fluid"]),
@@ -27,12 +27,12 @@ Button.propTypes = {
     colorScheme: PropTypes.string
 }
 
-Button.defaultProps = {
+CustomButton.defaultProps = {
     size: "fluid",
     form: "",
     disabled: false,
-    onClickButton: () => console.log("button with no specified onClickHandler has been clicked"),
+    onClickButton: () => {},
     colorScheme: "primaryAccent"
 }
 
-export default Button;
+export default CustomButton;

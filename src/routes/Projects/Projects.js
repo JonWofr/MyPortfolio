@@ -32,7 +32,8 @@ class Projects extends Component {
             searchFieldValue: "",
             isInitiallyFetchingData: true,
             isFurtherFetchingData: false,
-            totalAppliedFiltersCount: 0
+            totalAppliedFiltersCount: 0,
+            totalDocumentsMatchingFiltersCount: 0
         }
 
         this.debouncerTimeoutId = undefined;
@@ -42,8 +43,7 @@ class Projects extends Component {
     }
 
     render() {
-        console.info("rendering");
-        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalAppliedFiltersCount } = this.state;
+        const { projects, filters, searchFieldValue, isInitiallyFetchingData, isFurtherFetchingData, totalAppliedFiltersCount, totalDocumentsMatchingFiltersCount } = this.state;
 
         const projectIds = Object.keys(projects);
 
@@ -81,11 +81,15 @@ class Projects extends Component {
                             <Spinner colorMode="dark" />
                         </div>
                     }
-
+                    <div className={styles.totalDocumentsMatchingFiltersCountOuterContainer}>
+                        <div className={styles.totalDocumentsMatchingFiltersCountInnerContainer}>
+                            {totalDocumentsMatchingFiltersCount} Projekt{totalDocumentsMatchingFiltersCount !== 1 ? "e" : ""} insgesamt
+                        </div>
+                    </div>
                     {projectIds.length === 0 && !isInitiallyFetchingData &&
                         <div className={styles.noResultsFoundHeadingContainer}>
-                            <Heading type="secondary">
-                                Für die ausgewählten Filter konnten keine Ergebnisse gefunden werden!
+                            <Heading type="secondary" colorMode="dark">
+                                Für die ausgewählten Filter konnten keine Projekte gefunden werden!
                             </Heading>
                         </div>
                     }
@@ -114,7 +118,6 @@ class Projects extends Component {
     }
 
     componentDidMount = () => {
-        console.info("mounting");
         const { filters } = this.state;
         const { location } = this.props;
 
@@ -148,8 +151,6 @@ class Projects extends Component {
         this.setState({ isInitiallyFetchingData: true }, () => this.fetchProjects(queryObject))
     }
 
-    componentDidUpdate = () => console.info("updating");
-
     fetchProjects = async (queryObject) => {
         const { projects, isInitiallyFetchingData } = this.state;
 
@@ -167,13 +168,14 @@ class Projects extends Component {
 
         this.updateBrowserAddressBarUrl(`/projects${queryStringWithoutPagination}`);
 
-        const { response: { data, appendix: { page, lastPage } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${fullQueryString}`);
+        const { response: { data, appendix: { page, lastPage, documentsCount: totalDocumentsMatchingFiltersCount } } } = await http.get(`${process.env.REACT_APP_BACKEND_URL}/projects${fullQueryString}`);
 
         const newProjects = parser.parseDocumentsToProjects(data);
 
         this.setState({
             page,
             lastPage,
+            totalDocumentsMatchingFiltersCount,
             projects: isInitiallyFetchingData ? newProjects : {
                 ...projects,
                 ...newProjects

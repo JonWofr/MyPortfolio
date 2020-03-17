@@ -1,6 +1,6 @@
 @import "../../globalVariables";
 
-.select {
+div.customSelect {
   position: relative;
 
   overflow: hidden;
@@ -27,9 +27,14 @@
   &.light {
       & > select {
           color: $darker-font-color;
+          
+          & > option {
+            background-color: $light-background-color;
+            color: $darker-font-color;
+          }
       }
 
-      & > label > .labelContent {
+      & > label > span.labelContent {
           color: $darkest-font-color;
       }
 
@@ -50,9 +55,14 @@
   &.dark {
       & > select {
           color: $lighter-font-color;
+
+          & > option {
+            background-color: $dark-background-color;
+            color: $lighter-font-color;
+          }
       }
 
-      & > label > .labelContent {
+      & > label > span.labelContent {
           color: $lightest-font-color;
       }
 
@@ -90,9 +100,9 @@
 
     cursor: pointer;
 
-    &:focus + label > .labelContent,
-    &:valid:not([value=""]) + label > .labelContent,
-    &:disabled:not([value=""]) + label > .labelContent {
+    &:focus + label > span.labelContent,
+    &:valid:not([value=""]) + label > span.labelContent,
+    &:disabled:not([value=""]) + label > span.labelContent {
       transform: translateY(-2rem);
 
       font-size: 0.875rem;
@@ -103,9 +113,6 @@
     &:valid:not([value=""]) + label::after,
     &:disabled:not([value=""]) + label::after {
       transform: translateX(0%);
-    }
-
-    &:disabled {
     }
   }
 
@@ -142,7 +149,7 @@
         transition: transform 0.3s ease;
       }
 
-    & > .labelContent {
+    & > span.labelContent {
       position: absolute;
       bottom: 0;
       left: 0;
@@ -165,14 +172,6 @@
       align-items: center;
 
       color: $lighter-font-color;
-
-      & > span {
-        &.enabled {
-        }
-
-        &.disabled {
-        }
-      }
     }
   }
 }

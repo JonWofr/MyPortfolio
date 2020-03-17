@@ -22,7 +22,7 @@ Checkbox.propTypes = {
 };
 
 Checkbox.defaultProps = {
-    onChange: (e) => console.info("No onChangeHandler specified fot component Checkbox"),
+    onChange: () => {},
     colorScheme: "primaryAccent"
 }
 

@@ -1,3 +1,3 @@
-import TextArea from './TextArea';
+import CustomTextArea from './TextArea';
 
-export default TextArea;
+export default CustomTextArea;

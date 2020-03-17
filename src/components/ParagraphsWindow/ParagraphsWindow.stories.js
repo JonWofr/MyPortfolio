@@ -15,15 +15,15 @@ export const mockingData = {
     Component: ParagraphsWindow,
     stories: [{
         paragraphs: paragraphStoriesMockingData.stories,
-        onChangeValue: () => console.log("Changed value"),
-        onClickAddNewParagraph: () => console.log("Adding new paragraph"),
-        onClickRemoveParagraph: () => console.log("Removing old paragraph"),
+        onChangeValue: () => console.info("Changed value"),
+        onClickAddNewParagraph: () => console.info("Adding new paragraph"),
+        onClickRemoveParagraph: () => console.info("Removing old paragraph"),
         isEditable: true
     }, {
         paragraphs: paragraphStoriesMockingData.stories,
-        onChangeValue: () => console.log("Changed value"),
-        onClickAddNewParagraph: () => console.log("Adding new paragraph"),
-        onClickRemoveParagraph: () => console.log("Removing old paragraph"),
+        onChangeValue: () => console.info("Changed value"),
+        onClickAddNewParagraph: () => console.info("Adding new paragraph"),
+        onClickRemoveParagraph: () => console.info("Removing old paragraph"),
         isEditable: true,
         colorMode: "dark"
     }]

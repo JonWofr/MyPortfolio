@@ -4,19 +4,20 @@ import PropTypes from 'prop-types';
 // Styles
 import styles from './Select.module.scss';
 
-const Select = ({ form, disabled, required, selectedValue, options, mode, size, onChangeValue, id, placeholder, colorMode }) => {
+const CustomSelect = ({ form, disabled, required, selectedValue, options, mode, size, onChangeValue, id, placeholder, colorMode }) => {
     switch (mode) {
         case "single":
             return (
-                <div className={`${styles.select} ${styles[size]} ${styles[colorMode]}`}>
+                <div className={`${styles.customSelect} ${styles[size]} ${styles[colorMode]}`}>
                     <select
                         form={form}
                         disabled={disabled}
                         required={required}
                         value={selectedValue}
-                        onChange={(e) => onChangeValue(e.target.value)} id={id}
+                        onChange={(e) => onChangeValue(e.target.value)}
+                        id={id}
                     >
-                        <option selected value=""></option>
+                        <option value=""></option>
                         {options.map((option, optionIndex) => {
                             const { value, label } = option;
                             return <option key={optionIndex} value={value}>{label}</option>
@@ -31,7 +32,7 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
             )
         case "multi":
             return (
-                <div className={`${styles.select} ${styles[size]} ${styles[colorMode]}`}>
+                <div className={`${styles.customSelect} ${styles[size]} ${styles[colorMode]}`}>
                     <select
                         form={form}
                         disabled={disabled}
@@ -43,7 +44,11 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                         <option value=""></option>
                         {options.map((option, optionIndex) => {
                             const { value, label } = option;
-                            return <option key={optionIndex} value={value}>{label}</option>
+                            return (
+                                <option key={optionIndex} value={value}>
+                                    {label}
+                                </option>
+                            )
                         })}
                     </select>
                     <label>
@@ -78,7 +83,7 @@ const Select = ({ form, disabled, required, selectedValue, options, mode, size, 
                 </div>
             )
         default:
-            console.log(`The mode of the select ${mode} is not known`);
+            console.warn(`The mode of the select ${mode} is not known`);
     }
 }
 
@@ -90,12 +95,11 @@ const onClickDeleteListItem = (selectedValue, index, onChangeValueCb) => {
 const onChangeValueInterceptor = (selectedValue, currentValue, onChangeValueCb) => {
     if (currentValue !== "") {
         const newValue = [...selectedValue, currentValue];
-        console.log("Created new value from selection", newValue)
         onChangeValueCb(newValue);
     }
 }
 
-Select.propTypes = {
+CustomSelect.propTypes = {
     options: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedValue: PropTypes.any.isRequired,
 
@@ -111,8 +115,8 @@ Select.propTypes = {
     colorMode: PropTypes.oneOf(["light", "dark"])
 }
 
-Select.defaultProps = {
-    onChangeValue: () => { console.log("selects's value with no specified onChangeHandler has been changed") },
+CustomSelect.defaultProps = {
+    onChangeValue: () => { },
     form: undefined,
     disabled: false,
     required: true,
@@ -124,4 +128,4 @@ Select.defaultProps = {
     colorMode: "light"
 }
 
-export default Select;
+export default CustomSelect;

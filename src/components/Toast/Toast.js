@@ -19,8 +19,8 @@ const Toast = ({ heading, description, type, colorMode }) => (
 )
 
 Toast.propTypes = {
-    heading: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    heading: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     type: PropTypes.oneOf(["success", "info", "warn", "error"]).isRequired,
     colorMode: PropTypes.oneOf(["light", "dark"])
 }

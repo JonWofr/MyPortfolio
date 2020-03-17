@@ -5,12 +5,12 @@ import { storiesOf } from '@storybook/react';
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // Components 
-import Input from './Input.js';
+import CustomInput from './CustomInput.js';
 
 // Mocking data
 const mockingData = {
-    componentName: "Input",
-    Component: Input,
+    componentName: "CustomInput",
+    Component: CustomInput,
     stories: [{
         type: "text",
         placeholder: "testing-placeholder",

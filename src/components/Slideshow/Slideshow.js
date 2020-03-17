@@ -29,8 +29,6 @@ const Slideshow = ({ slides }) => {
         }`;
     }
 
-    console.log("slideshow rendering");
-
     return (
         <div className={`${styles.slideshow} ${slides.length > 0 && loadedImagesCounter === slides.length ? styles.visible : ""}`}>
             {slides.length > 0 && loadedImagesCounter !== slides.length &&
@@ -71,9 +69,10 @@ const Slideshow = ({ slides }) => {
 
 Slideshow.propTypes = {
     slides: PropTypes.arrayOf(PropTypes.exact({
+        _id: PropTypes.string,
         title: PropTypes.string,
         subtitle: PropTypes.string,
-        colorMode: PropTypes.oneOf(["primaryAccent", "secondaryAccent", "invertedPrimaryAccent", "invertedSecondaryAccent"]),
+        colorMode: PropTypes.oneOf(["light", "dark"]),
         projectName: PropTypes.string,
         image: PropTypes.exact({
             url: PropTypes.string,

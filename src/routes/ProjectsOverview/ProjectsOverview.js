@@ -83,10 +83,7 @@ class ProjectsOverview extends Component {
         }
     }
 
-    componentDidMount = () => {
-        console.info("mounting");
-        this.fetchProjects();
-    }
+    componentDidMount = () => this.fetchProjects();
 
     render = () => {
         const { toasts, page, lastPage, shouldShowParagraphs } = this.state;
@@ -116,14 +113,16 @@ class ProjectsOverview extends Component {
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
                         </table>
-                        <div id={styles.paginationContainer}>
-                            <Pagination
-                                page={page}
-                                lastPage={lastPage}
-                                onClickPage={this.onClickPaginationPage}
-                                colorMode="dark"
-                            />
-                        </div>
+                        {page && lastPage &&
+                            <div id={styles.paginationContainer}>
+                                <Pagination
+                                    page={page}
+                                    lastPage={lastPage}
+                                    onClickPage={this.onClickPaginationPage}
+                                    colorMode="dark"
+                                />
+                            </div>
+                        }
                         {shouldShowParagraphs && this.renderParagraphs()}
                     </div>
                 </main>
@@ -301,6 +300,8 @@ class ProjectsOverview extends Component {
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewProject(propertyName, value)}
                     onClickSave={() => this.insertProject()}
                     onClickShowParagraphs={() => this.toggleShowParagraphs()}
+                    onClickDelete={() => {}}
+                    onClickEdit={() => {}}
                     colorMode="dark"
                 />
             </tfoot>

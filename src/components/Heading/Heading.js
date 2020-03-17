@@ -31,7 +31,7 @@ const Heading = ({ children, type, colorMode }) => {
                 </h4>
             )
         default:
-            console.log("Invalid prop 'type' for component Heading")
+            console.warn("Invalid prop 'type' for component Heading")
             break;
     }
 }

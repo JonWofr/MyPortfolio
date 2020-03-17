@@ -138,6 +138,21 @@ main.customSize {
     z-index: 1;
   }
 
+  & > div.totalDocumentsMatchingFiltersCountOuterContainer {
+    background-color: $dark-background-color;
+
+    & > div.totalDocumentsMatchingFiltersCountInnerContainer {
+      width: $default-main-width;
+
+      padding: .75rem 0;
+      margin: 0 auto;
+
+      color: $lightest-font-color;
+      font-size: 1rem;
+      line-height: 1;
+    }
+  }
+
   & > .spinnerContainer.bottom {
     width: 50px;
     height: 50px;
@@ -153,7 +168,7 @@ main.customSize {
     width: $default-main-width;
 
     margin: 3rem auto 0 auto;
-  }
+    }
 
   & > .projectsContainer {
     display: flex;
@@ -171,8 +186,14 @@ main.customSize {
 }
 
 @media only screen and (min-width: $sm-breakpoint) {
-  main.customSize > div.noResultsFoundHeadingContainer {
-    width: $sm-breakpoint-main-width;
+  main.customSize {
+    & > div.totalDocumentsMatchingFiltersCountOuterContainer > div.totalDocumentsMatchingFiltersCountInnerContainer {
+      width: $sm-breakpoint-main-width;
+    }
+
+    & > div.noResultsFoundHeadingContainer {
+      width: $sm-breakpoint-main-width;
+    }
   }
 }
 
@@ -210,6 +231,10 @@ main.customSize {
       }
     }
 
+    & > div.totalDocumentsMatchingFiltersCountOuterContainer > div.totalDocumentsMatchingFiltersCountInnerContainer {
+      width: $md-breakpoint-main-width;
+    }
+
     & > div.noResultsFoundHeadingContainer {
       width: $md-breakpoint-main-width;
     }
@@ -222,6 +247,10 @@ main.customSize {
       width: $lg-breakpoint-main-width;
     }
 
+    & > div.totalDocumentsMatchingFiltersCountOuterContainer > div.totalDocumentsMatchingFiltersCountInnerContainer {
+      width: $lg-breakpoint-main-width;
+    }
+
     & > div.noResultsFoundHeadingContainer {
       width: $lg-breakpoint-main-width;
     }
@@ -231,6 +260,10 @@ main.customSize {
 @media only screen and (min-width: $xl-breakpoint) {
   main.customSize {
     & > div.filtersBarOuterContainer > div.filtersBarInnerContainer {
+      width: $xl-breakpoint-main-width;
+    }
+
+    & > div.totalDocumentsMatchingFiltersCountOuterContainer > div.totalDocumentsMatchingFiltersCountInnerContainer {
       width: $xl-breakpoint-main-width;
     }
 

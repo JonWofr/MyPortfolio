@@ -14,20 +14,20 @@ export const mockingData = {
     stories: [{
         page: 2,
         lastPage: 5,
-        onClickPage: (page) => console.log(`Trying to navigate to page ${page}`)
+        onClickPage: (page) => console.info(`Trying to navigate to page ${page}`)
     }, {
         page: 2,
         lastPage: 5,
-        onClickPage: (page) => console.log(`Trying to navigate to page ${page}`),
+        onClickPage: (page) => console.info(`Trying to navigate to page ${page}`),
         colorMode: "dark"
     }, {
         page: 1,
         lastPage: 10,
-        onClickPage: (page) => console.log(`Trying to navigate to page ${page}`)
+        onClickPage: (page) => console.info(`Trying to navigate to page ${page}`)
     }, {
         page: 1,
         lastPage: 1,
-        onClickPage: (page) => console.log(`Trying to navigate to page ${page}`)
+        onClickPage: (page) => console.info(`Trying to navigate to page ${page}`)
     }]
 }
 

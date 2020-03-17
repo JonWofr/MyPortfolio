@@ -16,18 +16,18 @@ const NotFound = props => {
                 <div className={styles.content}>
                     <div className={styles.headingsContainer}>
                         <div>
-                            <Heading type="primary">
+                            <Heading type="primary" colorMode="dark">
                                 404 - Not Found
                             </Heading>
                         </div>
                         <div>
-                            <Heading type="secondary">
+                            <Heading type="secondary" colorMode="dark">
                                 Wir konnten die aufgerufene Seite leider nicht finden!
                             </Heading>
                         </div>
                     </div>
                     <div className={styles.customLinkContainer}>
-                        <CustomLink size="large" colorScheme="invertedPrimaryAccent" to="/">
+                        <CustomLink size="large" colorScheme="invertedSecondaryAccent" to="/">
                             Zurück zur Startseite
                         </CustomLink>
                     </div>
