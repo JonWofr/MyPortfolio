@@ -11,15 +11,21 @@
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
-    "sass": "^1.25.0"
+    "sass": "^1.25.0",
+
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongodb": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run prod --prefix ./server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "postinstall": "react-scripts build"
   },
   "eslintConfig": {
     "extends": "react-app"
