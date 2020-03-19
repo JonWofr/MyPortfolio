@@ -1,5 +1,5 @@
 {
-  "name": "myportfolio-redone",
+  "name": "myportfolio",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,13 +19,13 @@
     "mongodb": "^3.3.2"
   },
   "scripts": {
-    "start": "npm run prod --prefix ./server",
+    "start": "node ./server/app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "postinstall": "react-scripts build"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
