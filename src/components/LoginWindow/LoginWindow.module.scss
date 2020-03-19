@@ -1,0 +1,53 @@
+@import '../../globalVariables';
+
+div.loginWindow {
+    height: 100%;
+
+    box-sizing: border-box;
+    padding: 1rem;
+
+    &.light {
+        background-color: $lighter-background-color;;
+    }
+    &.dark {
+        background-color: $darker-background-color;;
+    }
+ 
+    & > form {
+        height: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        & > div.headingContainer {
+            margin-bottom: 1.5rem;
+        }
+
+        & > div.customInputsContainer {
+            display: flex;
+
+            & > * {
+                margin: 0 .5rem;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+
+            & > div.customInputContainer {
+                flex: 1;
+            }
+        }
+
+        & > div.linkContainer {
+            margin-top: 1rem;
+        }
+
+        & > div.customButtonContainer {
+            margin-top: auto;
+        }
+    }
+}

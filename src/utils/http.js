@@ -26,6 +26,9 @@ export const post = (url, body, requestHeaderOptions) => {
 
         request.open("POST", url, true);
 
+        const jwt = localStorage.getItem("jwt");
+        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+
         request.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
 
@@ -43,6 +46,9 @@ export const put = (url, body, requestHeaderOptions) => {
 
         request.open("PUT", url, true);
 
+        const jwt = localStorage.getItem("jwt");
+        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+
         request.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
 
@@ -59,6 +65,9 @@ export const patch = (url, body, requestHeaderOptions) => {
         addListeners(request, resolve, reject);
 
         request.open("PATCH", url, true);
+        
+        const jwt = localStorage.getItem("jwt");
+        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
 
         request.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
@@ -78,6 +87,9 @@ export const remove = (url, body, requestHeaderOptions) => {
 
         request.open("DELETE", url, true);
 
+        const jwt = localStorage.getItem("jwt");
+        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+
         request.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
 
@@ -87,19 +99,33 @@ export const remove = (url, body, requestHeaderOptions) => {
 
 const addListeners = (request, resolve, reject) => {
     request.addEventListener("load", ({ target }) => {
-/*         const { status, statusText } = target;
-        console.info(status, statusText); */
-        resolve(target);
+        const { status, statusText } = target;
+        const statusCategory = parseInt(status.toString().charAt(0));
+        switch (statusCategory) {
+            case 1:
+            case 2:
+            case 3:
+                //console.info(status, statusText);
+                resolve(target);
+                break;
+            case 4:
+            case 5:
+                console.warn(status, statusText);
+                reject(`${status} ${statusText}`);
+                break;
+            default:
+                console.warn(`The response status ${status} is not known`);
+        }
     });
     request.addEventListener("error", ({ target }) => {
         const { status, statusText } = target;
         console.warn(status, statusText);
-        reject(target);
+        reject(`${status} ${statusText}`);
     })
 }
 
 const setRequestHeaders = (request, requestHeaderOptions) => {
     for (const key in requestHeaderOptions) {
-        request.setRequestHeaders(key, requestHeaderOptions[key]);
+        request.setRequestHeader(key, requestHeaderOptions[key]);
     }
 }

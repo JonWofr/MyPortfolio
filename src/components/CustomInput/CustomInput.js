@@ -24,6 +24,7 @@ const CustomInput = (props) => {
 const getInputTagViaProps = (props) => {
     const { type, form, disabled, onChange, value, required, id } = props;
     switch (type) {
+        case "password":
         case "file":
         case "date":
         case "text":

@@ -1,11 +1,11 @@
 // Routes
 import Home from './routes/Home';
-import ProjectsOverview from './routes/ProjectsOverview';
 import Projects from './routes/Projects';
-import SlidesOverview from './routes/SlidesOverview';
 import NotFound from './routes/NotFound';
 import About from './routes/About';
 import Contact from './routes/Contact';
+import SignUp from './routes/SignUp';
+import Login from './routes/Login';
 
 export const unprotectedRoutes = [{
     path: "/",
@@ -16,14 +16,6 @@ export const unprotectedRoutes = [{
     exact: true,
     Component: Projects
 }, {
-    path: "/projects-overview",
-    exact: true,
-    Component: ProjectsOverview
-}, {
-    path: "/slides-overview",
-    exact: true,
-    Component: SlidesOverview
-}, {
     path: "/about",
     exact: true,
     Component: About
@@ -31,6 +23,14 @@ export const unprotectedRoutes = [{
     path: "/contact",
     exact: true,
     Component: Contact
+}, {
+    path: "/sign-up",
+    exact: true,
+    Component: SignUp
+}, {
+    path: "/login",
+    exact: true,
+    Component: Login
 }, {
     Component: NotFound
 }]
