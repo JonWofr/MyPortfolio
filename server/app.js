@@ -67,7 +67,7 @@ app.use(express.static(`${__dirname}/public`));
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(`${__dirname}/../build`));
     app.all("*", (req, res) => {
-        res.status(200).sendFile(`${__dirname}/build/index.html`);
+        res.status(200).sendFile(`${__dirname}/../build/index.html`);
     })
 }
 
