@@ -61,10 +61,14 @@ app.use("/projects", require('./src/projects/routes'));
 app.use("/slides", require('./src/slides/routes'));
 app.use("/users", require('./src/users/routes'));
 
-app.use("/public", express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/public`));
 
+// Special code for Heroku deployment
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(`${__dirname}/../build/index.html`));
+    app.use(express.static(`${__dirname}/../build`));
+    app.all("*", (req, res) => {
+        res.status(200).sendFile(`${__dirname}/build/index.html`);
+    })
 }
 
 server.listen(process.env.PORT, () => console.info(`server is running in ${process.env.NODE_ENV} on ${process.env.URL}`));
