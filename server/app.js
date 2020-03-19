@@ -34,6 +34,8 @@ app.use((req, res, next) => {
     next();
 });
 
+console.info(`Trying to connect to mongoDb with URL ${process.env.MONGO_DB_URL}`);
+
 const client = new mongoDb.MongoClient(process.env.MONGO_DB_URL, { useUnifiedTopology: true, useNewUrlParser: true });
 
 client.connect(err => {
