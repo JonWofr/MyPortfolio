@@ -15,10 +15,10 @@ const collectionSlides = "slides";
 const collectionUsers = "users";
 
 //Initialization
-if (process.env.NODE_ENVIRONMENT === "development") dotenv.config({
+if (process.env.NODE_ENV === "development") dotenv.config({
     path: "./development.env"
 });
-else if (process.env.NODE_ENVIRONMENT === "production") dotenv.config({
+else if (process.env.NODE_ENV === "production") dotenv.config({
     path: "./production.env"
 });
 else throw new Error("The environment is not know. The server could not be started.");
@@ -63,8 +63,8 @@ app.use("/users", require('./src/users/routes'));
 
 app.use("/public", express.static(`${__dirname}/public`));
 
-if (process.env.NODE_ENVIRONMENT === "production") {
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(`${__dirname}/../build/index.html`));
 }
 
-server.listen(process.env.PORT, () => console.info(`server is running in ${process.env.NODE_ENVIRONMENT} on ${process.env.URL}`));
+server.listen(process.env.PORT, () => console.info(`server is running in ${process.env.NODE_ENV} on ${process.env.URL}`));
