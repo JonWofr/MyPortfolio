@@ -22,8 +22,7 @@ if (process.env.NODE_ENV === "development") dotenv.config({
 else if (process.env.NODE_ENV === "production") dotenv.config({
     path: "./production.env"
 });
-else if (process.env.NODE_ENV === "production-heroku") console.info("Initializing production build on Heroku");
-else throw new Error("The environment is not know. The server could not be started.");
+else throw new Error(`The environment ${process.env.NODE_ENV} is not know. The server could not be started.`);
 
 
 console.info(`Trying to connect to mongoDb with URL ${process.env.MONGO_DB_URL}`);
@@ -55,6 +54,7 @@ app.use((req, res, next) => {
     next();
 });
 
+// Routes
 app.use("/api/v1/projects", require('./src/projects/routes'));
 app.use("/api/v1/slides", require('./src/slides/routes'));
 app.use("/api/v1/users", require('./src/users/routes'));
@@ -62,8 +62,8 @@ app.use("/api/v1/users", require('./src/users/routes'));
 app.use(express.static(`${__dirname}/public`));
 
 // Special code for Heroku deployment (This directory has to be embedded in the frontend directory)
-if (process.env.NODE_ENV === "production-heroku") {
-    const pathToPublicFrontendFiles = path.resolve([__dirname, "/../build"]);
+if (process.env.NODE_ENV === "production") {
+    const pathToPublicFrontendFiles = path.resolve(__dirname, "/../build");
     console.info("Path to public frontend files", pathToPublicFrontendFiles);
     app.use(express.static(pathToPublicFrontendFiles));
     app.use((req, res) => res.status(200).sendFile(`${pathToPublicFrontendFiles}/index.html`));
