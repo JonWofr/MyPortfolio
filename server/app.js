@@ -63,10 +63,9 @@ app.use(express.static(`${__dirname}/public`));
 
 // Special code for Heroku deployment (This directory has to be embedded in the frontend directory)
 if (process.env.NODE_ENV === "production") {
-    const pathToPublicFrontendFiles = path.resolve(__dirname, "/../build");
-    console.info("Path to public frontend files", pathToPublicFrontendFiles);
-    app.use(express.static(pathToPublicFrontendFiles));
-    app.use((req, res) => res.status(200).sendFile(`${pathToPublicFrontendFiles}/index.html`));
+    console.info(__dirname);
+    app.use(express.static("/build"));
+    app.use((req, res) => res.status(200).sendFile(`/build/index.html`));
 }
 
 server.listen(process.env.PORT, () => console.info(`server is running in ${process.env.NODE_ENV} on ${process.env.URL}`));
