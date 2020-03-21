@@ -9,7 +9,7 @@ exports.uploadImage = async (req, res) => {
     if (!isSupportingFiletype(filetype)) return res.status(400).send(`Filetype ${filetype} is not supported.`);
 
     try {
-        const remoteFilepath = process.env.NODE_ENV === "production" ? await storeImageLocally(filename, req) : await storeImageRemotely(filename, req);
+        const remoteFilepath = process.env.NODE_ENV === "development" ? await storeImageLocally(filename, req) : await storeImageRemotely(filename, req);
         console.log(remoteFilepath);
         const body = {
             url: remoteFilepath
