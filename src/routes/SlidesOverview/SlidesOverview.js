@@ -193,13 +193,18 @@ class SlidesOverview extends Component {
         const deepClonedSlides = cloneDeep(slides);
 
         if (propertyName === "image") {
-            value = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
-            deepClonedSlides[slideId].image.url = value;
+            try {
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                this.triggerHttpToast(status, statusText);
+                deepClonedSlides[slideId].image.url = url;
+            }
+            catch ({ status, statusText }) {
+                this.triggerHttpToast(status, statusText);
+            }
         }
         else {
             deepClonedSlides[slideId][propertyName] = value;
         }
-
 
         this.setState({
             slides: deepClonedSlides
@@ -286,18 +291,19 @@ class SlidesOverview extends Component {
 
         const deepClonedNewSlide = cloneDeep(newSlide);
 
-        if (propertyName === "url") {
+        if (propertyName === "image") {
             try {
                 const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
                 this.triggerHttpToast(status, statusText);
-                value = url;
+                deepClonedNewSlide.image.url = url;
             }
             catch ({ status, statusText }) {
                 this.triggerHttpToast(status, statusText);
             }
         }
-
-        deepClonedNewSlide[propertyName] = value;
+        else {
+            deepClonedNewSlide[propertyName] = value;
+        }
 
         this.setState({
             newSlide: deepClonedNewSlide
