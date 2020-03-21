@@ -107,7 +107,7 @@ const renderImageInputFields = (image, onChangeValue, disabled, colorMode) => (
             id="paragraphImageFilePicker"
             type="file"
             size="fluid"
-            onChange={(e) => onChangeValue("dataUrl", e.target.files[0])}
+            onChange={(e) => onChangeValue("url", e.target.files[0])}
             disabled={disabled}
             colorMode={colorMode}
         />

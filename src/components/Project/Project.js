@@ -150,7 +150,6 @@ Project.propTypes = {
             image: PropTypes.exact({
                 position: PropTypes.string,
                 url: PropTypes.string,
-                dataUrl: PropTypes.string
             })
         }))
     }).isRequired,

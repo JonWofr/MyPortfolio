@@ -26,7 +26,6 @@ export const mockingData = {
             projectName: "clubber",
             image: {
                 url: slide1,
-                dataUrl: null
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
@@ -35,7 +34,6 @@ export const mockingData = {
             projectName: "clubber",
             image: {
                 url: slide2,
-                dataUrl: null
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
@@ -46,7 +44,6 @@ export const mockingData = {
             projectName: "reel",
             image: {
                 url: slide3,
-                dataUrl: null
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified")
         },
@@ -56,7 +53,6 @@ export const mockingData = {
             projectName: "wordsearch",
             image: {
                 url: slide4,
-                dataUrl: null
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified")
         }

@@ -25,8 +25,7 @@ const initialNewSlide = {
     colorMode: "",
     projectName: "",
     image: {
-        url: undefined,
-        dataUrl: undefined
+        url: undefined
     }
 }
 
@@ -50,8 +49,7 @@ class SlidesOverview extends Component {
                 colorMode: "",
                 projectName: "",
                 image: {
-                    url: undefined,
-                    dataUrl: undefined
+                    url: undefined
                 }
             }
         }
@@ -195,13 +193,14 @@ class SlidesOverview extends Component {
         const deepClonedSlides = cloneDeep(slides);
 
         if (propertyName === "image") {
-            const dataUrl = await parser.parseFileToDataUrl(value)
-            deepClonedSlides[slideId].image.url = value.name;
-            deepClonedSlides[slideId].image.dataUrl = dataUrl;
+            value = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+            deepClonedSlides[slideId].image.url = value;
         }
         else {
             deepClonedSlides[slideId][propertyName] = value;
         }
+
+
         this.setState({
             slides: deepClonedSlides
         });
@@ -274,8 +273,8 @@ class SlidesOverview extends Component {
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewSlide(propertyName, value)}
                     onClickSave={() => this.insertSlide()}
                     onClickShowParagraphs={() => { }}
-                    onClickDelete={() => {}}
-                    onClickEdit={() => {}}
+                    onClickDelete={() => { }}
+                    onClickEdit={() => { }}
                     colorMode="dark"
                 />
             </tfoot>
@@ -287,14 +286,19 @@ class SlidesOverview extends Component {
 
         const deepClonedNewSlide = cloneDeep(newSlide);
 
-        if (propertyName === "image") {
-            const dataUrl = await parser.parseFileToDataUrl(value);
-            deepClonedNewSlide.image.url = value.name;
-            deepClonedNewSlide.image.dataUrl = dataUrl;
+        if (propertyName === "url") {
+            try {
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                this.triggerHttpToast(status, statusText);
+                value = url;
+            }
+            catch ({ status, statusText }) {
+                this.triggerHttpToast(status, statusText);
+            }
         }
-        else {
-            deepClonedNewSlide[propertyName] = value;
-        }
+
+        deepClonedNewSlide[propertyName] = value;
+
         this.setState({
             newSlide: deepClonedNewSlide
         });

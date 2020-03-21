@@ -29,8 +29,7 @@ export const mockingData = {
                 "description": "",
                 "image": {
                     "position": "",
-                    "url": "http://localhost:2019/image_uploads/",
-                    "dataUrl": null
+                    "url": "http://localhost:2019/image-uploads/"
                 }
             }]
         },
@@ -58,8 +57,7 @@ export const mockingData = {
                 "description": "",
                 "image": {
                     "position": "",
-                    "url": "http://localhost:2019/image_uploads/",
-                    "dataUrl": null
+                    "url": "http://localhost:2019/image-uploads/"
                 }
             }]
         },
@@ -88,8 +86,7 @@ export const mockingData = {
                 "description": "",
                 "image": {
                     "position": "",
-                    "url": "http://localhost:2019/image_uploads/",
-                    "dataUrl": null
+                    "url": "http://localhost:2019/image-uploads/"
                 }
             }]
         },

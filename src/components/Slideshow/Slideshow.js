@@ -76,7 +76,6 @@ Slideshow.propTypes = {
         projectName: PropTypes.string,
         image: PropTypes.exact({
             url: PropTypes.string,
-            dataUrl: PropTypes.any
         })
     })).isRequired
 }

@@ -36,6 +36,34 @@ export const post = (url, body, requestHeaderOptions) => {
     })
 }
 
+export const postFile = (url, file, requestHeaderOptions) => {
+    return new Promise((resolve, reject = defaultReject) => {
+        const fileReader = new FileReader();
+        fileReader.addEventListener("error", err => reject(err))
+        fileReader.addEventListener("load", event => {
+            const body = event.target.result;
+            const request = new XMLHttpRequest();
+            request.responseType = "json";
+
+            request.upload.addEventListener("progress", (event) => {
+                console.info(`${Math.floor(event.loaded / event.total * 100)}%`);
+            });
+            addListeners(request, resolve, reject);
+
+            request.open("POST", url, true);
+
+            const jwt = localStorage.getItem("jwt");
+            if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+
+            request.setRequestHeader("Content-Type", "application/octet-stream");
+            if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
+
+            request.send(body);
+        })
+        fileReader.readAsArrayBuffer(file);
+    })
+}
+
 export const put = (url, body, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
@@ -65,7 +93,7 @@ export const patch = (url, body, requestHeaderOptions) => {
         addListeners(request, resolve, reject);
 
         request.open("PATCH", url, true);
-        
+
         const jwt = localStorage.getItem("jwt");
         if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
 

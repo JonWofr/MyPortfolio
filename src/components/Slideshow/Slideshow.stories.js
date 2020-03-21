@@ -26,16 +26,14 @@ export const mockingData = {
                 colorMode: "dark",
                 projectName: "clubber",
                 image: {
-                    url: slide1,
-                    dataUrl: null
+                    url: slide1
                 }
             },
             {
                 title: "Travisa:",
                 projectName: "clubber",
                 image: {
-                    url: slide2,
-                    dataUrl: null
+                    url: slide2
                 }
             },
             {
@@ -44,8 +42,7 @@ export const mockingData = {
                 colorMode: "dark",
                 projectName: "reel",
                 image: {
-                    url: slide3,
-                    dataUrl: null
+                    url: slide3
                 }
             },
             {
@@ -53,8 +50,7 @@ export const mockingData = {
                 subtitle: "Coding challenge",
                 projectName: "wordsearch",
                 image: {
-                    url: slide4,
-                    dataUrl: null
+                    url: slide4
                 }
             }
         ]

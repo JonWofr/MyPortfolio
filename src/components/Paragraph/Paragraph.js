@@ -38,7 +38,6 @@ Paragraph.propTypes = {
     image: PropTypes.exact({
         position: PropTypes.string,
         url: PropTypes.string,
-        dataUrl: PropTypes.any
     }),
     colorMode: PropTypes.oneOf(["light", "dark"])
 }
@@ -48,7 +47,6 @@ Paragraph.defaultProps = {
     image: {
         position: "",
         url: "",
-        dataUrl: undefined
     },
     colorMode: "light"
 }

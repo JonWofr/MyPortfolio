@@ -45,7 +45,6 @@ Slide.propTypes = {
     projectName: PropTypes.string.isRequired,
     image: PropTypes.exact({
         url: PropTypes.string,
-        dataUrl: PropTypes.any
     }).isRequired,
     onLoadImage: PropTypes.func.isRequired,
     subtitle: PropTypes.string,

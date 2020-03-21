@@ -35,8 +35,7 @@ const initialNewProject = {
             description: "",
             image: {
                 position: "",
-                url: "",
-                dataUrl: ""
+                url: ""
             }
         }
     ]
@@ -74,8 +73,7 @@ class ProjectsOverview extends Component {
                         description: "",
                         image: {
                             position: "",
-                            url: "",
-                            dataUrl: ""
+                            url: ""
                         }
                     }
                 ]
@@ -300,8 +298,8 @@ class ProjectsOverview extends Component {
                     onChangeColumnValue={(propertyName, value) => this.onChangeNewProject(propertyName, value)}
                     onClickSave={() => this.insertProject()}
                     onClickShowParagraphs={() => this.toggleShowParagraphs()}
-                    onClickDelete={() => {}}
-                    onClickEdit={() => {}}
+                    onClickDelete={() => { }}
+                    onClickEdit={() => { }}
                     colorMode="dark"
                 />
             </tfoot>
@@ -369,25 +367,21 @@ class ProjectsOverview extends Component {
         )
     }
 
-    onChangeParagraphsWindowValue = (paragraphIndex, propertyName, value) => {
-        if (propertyName === "dataUrl") {
-            // A File is generally speaking a Blob (the File interface extends the Blob interface). A Blob is a binary object.
-            // In order to send this data via a json object we have to encode it. We are encoding it to a dataURL, which consists of different parts (i.e. MIME-type, the data in Base64 format etc.).
-            // This Url is additionally useful for HTML-elements with src attribute. If we would just encode the Blob with btoa method (which creates a Base64 encoded String) we would not be able to
-            // directly use it inside the src attribute.
-            parser.parseFileToDataUrl(value)
-                .then((dataUrl) => {
-                    this.changeParagraphValue(paragraphIndex, "url", value.name);
-                    this.changeParagraphValue(paragraphIndex, propertyName, dataUrl);
-                })
-        }
-        else this.changeParagraphValue(paragraphIndex, propertyName, value);
-    }
-
     // TODO Changes are not displayed properly. State is not changed according to user input.
 
-    changeParagraphValue = (paragraphIndex, propertyName, value) => {
+    onChangeParagraphsWindowValue = async (paragraphIndex, propertyName, value) => {
         const { currentlyVisibleParagraphsProjectId, projects, newProject } = this.state;
+
+        if (propertyName === "url") {
+            try {
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                this.triggerHttpToast(status, statusText);
+                value = url;
+            }
+            catch ({ status, statusText }) {
+                this.triggerHttpToast(status, statusText);
+            }
+        }
 
         let deepClonedProjects;
         let deepClonedProject;
@@ -405,7 +399,6 @@ class ProjectsOverview extends Component {
             // Fall through feature --> continues with the code until break is reached
             case "position":
             case "url":
-            case "dataUrl":
                 deepClonedProject.paragraphs[paragraphIndex].image[propertyName] = value;
                 break;
             default:

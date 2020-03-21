@@ -64,19 +64,6 @@ export const parseDocumentsToProjects = (documents) => {
     return projects;
 }
 
-export const parseFileToDataUrl = (file) => {
-    return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.onload = (e) => {
-            resolve(e.target.result);
-        }
-        fileReader.onerror = (e) => {
-            reject(e.target.error);
-        }
-        fileReader.readAsDataURL(file);
-    })
-}
-
 export const parseShallowPropsObjectToPropsString = (props) => {
     let propsString = "";
     for (const key in props) {
