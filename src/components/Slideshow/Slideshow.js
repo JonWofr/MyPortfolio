@@ -17,7 +17,7 @@ const Slideshow = ({ slides }) => {
     const oneSecondInPercent = 100 / animationDuration;
 
     let keyframes;
-    if (slides.length >= 2) {
+    if (slides.length >= 3) {
         keyframes = `@keyframes fade-out {
             0% { opacity: 1; z-index: 2; }
             ${oneSecondInPercent * slideFrozenTimeInSeconds}% { opacity: 1; z-index: 2; }
@@ -31,7 +31,7 @@ const Slideshow = ({ slides }) => {
 
     return (
         <div className={`${styles.slideshow} ${slides.length > 0 && loadedImagesCounter === slides.length ? styles.visible : ""}`}>
-            {slides.length > 0 && loadedImagesCounter !== slides.length &&
+            {loadedImagesCounter !== slides.length &&
                 <div className={styles.spinnerContainer}>
                     <Spinner colorMode="dark" />
                 </div>
