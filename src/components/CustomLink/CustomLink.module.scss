@@ -1,4 +1,4 @@
-@import '../../globalVariables';
+@import "../../globalVariables";
 
 .customLink {
     display: inline-block;
@@ -6,16 +6,38 @@
     border-radius: $default-button-border-radius;
 
     transition-timing-function: ease-in-out;
-    transition-duration: .25s;
-    transition-property: color, background-color;
+    transition-duration: 0.25s;
+    transition-property: filter;
 
     box-sizing: border-box;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
 
-    font-size: 1rem;
+    font-size: 1.125rem;
     line-height: 1;
     font-family: Quicksand-Bold;
     text-align: center;
+
+    &.default {
+        background-color: $primary-accent-color;
+
+        box-shadow: $default-button-box-shadow;
+
+        &.light {
+            color: $lightest-font-color;
+        }
+        &.dark {
+            color: $darkest-font-color;
+        }
+    }
+    &.inverted {
+        background-color: transparent;
+
+        border-width: 1px;
+        border-style: solid;
+        border-color: $primary-accent-color;
+
+        color: $primary-accent-color;
+    }
 
     &.small {
         width: 100px;
@@ -33,53 +55,7 @@
         width: 100%;
     }
 
-    &.primaryAccent,
-    &.secondaryAccent {
-        box-shadow: $default-button-box-shadow;
-    }
-
-    &.primaryAccent {
-        color: $lightest-font-color;
-
-        background-color: $primary-accent-color;
-
-        &:hover {
-            background-color: $primary-accent-color-hover;
-        }
-    }
-
-    &.secondaryAccent {
-        color: $darkest-font-color;
-
-        background-color: $secondary-accent-color;
-
-        &:hover {
-            background-color: $secondary-accent-color-hover;
-        }
-    }
-
-    &.invertedPrimaryAccent {
-        color: $primary-accent-color;
-
-        border: 1px solid $primary-accent-color;
-
-        &:hover {
-            color: $lightest-font-color;
-            
-            background-color: $primary-accent-color;
-        }
-    }
-
-    &.invertedSecondaryAccent {
-        color: $secondary-accent-color;
-
-        border: 1px solid $secondary-accent-color;
-
-        &:hover {
-            color: $darkest-font-color;
-
-            background-color: $secondary-accent-color;
-        }
+    &:hover {
+        filter: brightness(80%);
     }
 }
-

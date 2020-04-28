@@ -171,7 +171,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     element: "input",
     elementAttributes: {
         type: "text",
-        required: false
+        required: true
     }
 }, {
     name: "title",
@@ -187,23 +187,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     element: "input",
     elementAttributes: {
         type: "text",
-        required: false
-    }
-}, {
-    name: "colorMode",
-    label: "ColorMode",
-    element: "select",
-    elementAttributes: {
-        options: [{
-            value: "light",
-            label: "Light"
-        }, {
-            value: "dark",
-            label: "Dark"
-        }],
-        required: true,
-        defaultValue: "primaryAccent",
-        mode: "single"
+        required: true
     }
 }, {
     name: "projectName",
@@ -220,5 +204,29 @@ export const slidesOverviewFormElementsDefinitions = [{
     elementAttributes: {
         type: "file",
         required: false
+    }
+}, {
+    name: "buttonColor",
+    label: "ButtonColor",
+    element: "input",
+    elementAttributes: {
+        type: "text",
+        required: true
+    }
+}, {
+    name: "colorMode",
+    label: "ColorMode",
+    element: "select",
+    elementAttributes: {
+        options: [{
+            value: "light",
+            label: "Light"
+        }, {
+            value: "dark",
+            label: "Dark"
+        }],
+        required: true,
+        defaultValue: "dark",
+        mode: "single"
     }
 }]

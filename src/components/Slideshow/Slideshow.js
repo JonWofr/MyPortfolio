@@ -43,7 +43,7 @@ const Slideshow = ({ slides }) => {
             }
             {
                 slides.map((slide, slideIndex) => {
-                    const { title, subtitle, colorMode, projectName, image } = slide;
+                    const { title, subtitle, projectName, image, buttonColor, colorMode } = slide;
                     const style = {
                         animationName: "fade-out",
                         animationDuration: animationDuration + "s",
@@ -53,10 +53,11 @@ const Slideshow = ({ slides }) => {
                         <div key={slideIndex} className={styles.slideContainer} style={style}>
                             <Slide
                                 title={title}
+                                subtitle={subtitle}
                                 projectName={projectName}
                                 image={image}
                                 onLoadImage={() => setLoadedImagesCounter(loadedImagesCounter => loadedImagesCounter + 1)}
-                                subtitle={subtitle}
+                                buttonColor={buttonColor}
                                 colorMode={colorMode}
                             />
                         </div>
@@ -72,11 +73,12 @@ Slideshow.propTypes = {
         _id: PropTypes.string,
         title: PropTypes.string,
         subtitle: PropTypes.string,
-        colorMode: PropTypes.oneOf(["light", "dark"]),
         projectName: PropTypes.string,
         image: PropTypes.exact({
-            url: PropTypes.string,
-        })
+            url: PropTypes.string
+        }),
+        buttonColor: PropTypes.string,
+        colorMode: PropTypes.oneOf(["light", "dark"])
     })).isRequired
 }
 

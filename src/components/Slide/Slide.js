@@ -7,7 +7,7 @@ import CustomLink from '../CustomLink';
 // Styles
 import styles from './Slide.module.scss';
 
-const Slide = memo(({ title, projectName, image, onLoadImage, subtitle, colorMode }) => (
+const Slide = memo(({ title, subtitle, projectName, image, onLoadImage, buttonColor, colorMode }) => (
     <div className={`${styles.slide} ${styles[colorMode]}`}>
         <img
             data-src={image.url}
@@ -30,9 +30,9 @@ const Slide = memo(({ title, projectName, image, onLoadImage, subtitle, colorMod
                 </h2>
             }
             <div className={styles.customLinkContainer}>
-                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} colorScheme={colorMode === "light" ? "invertedPrimaryAccent" : "invertedSecondaryAccent"} size="small">
+                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} color={buttonColor} size="medium" colorMode={colorMode} >
                     Mehr
-                    </CustomLink>
+                </CustomLink>
             </div>
         </div>
     </div>
@@ -42,12 +42,14 @@ const getQueryString = (projectName) => `query={"projectName":{"$regex":"${proje
 
 Slide.propTypes = {
     title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
     projectName: PropTypes.string.isRequired,
     image: PropTypes.exact({
         url: PropTypes.string,
     }).isRequired,
     onLoadImage: PropTypes.func.isRequired,
-    subtitle: PropTypes.string,
+    buttonColor: PropTypes.string.isRequired,
+
     colorMode: PropTypes.oneOf(["light", "dark"])
 }
 

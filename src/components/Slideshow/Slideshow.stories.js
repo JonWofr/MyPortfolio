@@ -9,10 +9,9 @@ import Slideshow from './Slideshow';
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
 
 // Images
-import slide1 from '../../assets/images/slide1.jpg';
-import slide2 from '../../assets/images/slide2.jpg';
-import slide3 from '../../assets/images/slide3.jpg';
-import slide4 from '../../assets/images/slide4.jpg';
+import slide1 from '../../assets/images/slide-1.svg';
+import slide2 from '../../assets/images/slide-2.svg';
+import slide3 from '../../assets/images/slide-3.svg';
 
 // MockingData
 export const mockingData = {
@@ -21,37 +20,36 @@ export const mockingData = {
     stories: [{
         slides: [
             {
-                title: "Clubber:",
-                subtitle: "Veranstaltungen in Stuttgart",
-                colorMode: "dark",
-                projectName: "clubber",
-                image: {
-                    url: slide1
-                }
-            },
-            {
+                _id: "1",
                 title: "Travisa:",
-                projectName: "clubber",
-                image: {
-                    url: slide2
-                }
-            },
-            {
-                title: "Reel",
-                subtitle: "The better Netflix",
+                subtitle: "Auslandssemester Planung leicht gemacht",
                 colorMode: "dark",
-                projectName: "reel",
+                projectName: "travisa",
                 image: {
-                    url: slide3
-                }
+                    url: slide1,
+                },
+                buttonColor: "#47B6F4"
             },
             {
-                title: "Wordsearch:",
-                subtitle: "Coding challenge",
-                projectName: "wordsearch",
+                _id: "2",
+                title: "dein geschenkgutschein:",
+                subtitle: "Verschenken Sie den perfekten Gutschein an Ihren Liebsten",
+                projectName: "dein-geschenkgutschein",
                 image: {
-                    url: slide4
-                }
+                    url: slide2,
+                },
+                buttonColor: "#FF4B4B"
+            },
+            {
+                _id: "3",
+                title: "agile toolbox",
+                subtitle: "Alle gängigen agilen Methoden in einem Baukasten",
+                colorMode: "dark",
+                projectName: "agile-toolbox",
+                image: {
+                    url: slide3,
+                },
+                buttonColor: "#4ECDC4"
             }
         ]
     }]

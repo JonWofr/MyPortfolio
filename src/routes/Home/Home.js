@@ -21,7 +21,7 @@ class Home extends Component {
     }
     
     componentDidMount() {
-        http.get(`${process.env.REACT_APP_BACKEND_URL}/slides`)
+        http.get(`${process.env.REACT_APP_BACKEND_URL}/slides?limit=100`)
             .then(({ response: { data } }) => {
                 this.setState({
                     slides: data

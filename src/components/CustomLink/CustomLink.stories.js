@@ -13,46 +13,49 @@ export const mockingData = {
     componentName: "CustomLink",
     Component: CustomLink,
     stories: [{
-        size: "small",
-        to: "/projects",
-        children: "Hier"
-    }, {
-        size: "medium",
-        to: "/projects",
-        children: "Hier"
-    }, {
-        size: "large",
-        to: "/projects",
-        children: "Hier"
-    }, {
-        size: "fluid",
-        to: "/projects",
-        children: "Hier"
-    }, {
-        size: "medium",
-        to: "/projects",
         children: "Hier",
-        colorScheme: "primaryAccent"
-    }, {
-        size: "medium",
         to: "/projects",
-        children: "Hier",
-        colorScheme: "secondaryAccent"
+        color: "red"
     }, {
-        size: "medium",
-        to: "/projects",
         children: "Hier",
-        colorScheme: "invertedPrimaryAccent"
+        to: "/projects",
+        color: "red",
+        size: "small"
     }, {
-        size: "medium",
-        to: "/projects",
         children: "Hier",
-        colorScheme: "invertedSecondaryAccent"
+        to: "/projects",
+        color: "red",
+        size: "medium"
     }, {
-        size: "medium",
-        to: "/projects",
         children: "Hier",
-        disabled: true
+        to: "/projects",
+        color: "red",
+        size: "large"
+    }, {
+        children: "Hier",
+        to: "/projects",
+        color: "red",
+        size: "fluid"
+    }, {
+        children: "Hier",
+        to: "/projects",
+        color: "red",
+        colorMode: "light"
+    }, {
+        children: "Hier",
+        to: "/projects",
+        color: "red",
+        colorMode: "dark"
+    }, {
+        children: "Hier",
+        to: "/projects",
+        color: "red",
+        type: "default"
+    }, {
+        children: "Hier",
+        to: "/projects",
+        color: "red",
+        type: "inverted"
     }]
 }
 

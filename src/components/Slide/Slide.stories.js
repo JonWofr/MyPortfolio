@@ -6,10 +6,9 @@ import React from 'react';
 import Slide from './Slide.js'
 
 // Images
-import slide1 from '../../assets/images/slide1.jpg';
-import slide2 from '../../assets/images/slide2.jpg';
-import slide3 from '../../assets/images/slide3.jpg';
-import slide4 from '../../assets/images/slide4.jpg';
+import slide1 from '../../assets/images/slide-1.svg';
+import slide2 from '../../assets/images/slide-2.svg';
+import slide3 from '../../assets/images/slide-3.svg';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';
@@ -20,41 +19,36 @@ export const mockingData = {
     Component: Slide,
     stories: [
         {
-            title: "Clubber:",
-            subtitle: "Veranstaltungen in Stuttgart",
+            title: "Travisa",
+            subtitle: "Auslandssemester Planung leicht gemacht",
             colorMode: "dark",
-            projectName: "clubber",
+            projectName: "travisa",
             image: {
                 url: slide1,
             },
-            onLoadImage: () => console.info("no onLoadImageHandler specified")
+            onLoadImage: () => console.info("no onLoadImageHandler specified"),
+            buttonColor: "#47B6F4"
         },
         {
-            title: "Travisa:",
-            projectName: "clubber",
+            title: "dein geschenkgutschein",
+            subtitle: "Verschenken Sie den perfekten Gutschein an Ihren Liebsten",
+            projectName: "dein-geschenkgutschein",
             image: {
                 url: slide2,
             },
-            onLoadImage: () => console.info("no onLoadImageHandler specified")
+            onLoadImage: () => console.info("no onLoadImageHandler specified"),
+            buttonColor: "#FF4B4B"
         },
         {
-            title: "Reel",
-            subtitle: "The better Netflix",
+            title: "agile toolbox",
+            subtitle: "Alle gängigen agilen Methoden in einem Baukasten",
             colorMode: "dark",
-            projectName: "reel",
+            projectName: "agile-toolbox",
             image: {
                 url: slide3,
             },
-            onLoadImage: () => console.info("no onLoadImageHandler specified")
-        },
-        {
-            title: "Wordsearch:",
-            subtitle: "Coding challenge",
-            projectName: "wordsearch",
-            image: {
-                url: slide4,
-            },
-            onLoadImage: () => console.info("no onLoadImageHandler specified")
+            onLoadImage: () => console.info("no onLoadImageHandler specified"),
+            buttonColor: "#4ECDC4"
         }
     ]
 }

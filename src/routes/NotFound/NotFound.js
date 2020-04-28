@@ -27,7 +27,7 @@ const NotFound = props => {
                         </div>
                     </div>
                     <div className={styles.customLinkContainer}>
-                        <CustomLink size="large" colorScheme="invertedSecondaryAccent" to="/">
+                        <CustomLink to="/" size="large" colorMode="dark">
                             Zurück zur Startseite
                         </CustomLink>
                     </div>
