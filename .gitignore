@@ -7,3 +7,6 @@
 # IDE
 /.vscode
 
+# Environment variables
+/.env.development
+/.env.production
