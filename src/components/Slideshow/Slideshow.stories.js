@@ -28,7 +28,8 @@ export const mockingData = {
                 image: {
                     url: slide1,
                 },
-                buttonColor: "#47B6F4"
+                buttonBackgroundColor: "#47B6F4",
+                buttonFontColor: "#1a1a1a"
             },
             {
                 _id: "2",
@@ -38,7 +39,8 @@ export const mockingData = {
                 image: {
                     url: slide2,
                 },
-                buttonColor: "#FF4B4B"
+                buttonBackgroundColor: "#FF4B4B",
+                buttonFontColor: "#1a1a1a"
             },
             {
                 _id: "3",
@@ -49,7 +51,8 @@ export const mockingData = {
                 image: {
                     url: slide3,
                 },
-                buttonColor: "#4ECDC4"
+                buttonBackgroundColor: "#4ECDC4",
+                buttonFontColor: "#1a1a1a"
             }
         ]
     }]

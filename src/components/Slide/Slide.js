@@ -7,7 +7,7 @@ import CustomLink from '../CustomLink';
 // Styles
 import styles from './Slide.module.scss';
 
-const Slide = memo(({ title, subtitle, projectName, image, onLoadImage, buttonColor, colorMode }) => (
+const Slide = memo(({ title, subtitle, projectName, image, onLoadImage, buttonBackgroundColor, buttonFontColor, colorMode }) => (
     <div className={`${styles.slide} ${styles[colorMode]}`}>
         <img
             data-src={image.url}
@@ -30,7 +30,7 @@ const Slide = memo(({ title, subtitle, projectName, image, onLoadImage, buttonCo
                 </h2>
             }
             <div className={styles.customLinkContainer}>
-                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} color={buttonColor} size="medium" colorMode={colorMode} >
+                <CustomLink to={{ pathname: "projects", search: getQueryString(projectName) }} backgroundColor={buttonBackgroundColor} fontColor={buttonFontColor} size="medium" >
                     Mehr
                 </CustomLink>
             </div>
@@ -48,7 +48,8 @@ Slide.propTypes = {
         url: PropTypes.string,
     }).isRequired,
     onLoadImage: PropTypes.func.isRequired,
-    buttonColor: PropTypes.string.isRequired,
+    buttonBackgroundColor: PropTypes.string.isRequired,
+    buttonFontColor: PropTypes.string.isRequired,
 
     colorMode: PropTypes.oneOf(["light", "dark"])
 }

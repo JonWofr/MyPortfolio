@@ -206,12 +206,28 @@ export const slidesOverviewFormElementsDefinitions = [{
         required: false
     }
 }, {
-    name: "buttonColor",
-    label: "ButtonColor",
+    name: "buttonBackgroundColor",
+    label: "ButtonBackgroundColor",
     element: "input",
     elementAttributes: {
         type: "text",
         required: true
+    }
+}, {
+    name: "buttonFontColor",
+    label: "ButtonFontColor",
+    element: "select",
+    elementAttributes: {
+        options: [{
+            value: "#e6e6e6",
+            label: "Light"
+        }, {
+            value: "#1a1a1a",
+            label: "Dark"
+        }],
+        required: true,
+        defaultValue: "#1a1a1a",
+        mode: "single"
     }
 }, {
     name: "colorMode",

@@ -67,12 +67,12 @@ class SlidesOverview extends Component {
                     <div id={styles.slidesOverview}>
                         {toasts.length > 0 &&
                             toasts.map((toast, index) => {
-                                const { type, title, description } = toast;
+                                const { type, heading, description } = toast;
                                 return (
                                     <Toast
                                         key={index}
                                         type={type}
-                                        title={title}
+                                        heading={heading}
                                         description={description}
                                         colorMode="dark"
                                     />

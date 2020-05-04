@@ -27,7 +27,8 @@ export const mockingData = {
                 url: slide1,
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified"),
-            buttonColor: "#47B6F4"
+            buttonBackgroundColor: "#47B6F4",
+            buttonFontColor: "#1a1a1a"
         },
         {
             title: "dein geschenkgutschein",
@@ -37,7 +38,8 @@ export const mockingData = {
                 url: slide2,
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified"),
-            buttonColor: "#FF4B4B"
+            buttonBackgroundColor: "#FF4B4B",
+            buttonFontColor: "#1a1a1a"
         },
         {
             title: "agile toolbox",
@@ -48,7 +50,8 @@ export const mockingData = {
                 url: slide3,
             },
             onLoadImage: () => console.info("no onLoadImageHandler specified"),
-            buttonColor: "#4ECDC4"
+            buttonBackgroundColor: "#4ECDC4",
+            buttonFontColor: "#1a1a1a"
         }
     ]
 }

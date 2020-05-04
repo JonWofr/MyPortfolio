@@ -93,7 +93,7 @@ const Project = ({ data, colorMode }) => {
                         </Heading>
                         </div>
                         <div className={styles.projectDuration}>
-                            {`${startDate} - ${endDate}`}
+                            {`${formatDate(startDate)} - ${formatDate(endDate)}`}
                         </div>
                     </section>
                     <section className="fade">
@@ -131,6 +131,12 @@ const Project = ({ data, colorMode }) => {
             </div>
         </article>
     )
+}
+
+const formatDate = (date) => {
+    const year = date.substr(0, 4);
+    const month = date.substr(5, 2);
+    return `${month}/${year}`;
 }
 
 Project.propTypes = {

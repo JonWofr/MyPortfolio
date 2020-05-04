@@ -18,25 +18,13 @@
     text-align: center;
 
     &.default {
-        background-color: $primary-accent-color;
-
         box-shadow: $default-button-box-shadow;
-
-        &.light {
-            color: $lightest-font-color;
-        }
-        &.dark {
-            color: $darkest-font-color;
-        }
     }
     &.inverted {
         background-color: transparent;
 
         border-width: 1px;
         border-style: solid;
-        border-color: $primary-accent-color;
-
-        color: $primary-accent-color;
     }
 
     &.small {

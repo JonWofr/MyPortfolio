@@ -374,7 +374,7 @@ class ProjectsOverview extends Component {
 
         if (propertyName === "url") {
             try {
-                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
+                const { status, statusText, response: { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
                 value = url;
             }
@@ -453,6 +453,10 @@ class ProjectsOverview extends Component {
         else deepClonedProject = cloneDeep(newProject);
 
         deepClonedProject.paragraphs.splice(paragraphIndex, 1);
+
+        if (deepClonedProject.paragraphs.length === 0) {
+            deepClonedProject.paragraphs.push(initialNewProject.paragraphs[0])
+        }
 
         if (currentlyVisibleParagraphsProjectId) {
             deepClonedProjects[currentlyVisibleParagraphsProjectId] = deepClonedProject;

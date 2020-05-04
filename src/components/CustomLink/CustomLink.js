@@ -5,23 +5,24 @@ import PropTypes from 'prop-types';
 // Styles
 import styles from './CustomLink.module.scss';
 
-const CustomLink = ({ children, to, color, size, type, colorMode }) => {
+const CustomLink = ({ children, to, backgroundColor, fontColor, size, type }) => {
     let style;
     if (type === "default") {
         style = {
-            backgroundColor: color
+            backgroundColor,
+            color: fontColor
         }
     }
     else if (type === "inverted") {
         style = {
-            borderColor: color,
-            color
+            borderColor: backgroundColor,
+            color: fontColor
         }
     }
     else throw new Error(`Type ${type} is not known`)
 
     return (
-        <Link className={`${styles.customLink} ${styles[size]} ${styles[type]} ${styles[colorMode]}`} style={style} to={to}>
+        <Link className={`${styles.customLink} ${styles[size]} ${styles[type]}`} style={style} to={to}>
             {children}
         </Link>
     )
@@ -30,17 +31,16 @@ const CustomLink = ({ children, to, color, size, type, colorMode }) => {
 CustomLink.propTypes = {
     children: PropTypes.node.isRequired,
     to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-    color: PropTypes.string.isRequired,
-
+    backgroundColor: PropTypes.string.isRequired,
+    fontColor: PropTypes.string.isRequired,
+    
     size: PropTypes.oneOf(["small", "medium", "large", "fluid"]),
-    type: PropTypes.oneOf(["default", "inverted"]),
-    colorMode: PropTypes.oneOf(["light", "dark"])
+    type: PropTypes.oneOf(["default", "inverted"])
 }
 
 CustomLink.defaultProps = {
     size: "medium",
-    type: "default",
-    colorMode: "light"
+    type: "default"
 }
 
 
