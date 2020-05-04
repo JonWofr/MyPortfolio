@@ -3,36 +3,33 @@ const defaultReject = (err) => console.warn("An error occurred", err);
 export const get = (url, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
-        const request = new XMLHttpRequest();
-        request.responseType = "json";
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
 
-        addListeners(request, resolve, reject);
+        addListeners(req, resolve, reject);
 
-        request.open("GET", url, true);
+        req.open("GET", url, true);
 
-        if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
+        if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-        request.send(null);
+        req.send(null);
     })
 }
 
 export const post = (url, body, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
-        const request = new XMLHttpRequest();
-        request.responseType = "json";
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
 
-        addListeners(request, resolve, reject);
+        addListeners(req, resolve, reject);
 
-        request.open("POST", url, true);
+        req.open("POST", url, true);
+        attachJwt(req);
 
-        const jwt = localStorage.getItem("jwt");
-        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+        if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-        request.setRequestHeader("Content-Type", "application/json");
-        if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
-
-        request.send(JSON.stringify(body));
+        req.send(JSON.stringify(body));
     })
 }
 
@@ -42,23 +39,22 @@ export const postFile = (url, file, requestHeaderOptions) => {
         fileReader.addEventListener("error", err => reject(err))
         fileReader.addEventListener("load", event => {
             const body = event.target.result;
-            const request = new XMLHttpRequest();
-            request.responseType = "json";
+            const req = new XMLHttpRequest();
+            req.responseType = "json";
 
-            request.upload.addEventListener("progress", (event) => {
+            req.upload.addEventListener("progress", (event) => {
                 console.info(`${Math.floor(event.loaded / event.total * 100)}%`);
             });
-            addListeners(request, resolve, reject);
+            addListeners(req, resolve, reject);
 
-            request.open("POST", url, true);
+            req.open("POST", url, true);
+            attachJwt(req);
 
-            const jwt = localStorage.getItem("jwt");
-            if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+            if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-            request.setRequestHeader("Content-Type", "application/octet-stream");
-            if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
+            req.setRequestHeader("Content-Type", file.type);
 
-            request.send(body);
+            req.send(body);
         })
         fileReader.readAsArrayBuffer(file);
     })
@@ -67,40 +63,38 @@ export const postFile = (url, file, requestHeaderOptions) => {
 export const put = (url, body, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
-        const request = new XMLHttpRequest();
-        request.responseType = "json";
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
 
-        addListeners(request, resolve, reject);
+        addListeners(req, resolve, reject);
 
-        request.open("PUT", url, true);
+        req.open("PUT", url, true);
+        attachJwt(req);
 
-        const jwt = localStorage.getItem("jwt");
-        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
 
-        request.setRequestHeader("Content-Type", "application/json");
-        if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
+        req.setRequestHeader("Content-Type", "application/json");
+        if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-        request.send(JSON.stringify(body));
+        req.send(JSON.stringify(body));
     })
 }
 
 export const patch = (url, body, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
-        const request = new XMLHttpRequest();
-        request.responseType = "json";
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
 
-        addListeners(request, resolve, reject);
+        addListeners(req, resolve, reject);
 
-        request.open("PATCH", url, true);
+        req.open("PATCH", url, true);
+        attachJwt(req);
 
-        const jwt = localStorage.getItem("jwt");
-        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
 
-        request.setRequestHeader("Content-Type", "application/json");
-        if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
+        req.setRequestHeader("Content-Type", "application/json");
+        if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-        request.send(JSON.stringify(body));
+        req.send(JSON.stringify(body));
     })
 }
 
@@ -108,25 +102,23 @@ export const patch = (url, body, requestHeaderOptions) => {
 export const remove = (url, body, requestHeaderOptions) => {
     return new Promise((resolve, reject = defaultReject) => {
 
-        const request = new XMLHttpRequest();
-        request.responseType = "json";
+        const req = new XMLHttpRequest();
+        req.responseType = "json";
 
-        addListeners(request, resolve, reject);
+        addListeners(req, resolve, reject);
 
-        request.open("DELETE", url, true);
+        req.open("DELETE", url, true);
+        attachJwt(req);
 
-        const jwt = localStorage.getItem("jwt");
-        if (jwt !== null) request.setRequestHeader("Authorization", `Bearer ${jwt}`);
+        req.setRequestHeader("Content-Type", "application/json");
+        if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
-        request.setRequestHeader("Content-Type", "application/json");
-        if (requestHeaderOptions) setRequestHeaders(request, requestHeaderOptions);
-
-        request.send(JSON.stringify(body));
+        req.send(JSON.stringify(body));
     })
 }
 
-const addListeners = (request, resolve, reject) => {
-    request.addEventListener("load", ({ target }) => {
+const addListeners = (req, resolve, reject) => {
+    req.addEventListener("load", ({ target }) => {
         const { status, statusText } = target;
         const statusCategory = parseInt(status.toString().charAt(0));
         switch (statusCategory) {
@@ -145,15 +137,20 @@ const addListeners = (request, resolve, reject) => {
                 console.warn(`The response status ${status} is not known`);
         }
     });
-    request.addEventListener("error", ({ target }) => {
+    req.addEventListener("error", ({ target }) => {
         const { status, statusText } = target;
         console.warn(status, statusText);
         reject(`${status} ${statusText}`);
     })
 }
 
-const setRequestHeaders = (request, requestHeaderOptions) => {
+const attachJwt = (req) => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt !== null) req.setRequestHeader("Authorization", `Bearer ${jwt}`);
+}
+
+const setRequestHeaders = (req, requestHeaderOptions) => {
     for (const key in requestHeaderOptions) {
-        request.setRequestHeader(key, requestHeaderOptions[key]);
+        req.setRequestHeader(key, requestHeaderOptions[key]);
     }
 }

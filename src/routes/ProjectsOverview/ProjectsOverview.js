@@ -374,7 +374,7 @@ class ProjectsOverview extends Component {
 
         if (propertyName === "url") {
             try {
-                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
                 value = url;
             }

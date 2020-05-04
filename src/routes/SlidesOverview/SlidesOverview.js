@@ -194,7 +194,7 @@ class SlidesOverview extends Component {
 
         if (propertyName === "image") {
             try {
-                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
                 deepClonedSlides[slideId].image.url = url;
             }
@@ -293,7 +293,7 @@ class SlidesOverview extends Component {
 
         if (propertyName === "image") {
             try {
-                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}&filetype=${value.type}`, value);
+                const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
                 deepClonedNewSlide.image.url = url;
             }
