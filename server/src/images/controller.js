@@ -8,8 +8,8 @@ const imageminSvgo = require("imagemin-svgo");
 
 
 exports.uploadImage = async (req, res) => {
-    const { fileName, fileType } = req.query;
-    
+    const { filename: fileName, filetype: fileType } = req.query;
+
     if (!isSupportingFiletype(fileType)) {
         console.warn(`Filetype ${fileType} is not supported.`);
         return res.status(400).send(`Filetype ${fileType} is not supported.`);
@@ -54,27 +54,27 @@ const readStream = (readableStream) => new Promise((resolve, reject) => {
             chunks.push(chunk);
         }
     });
-}) 
+})
 
 
 const compressImage = async (buffer) => await imagemin.buffer(buffer, {
-        plugins: [
-            imageminMozjpeg({
-                quality: 0.5
-            }),
-            imageminPngquant({
-                quality: [0.5, 1]
-            }),
-            imageminSvgo(),            
-        ]
-    })
+    plugins: [
+        imageminMozjpeg({
+            quality: 0.5
+        }),
+        imageminPngquant({
+            quality: [0.5, 1]
+        }),
+        imageminSvgo(),
+    ]
+})
 
 const storeImageLocally = async (filename, buffer) => {
-        const localFilepath = getLocalFilepath(filename);
-        const fd = fs.openSync(localFilepath, "w");
-        const bytesWritten = fs.writeSync(fd, buffer);
-        console.info(`Successfully wrote ${bytesWritten} to the local file system`);
-        return getRemoteFilepath(filename);
+    const localFilepath = getLocalFilepath(filename);
+    const fd = fs.openSync(localFilepath, "w");
+    const bytesWritten = fs.writeSync(fd, buffer);
+    console.info(`Successfully wrote ${bytesWritten} to the local file system`);
+    return getRemoteFilepath(filename);
 }
 
 const getLocalFilepath = filename => {
@@ -86,19 +86,17 @@ const getRemoteFilepath = filename => {
     return `${process.env.PROTOCOL}://${process.env.DOMAIN}:${process.env.PORT}/image-uploads/${filename}`;
 }
 
-const storeImageRemotely = (filename, buffer) => {
-    return new Promise((resolve, reject) => {
-        const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
-        const params = {
-            Bucket: process.env.AWS_BUCKET_NAME,
-            Key: `image-uploads/${filename}`,
-            Body: buffer,
-            ContentType: "application/octet-stream"
-        }
-        s3.upload(params, (err, data) => {
-            if (err) reject(err);
-            console.info("Successfully uploaded image");
-            resolve(data.Location);
-        })
+const storeImageRemotely = (filename, buffer) => new Promise((resolve, reject) => {
+    const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+    const params = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `image-uploads/${filename}`,
+        Body: buffer,
+        ContentType: "application/octet-stream"
+    }
+    s3.upload(params, (err, data) => {
+        if (err) reject(err);
+        console.info("Successfully uploaded image");
+        resolve(data.Location);
     })
-}
+})
