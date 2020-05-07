@@ -4,11 +4,11 @@ export const projectsOverviewFormElementDefinitions = [{
     element: "input",
     elementAttributes: {
         type: "text",
-        required: false
+        required: true
     }
 }, {
     name: "projectName",
-    label: "Project Name",
+    label: "Projectname",
     element: "input",
     elementAttributes: {
         type: "text",
@@ -133,7 +133,7 @@ export const projectsOverviewFormElementDefinitions = [{
     }
 }, {
     name: "teamMembers",
-    label: "Teammembers",
+    label: "TeamMembers",
     element: "input",
     elementAttributes: {
         type: "text",
@@ -157,7 +157,7 @@ export const projectsOverviewFormElementDefinitions = [{
     }
 }, {
     name: "gitRepoLink",
-    label: "Git Repo Link",
+    label: "Git\u00a0Repo",
     element: "input",
     elementAttributes: {
         type: "text",
@@ -191,7 +191,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     }
 }, {
     name: "projectName",
-    label: "ProjectName",
+    label: "Projectname",
     element: "input",
     elementAttributes: {
         type: "text",
@@ -207,7 +207,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     }
 }, {
     name: "buttonBackgroundColor",
-    label: "ButtonBackgroundColor",
+    label: "Button\u00a0Backgroundcolor",
     element: "input",
     elementAttributes: {
         type: "text",
@@ -215,7 +215,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     }
 }, {
     name: "buttonFontColor",
-    label: "ButtonFontColor",
+    label: "Button\u00a0Fontcolor",
     element: "select",
     elementAttributes: {
         options: [{
@@ -231,7 +231,7 @@ export const slidesOverviewFormElementsDefinitions = [{
     }
 }, {
     name: "colorMode",
-    label: "ColorMode",
+    label: "Colormode",
     element: "select",
     elementAttributes: {
         options: [{

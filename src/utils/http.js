@@ -10,6 +10,7 @@ export const get = (url, requestHeaderOptions) => {
 
         req.open("GET", url, true);
 
+        req.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
         req.send(null);
@@ -27,6 +28,7 @@ export const post = (url, body, requestHeaderOptions) => {
         req.open("POST", url, true);
         attachJwt(req);
 
+        req.setRequestHeader("Content-Type", "application/json");
         if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
         req.send(JSON.stringify(body));
@@ -50,9 +52,8 @@ export const postFile = (url, file, requestHeaderOptions) => {
             req.open("POST", url, true);
             attachJwt(req);
 
-            if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
-
             req.setRequestHeader("Content-Type", file.type);
+            if (requestHeaderOptions) setRequestHeaders(req, requestHeaderOptions);
 
             req.send(body);
         })

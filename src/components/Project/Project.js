@@ -11,6 +11,9 @@ import GitRepoLink from '../GitRepoLink';
 // Styles
 import styles from './Project.module.scss';
 
+// Models
+import { projectsOverviewFormElementDefinitions } from '../../models/formElementDefinitions';
+
 const Project = ({ data, colorMode }) => {
     const { projectName, categories, languages, technologies, teamMembers, startDate, endDate, gitRepoLink, paragraphs } = data;
 
@@ -38,7 +41,7 @@ const Project = ({ data, colorMode }) => {
                         </div>
                         <div>
                             <BadgeList
-                                items={categories}
+                                items={getBadgeListItems("categories", categories)}
                                 direction="horizontal"
                                 colorMode={colorMode}
                             />
@@ -52,7 +55,7 @@ const Project = ({ data, colorMode }) => {
                         </div>
                         <div>
                             <BadgeList
-                                items={languages}
+                                items={getBadgeListItems("languages", languages)}
                                 direction="horizontal"
                                 colorMode={colorMode}
                             />
@@ -62,11 +65,11 @@ const Project = ({ data, colorMode }) => {
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Verwendete Technologien:
-                        </Heading>
+                            </Heading>
                         </div>
                         <div>
                             <BadgeList
-                                items={technologies}
+                                items={getBadgeListItems("technologies", technologies)}
                                 direction="horizontal"
                                 colorMode={colorMode}
                             />
@@ -76,7 +79,7 @@ const Project = ({ data, colorMode }) => {
                         <div>
                             <Heading type="tertiary" colorMode={colorMode}>
                                 Teammitglieder
-                        </Heading>
+                            </Heading>
                         </div>
                         <div>
                             <BadgeList
@@ -137,6 +140,15 @@ const formatDate = (date) => {
     const year = date.substr(0, 4);
     const month = date.substr(5, 2);
     return `${month}/${year}`;
+}
+
+const getBadgeListItems = (badgeName, badgeValues) => {
+    const options = projectsOverviewFormElementDefinitions.find((projectsOverviewFormElementDefinition) => projectsOverviewFormElementDefinition.name === badgeName).elementAttributes.options;
+    const badgeLabels = badgeValues.map((badgeValue) => {
+        const matchingOption = options.find((option) => option.value === badgeValue)
+        return matchingOption.label;
+    })
+    return badgeLabels;
 }
 
 Project.propTypes = {

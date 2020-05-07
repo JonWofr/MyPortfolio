@@ -1,11 +1,11 @@
 // Routes
-import Home from './routes/Home';
-import Projects from './routes/Projects';
-import NotFound from './routes/NotFound';
-import About from './routes/About';
-import Contact from './routes/Contact';
-import SignUp from './routes/SignUp';
-import Login from './routes/Login';
+import Home from './views/Home';
+import Projects from './views/Projects';
+import NotFound from './views/NotFound';
+import About from './views/About';
+import Contact from './views/Contact';
+import SignUp from './views/SignUp';
+import Login from './views/Login';
 
 export const unprotectedRoutes = [{
     path: "/",

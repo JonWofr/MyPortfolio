@@ -33,8 +33,8 @@ const Paragraph = ({ description, heading, image: { position, url }, colorMode }
 )
 
 Paragraph.propTypes = {
-    description: PropTypes.string.isRequired,
     heading: PropTypes.string,
+    description: PropTypes.string,
     image: PropTypes.exact({
         position: PropTypes.string,
         url: PropTypes.string,
@@ -44,6 +44,7 @@ Paragraph.propTypes = {
 
 Paragraph.defaultProps = {
     heading: "",
+    description: "",
     image: {
         position: "",
         url: "",

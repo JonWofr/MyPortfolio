@@ -75,8 +75,17 @@
 
 @media only screen and (min-width: $md-breakpoint) {
     .paragraph {
-        flex-direction: row;
-        align-items: stretch;
+        &.left,
+        &.right {
+            flex-direction: row;
+            align-items: stretch;
+
+            & > * {
+                flex: 1;
+    
+                margin: 0 .5rem;
+            }
+        }
 
         &.left {
             & > img {
@@ -95,12 +104,6 @@
             & > div.textContainer {
                 margin-left: 0;
             }
-        }
-        
-        & > * {
-            flex: 1;
-
-            margin: 0 .5rem;
         }
 
         & > img {

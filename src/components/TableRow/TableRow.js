@@ -34,7 +34,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     return (
                         <td key={columnIndex}>
                             <CustomInput
-                                placeholder={label}
+                                placeholder={required ? appendAsterisk(label) : label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
                                 value={type === "file" ? undefined : value}
@@ -51,7 +51,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                     return (
                         <td key={columnIndex}>
                             <CustomSelect
-                                placeholder={label}
+                                placeholder={required ? appendAsterisk(label) : label}
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
                                 selectedValue={value}
@@ -122,6 +122,8 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
         </td>
     </tr>
 )
+
+const appendAsterisk = (label) => `${label}\u00a0*`;
 
 
 TableRow.propTypes = {

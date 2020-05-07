@@ -1,6 +1,6 @@
 // Components
-import ProjectsOverview from './routes/ProjectsOverview';
-import SlidesOverview from './routes/SlidesOverview';
+import ProjectsOverview from './views/ProjectsOverview';
+import SlidesOverview from './views/SlidesOverview';
 
 export const protectedRoutes = [{
     path: "/projects-overview",
