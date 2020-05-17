@@ -6,7 +6,7 @@ import styles from './ParagraphsWindow.module.scss';
 
 // Components
 import CustomInput from '../CustomInput';
-import CustomSelect from '../Select';
+import CustomSelect from '../CustomSelect';
 import CustomTextArea from '../CustomTextArea';
 import Heading from '../Heading';
 
@@ -99,16 +99,17 @@ const renderImageInputFields = (image, onChangeValue, disabled, colorMode) => (
             type="text"
             size="fluid"
             value={image.url}
-            disabled={true}
+            disabled={disabled}
+            onChange={(e) => onChangeValue("url", e.target.value)}
             placeholder={"Image-URL"}
             colorMode={colorMode}
         />
         <CustomInput
-            id="paragraphImageFilePicker"
             type="file"
             size="fluid"
-            onChange={(e) => onChangeValue("url", e.target.files[0])}
             disabled={disabled}
+            onChange={(e) => onChangeValue("file", e.target.files[0])}
+            placeholder={"File"}
             colorMode={colorMode}
         />
     </Fragment>

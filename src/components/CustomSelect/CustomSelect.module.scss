@@ -1,11 +1,12 @@
 @import "../../globalVariables";
 
-div.customInput {
-  height: 2.875rem;
-
+div.customSelect {
   position: relative;
 
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 
   &.small {
     width: 100px;
@@ -24,32 +25,70 @@ div.customInput {
   }
 
   &.light {
-    & > input {
+    & > select {
       color: $darker-font-color;
+
+      & > option {
+        background-color: $light-background-color;
+        color: $darker-font-color;
+      }
     }
 
     & > label > span.labelContent {
       color: $darkest-font-color;
     }
+
+    & > ul {
+      background-color: $lighter-background-color;
+
+      & > li {
+        & > span {
+          color: $darker-font-color;
+        }
+        & > button > svg > path:first-child {
+          fill: $darker-font-color;
+        }
+      }
+    }
   }
 
   &.dark {
-    & > input {
+    & > select {
       color: $lighter-font-color;
+
+      & > option {
+        background-color: $dark-background-color;
+        color: $lighter-font-color;
+      }
     }
 
     & > label > span.labelContent {
       color: $lightest-font-color;
     }
+
+    & > ul {
+      background-color: $darker-background-color;
+
+      & > li {
+        & > span {
+          color: $lighter-font-color;
+        }
+        & > button > svg > path:first-child {
+          fill: $lighter-font-color;
+        }
+      }
+    }
   }
 
-  & > input {
+  & > select {
     width: 100%;
-    height: 100%;
+    height: 2.875rem;
 
-    box-sizing: border-box;
     padding: 0;
     padding-top: 0.875rem;
+
+    box-sizing: border-box;
+
     border: none;
 
     outline: none;
@@ -58,10 +97,12 @@ div.customInput {
     line-height: 2rem;
 
     background-color: transparent;
-    
+
+    cursor: pointer;
+
     &:enabled:focus,
-    &:enabled:not([value=""]),
-    &:disabled:not([value=""]) {
+    &:enabled:valid,
+    &:disabled {
       & + label > span.labelContent {
         transform: translateY(-2rem);
 
@@ -71,7 +112,7 @@ div.customInput {
     }
 
     &:enabled:focus,
-    &:enabled:not([value=""]) {
+    &:enabled:valid {
       & + label::after {
         transform: translateX(0%);
       }
@@ -80,7 +121,7 @@ div.customInput {
 
   & > label {
     width: 100%;
-    height: 100%;
+    height: 2.875rem;
 
     position: absolute;
     left: 0;
@@ -120,6 +161,20 @@ div.customInput {
       line-height: 2rem;
 
       transition: all 0.3s ease;
+    }
+  }
+
+  & > ul {
+    border-collapse: collapse;
+
+    & > li {
+      padding: 0.125rem 0.25rem;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: $lighter-font-color;
     }
   }
 }

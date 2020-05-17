@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // Presentational Components
 import CustomInput from '../CustomInput';
-import CustomSelect from '../Select';
+import CustomSelect from '../CustomSelect';
 
 // Styles
 import styles from './TableRow.module.scss';
@@ -47,7 +47,7 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                         </td>
                     )
                 case "select":
-                    const { options, defaultValue, mode } = elementAttributes;
+                    const { options, mode } = elementAttributes;
                     return (
                         <td key={columnIndex}>
                             <CustomSelect
@@ -55,7 +55,6 @@ const TableRow = ({ tableRowId, data, formElementDefinitions, isEditable, onChan
                                 form={`form${tableRowId}`}
                                 disabled={!isEditable}
                                 selectedValue={value}
-                                defaultValue={defaultValue}
                                 required={required}
                                 mode={mode}
                                 options={options}

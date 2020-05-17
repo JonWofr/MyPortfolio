@@ -3,6 +3,10 @@
 #slidesOverview {
   overflow-x: hidden;
 
+  & > div.headingContainer {
+    margin-bottom: 1.5rem;
+  }
+
   & > table {
     width: 100%;
 
@@ -11,6 +15,10 @@
       width: 100%;
 
       vertical-align: top;
+    }
+
+    & > tbody > tr {
+      margin-bottom: 2rem;
     }
   }
 

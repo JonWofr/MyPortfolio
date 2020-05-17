@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 // Presentational Components
-import Select from './Select';
+import Select from './CustomSelect';
 
 // Utils
 import { parseShallowPropsObjectToPropsString } from '../../utils/parser';

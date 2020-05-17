@@ -96,7 +96,8 @@ const Project = ({ data, colorMode }) => {
                         </Heading>
                         </div>
                         <div className={styles.projectDuration}>
-                            {`${formatDate(startDate)} - ${formatDate(endDate)}`}
+                            {startDate !== "" ? formatDate(startDate) : ""}
+                            { endDate !== "" ? ` - ${formatDate(endDate)}` : ""}
                         </div>
                     </section>
                     <section className="fade">

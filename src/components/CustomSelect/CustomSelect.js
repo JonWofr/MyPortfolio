@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import styles from './Select.module.scss';
+import styles from './CustomSelect.module.scss';
 
 const CustomSelect = ({ form, disabled, required, selectedValue, options, mode, size, onChangeValue, id, placeholder, colorMode }) => {
     switch (mode) {
@@ -108,7 +108,6 @@ CustomSelect.propTypes = {
     disabled: PropTypes.bool,
     required: PropTypes.bool,
     mode: PropTypes.string,
-    defaultValue: PropTypes.string,
     size: PropTypes.string,
     id: PropTypes.string,
     placeholder: PropTypes.string,
@@ -121,7 +120,6 @@ CustomSelect.defaultProps = {
     disabled: false,
     required: true,
     mode: "single",
-    defaultValue: "",
     size: "medium",
     id: undefined,
     placeholder: "placeholder",

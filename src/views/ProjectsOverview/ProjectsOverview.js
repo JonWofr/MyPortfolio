@@ -104,9 +104,11 @@ class ProjectsOverview extends Component {
                                 )
                             })
                         }
-                        <Heading type="primary" colorMode="dark">
-                            Projects-formular
-                        </Heading>
+                        <div className={styles.headingContainer}>
+                            <Heading type="primary" colorMode="dark">
+                                Projects-formular
+                            </Heading>
+                        </div>
                         <table>
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
@@ -372,10 +374,11 @@ class ProjectsOverview extends Component {
     onChangeParagraphsWindowValue = async (paragraphIndex, propertyName, value) => {
         const { currentlyVisibleParagraphsProjectId, projects, newProject } = this.state;
 
-        if (propertyName === "url") {
+        if (propertyName === "file") {
             try {
                 const { status, statusText, response: { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
+                propertyName = "url";
                 value = url;
             }
             catch ({ status, statusText }) {

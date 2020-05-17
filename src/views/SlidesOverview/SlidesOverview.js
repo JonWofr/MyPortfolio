@@ -22,11 +22,13 @@ import styles from './SlidesOverview.module.scss';
 const initialNewSlide = {
     title: "",
     subtitle: "",
-    colorMode: "",
     projectName: "",
     image: {
         url: undefined
-    }
+    },
+    buttonBackgroundColor: "",
+    buttonFontColor: "",
+    colorMode: ""
 }
 
 class SlidesOverview extends Component {
@@ -46,11 +48,13 @@ class SlidesOverview extends Component {
             newSlide: {
                 title: "",
                 subtitle: "",
-                colorMode: "",
                 projectName: "",
                 image: {
                     url: undefined
-                }
+                },
+                buttonBackgroundColor: "",
+                buttonFontColor: "",
+                colorMode: ""
             }
         }
     }
@@ -79,9 +83,11 @@ class SlidesOverview extends Component {
                                 )
                             })
                         }
-                        <Heading type="primary" colorMode="dark">
-                            Slides-formular
-                        </Heading>
+                        <div className={styles.headingContainer}>
+                            <Heading type="primary" colorMode="dark">
+                                Slides-formular
+                            </Heading>
+                        </div>
                         <table>
                             {this.renderTableBody()}
                             {this.renderTableFoot()}
@@ -192,7 +198,7 @@ class SlidesOverview extends Component {
 
         const deepClonedSlides = cloneDeep(slides);
 
-        if (propertyName === "image") {
+        if (propertyName === "file") {
             try {
                 const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);
@@ -291,7 +297,7 @@ class SlidesOverview extends Component {
 
         const deepClonedNewSlide = cloneDeep(newSlide);
 
-        if (propertyName === "image") {
+        if (propertyName === "file") {
             try {
                 const { status, statusText, response : { url } } = await http.postFile(`${process.env.REACT_APP_BACKEND_URL}/images?filename=${value.name}`, value);
                 this.triggerHttpToast(status, statusText);

@@ -39,7 +39,6 @@ export const projectsOverviewFormElementDefinitions = [{
             label: "Other",
         }],
         required: true,
-        defaultValue: "web",
         mode: "multi"
     }
 }, {
@@ -76,7 +75,6 @@ export const projectsOverviewFormElementDefinitions = [{
             label: "Other",
         }],
         required: true,
-        defaultValue: "html",
         mode: "multi"
     }
 }, {
@@ -128,7 +126,6 @@ export const projectsOverviewFormElementDefinitions = [{
             label: "Other",
         }],
         required: true,
-        defaultValue: "react",
         mode: "multi"
     }
 }, {
@@ -198,8 +195,8 @@ export const slidesOverviewFormElementsDefinitions = [{
         required: true
     }
 }, {
-    name: "image",
-    label: "Image",
+    name: "file",
+    label: "File",
     element: "input",
     elementAttributes: {
         type: "file",
@@ -226,7 +223,6 @@ export const slidesOverviewFormElementsDefinitions = [{
             label: "Dark"
         }],
         required: true,
-        defaultValue: "#1a1a1a",
         mode: "single"
     }
 }, {
@@ -242,7 +238,6 @@ export const slidesOverviewFormElementsDefinitions = [{
             label: "Dark"
         }],
         required: true,
-        defaultValue: "dark",
         mode: "single"
     }
 }]
