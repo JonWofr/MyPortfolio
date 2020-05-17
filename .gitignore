@@ -1,11 +1,14 @@
 # dependencies
-/node_modules
+node_modules
 
 # production
-/build
+build
 
 # IDE
-/.vscode
+.vscode
 
 # Environment variables
-/.env.*
+.env.*
+
+# Backend
+server
