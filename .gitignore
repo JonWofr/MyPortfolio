@@ -9,9 +9,6 @@ node_modules
 # Deployment
 build
 
-# Environment variables
-.env.*
-
 
 # BACKEND
 
