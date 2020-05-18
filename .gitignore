@@ -1,14 +1,33 @@
-# dependencies
-node_modules
-
-# production
-build
+# FRONTEND
 
 # IDE
 .vscode
 
+# Dependencies
+node_modules
+
+# Deployment
+build
+
 # Environment variables
 .env.*
 
-# Backend
-server
+
+# BACKEND
+
+# IDE
+server/.vscode
+
+# Dependencies
+server/node_modules
+
+# Image Uploads
+server/public/image-uploads
+
+# Environment Variables
+server/*.env
+
+# Misc
+server/.gitignore
+server/package-lock.json
+server/package.json
